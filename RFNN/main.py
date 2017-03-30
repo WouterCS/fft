@@ -20,7 +20,7 @@ def train():
     dataset = load_and_preprocess_dataset()
     print('Loaded the dataset: ', datetime.now().time())
     
-    trainGivenSetSize(dataset, 300,1)
+    #trainGivenSetSize(dataset, 300,1)
     trainGivenSetSize(dataset, 1000,1)
     trainGivenSetSize(dataset, 2000, 1)
     trainGivenSetSize(dataset, 5000,1)
