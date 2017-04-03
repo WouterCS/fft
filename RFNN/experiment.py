@@ -307,7 +307,7 @@ def do_training(params, dataset): #, update_plots):
         if hasattr(optimizer, '_lr_t'):
             cur_lr = optimizer._lr_t.eval(session=sess)
         else: # due to inconsistent naming in adagrad optimizer vs other optimizers
-            cur_lr = optimizer._learning_rate.eval(session=sess)
+            cur_lr = optimizer._learning_rate
         print('Epoch: %d, lr: %f, number of stepts: %d, at time: ' % (curEpoch, cur_lr, global_step.eval(session=sess)) , datetime.now().time())
         if curEpoch in params.eval_epochs:
             evaluate(train_data, train_labels, validation_data, validation_labels, test_data, test_labels, sess, eval_data_node, prediction_eval, params, curEpoch)
