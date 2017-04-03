@@ -304,7 +304,7 @@ def do_training(params, dataset): #, update_plots):
 
     batch_number = 0
     for curEpoch in range(int(numpy.ceil(params.max_epochs))):
-        if hasattr(optimizer, _lr_t):
+        if hasattr(optimizer, '_lr_t'):
             cur_lr = optimizer._lr_t.eval(session=sess)
         else: # due to inconsistent naming in adagrad optimizer vs other optimizers
             cur_lr = optimizer._learning_rate.eval(session=sess)
