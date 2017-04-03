@@ -51,7 +51,7 @@ class parameters:
         self.eval_batchsize = 100
         self.number_of_training_samples = 100
         self.optimizer = 'adam'
-        self.initial_lr = 1.0
+        self.initial_lr = 1e-1
         self.min_lr = 1e-5
         self.learning_rate = []
 
