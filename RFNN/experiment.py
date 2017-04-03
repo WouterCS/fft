@@ -265,7 +265,10 @@ def do_training(params, dataset): #, update_plots):
     loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=train_labels_node, logits=logits), name="loss")
 
     global_step = tf.Variable(0, trainable=False)
-    learning_rate = tf.train.exponential_decay(params.initial_lr, global_step, params.max_epochs *( params.number_of_training_samples // params.batchsize ), params.min_lr, staircase=False)
+    if params.fixed_lr:
+        learning_rate = params.initial_lr
+    else
+        learning_rate = tf.train.exponential_decay(params.initial_lr, global_step, params.max_epochs *( params.number_of_training_samples // params.batchsize ), params.min_lr, staircase=False)
     print('Learning rate; starting value: %f, max epochs: %d, rate: %f' % (params.initial_lr, params.max_epochs, params.min_lr))
 
     
@@ -275,8 +278,10 @@ def do_training(params, dataset): #, update_plots):
                                                rho=0.95,
                                                epsilon=1e-06,
                                                name="optimizer")
-    if params.optimizer == 'adam':
+    elif params.optimizer == 'adam':
         optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
+    elif params.optimizer == 'adagrad':
+        optimizer = tf.train.AdagradOptimizer(learning_rate=learning_rate)
     
     train_op = optimizer.minimize(loss, global_step=global_step)
     # Create evaluation model

@@ -23,7 +23,13 @@ def train():
     #trainGivenSetSize(dataset, 300,1)
     #trainGivenSetSize(dataset, 1000,1)
     #trainGivenSetSize(dataset, 2000, 1)
-    trainGivenSetSize(dataset, 5000,1)
+    trainGivenSetSize(dataset, 2000, 'adam', False, 0.1, 'absFFT', 1)
+    trainGivenSetSize(dataset, 2000, 'adadelta', True, 1, 'absFFT', 2)
+    trainGivenSetSize(dataset, 2000, 'adadelta', True, 1e-3, 'absFFT', 3)
+    trainGivenSetSize(dataset, 2000, 'adadelta', False, 0.1, 'absFFT', 4)
+    trainGivenSetSize(dataset, 2000, 'adagrad', True, 0.1, 'absFFT', 5)
+    trainGivenSetSize(dataset, 2000, 'adam', False, 0.1, 'abs', 6)
+    
     #trainGivenSetSize(dataset, 10000,1)
     #trainGivenSetSize(dataset, 20000,1)
     #trainGivenSetSize(dataset, 60000,1)
@@ -40,14 +46,19 @@ def trainErrorRedo(dataset, numExamples):
             error = True
             i = i + 1
     
-def trainGivenSetSize(dataset, numExamples, i):
+def trainGivenSetSize(dataset, numExamples, optimizer, fixed_lr, initial_lr, fftFunction, i):
     directory = '/results/results-%d-%d' % (numExamples, i)
     if not os.path.exists(directory):
         os.makedirs(directory)
     print('Start of training with %d examples.' % (numExamples))
     params = para.parameters(directory + '/para')
     params.number_of_training_samples = numExamples
-    print('Initialized the parameters: ', datetime.now().time())
+    params.optimizer = optimizer
+    params.fixed_lr = fixed_lr
+    params.initial_lr = initial_lr
+    params.fftFunction = fftFunction
+    
+    print('Initialized the parameters: %s' % str(datetime.now()))
     do_training(params, dataset)
     
     params.save()
