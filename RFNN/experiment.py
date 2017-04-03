@@ -267,7 +267,7 @@ def do_training(params, dataset): #, update_plots):
     global_step = tf.Variable(0, trainable=False)
     if params.fixed_lr:
         learning_rate = params.initial_lr
-    else
+    else:
         learning_rate = tf.train.exponential_decay(params.initial_lr, global_step, params.max_epochs *( params.number_of_training_samples // params.batchsize ), params.min_lr, staircase=False)
     print('Learning rate; starting value: %f, max epochs: %d, rate: %f' % (params.initial_lr, params.max_epochs, params.min_lr))
 
