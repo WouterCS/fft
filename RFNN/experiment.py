@@ -296,16 +296,14 @@ def do_training(params, dataset): #, update_plots):
     print('Run session: ' , datetime.now().time())
     # Append the initial weights to the history
     w = sess.run(weights)
-    params.epochs.append(0)
-    params.sigmas[0].append((w['s1']))
-    params.sigmas[1].append((w['s2']))
-    params.sigmas[2].append((w['s3']))
 
     batch_number = 0
     for curEpoch in range(int(numpy.ceil(params.max_epochs))):
-        print('Epoch: %d, lr: %f, number of stepts: %d, at time: ' % (curEpoch, optimizer._lr_t.eval(session=sess), global_step.eval(session=sess)) , datetime.now().time())
+        cur_lr = optimizer._lr_t.eval(session=sess)
+        print('Epoch: %d, lr: %f, number of stepts: %d, at time: ' % (curEpoch, cur_lr, global_step.eval(session=sess)) , datetime.now().time())
         if curEpoch in params.eval_epochs:
             evaluate(train_data, train_labels, validation_data, validation_labels, test_data, test_labels, sess, eval_data_node, prediction_eval, params, curEpoch)
+            params.learning_rate.append(cur_lr)
         if (params.save_freq is not None) and (curEpoch % params.save_freq == 0):
             params.save()
         # Shuffle the training samples between epochs
@@ -319,10 +317,6 @@ def do_training(params, dataset): #, update_plots):
 
             # Do evaluation
 
-
-                # Update live plots
-                #update_plots(params)
-
             # Select the training batch data and labels
             batch_data = train_data[i * params.batchsize:(i + 1) * params.batchsize]
             batch_labels = train_labels[i * params.batchsize:(i + 1) * params.batchsize]
@@ -335,16 +329,11 @@ def do_training(params, dataset): #, update_plots):
             batch_number += 1
 
             # Update the results
-            params.epochs.append(epoch)
             params.loss.append(l)
-            params.sigmas[0].append((w['s1']))
-            params.sigmas[1].append((w['s2']))
-            params.sigmas[2].append((w['s3']))
     
     # Final evaluation on different sets
     evaluate(train_data, train_labels, validation_data, validation_labels, test_data, test_labels, sess, eval_data_node, prediction_eval, params, params.max_epochs)
-    # Update live plots
-    #update_plots(params)
+    params.learning_rate.append(cur_lr)
 
     # Close the session
     sess.close()

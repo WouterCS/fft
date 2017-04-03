@@ -46,13 +46,14 @@ class parameters:
         # Training parameters
         self.max_epochs = 600
         self.batchsize = 25
-        self.eval_epochs = range(600) #[95,96,97,98,99,100]
+        self.eval_epochs = range(15, 600) #[95,96,97,98,99,100]
         self.save_freq = 1
         self.eval_batchsize = 100
         self.number_of_training_samples = 100
         self.optimizer = 'adam'
         self.initial_lr = 1.0
         self.min_lr = 1e-5
+        self.learning_rate = []
 
         # Regularization
         self.lambda_w1_normal = 0.0
@@ -69,9 +70,6 @@ class parameters:
         self.loss = []
         self.alphas_normal = []
         self.alphas_resize = []
-        self.sigmas_normal = []
-        self.sigmas_resize = []
-        self.sigmas = [[],[],[]]
 
         #self.basis_normal = []
         #self.basis_resize = []
