@@ -1,6 +1,6 @@
 NAME='tfGPU'
 IMAGENAME='myimage2' # 'mydockerimage' #gcr.io/tensorflow/tensorflow:latest-gpu /bin/bash
-DROPBOXPATH='/home/uijenswr/Dropbox/results'
+DROPBOXPATH='/home/uijenswr/Dropbox/thesis'
 
 
 PROJECTPATH="$(dirname "$(dirname "${BASH_SOURCE[0]}")")" #'/home/wouter/Documents/DockerMap/Code'
