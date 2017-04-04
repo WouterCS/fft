@@ -20,20 +20,15 @@ def train():
     dataset = load_and_preprocess_dataset()
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
-    #trainGivenSetSize(dataset, 300,1)
-    #trainGivenSetSize(dataset, 1000,1)
-    #trainGivenSetSize(dataset, 2000, 1)
-    trainGivenSetSize(dataset, 2000, 'adam', False, 0.1, 'absFFT', 1)
-    trainGivenSetSize(dataset, 2000, 'adadelta', True, 1, 'absFFT', 2)
-    trainGivenSetSize(dataset, 2000, 'adadelta', True, 1e-3, 'absFFT', 3)
-    trainGivenSetSize(dataset, 2000, 'adadelta', False, 0.1, 'absFFT', 4)
-    trainGivenSetSize(dataset, 2000, 'adagrad', True, 0.1, 'absFFT', 5)
-    trainGivenSetSize(dataset, 2000, 'adam', False, 0.1, 'abs', 6)
-    
-    #trainGivenSetSize(dataset, 10000,1)
-    #trainGivenSetSize(dataset, 20000,1)
-    #trainGivenSetSize(dataset, 60000,1)
-    #trainGivenSetSize(dataset, 10000)
+    trainGivenSetSize(dataset, 2000, 'adadelta', False, 1, 'absFFT', 1)
+    trainGivenSetSize(dataset, 2000, 'adadelta', True, 3e-1, 'absFFT', 2)
+    trainGivenSetSize(dataset, 2000, 'adadelta', True, 1e-1, 'absFFT', 3)
+    trainGivenSetSize(dataset, 2000, 'adadelta', True, 3e-2, 'absFFT', 4)
+    trainGivenSetSize(dataset, 2000, 'adadelta', True, 1e-2, 'absFFT', 5)
+    trainGivenSetSize(dataset, 2000, 'adagrad', False, 1e-1, 'absFFT', 1)
+    trainGivenSetSize(dataset, 2000, 'adagrad', True, 3e-2, 'absFFT', 6)
+    trainGivenSetSize(dataset, 2000, 'adagrad', True, 1e-2, 'absFFT', 7)
+    trainGivenSetSize(dataset, 2000, 'adagrad', True, 3e-3, 'absFFT', 8)
 
 def trainErrorRedo(dataset, numExamples):
     error = True
