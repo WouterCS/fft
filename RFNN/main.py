@@ -25,10 +25,10 @@ def train():
     trainGivenSetSize(dataset, 2000, 'adadelta', True, 1e-1, 'absFFT', 3)
     trainGivenSetSize(dataset, 2000, 'adadelta', True, 3e-2, 'absFFT', 4)
     trainGivenSetSize(dataset, 2000, 'adadelta', True, 1e-2, 'absFFT', 5)
-    trainGivenSetSize(dataset, 2000, 'adagrad', False, 1e-1, 'absFFT', 1)
-    trainGivenSetSize(dataset, 2000, 'adagrad', True, 3e-2, 'absFFT', 6)
-    trainGivenSetSize(dataset, 2000, 'adagrad', True, 1e-2, 'absFFT', 7)
-    trainGivenSetSize(dataset, 2000, 'adagrad', True, 3e-3, 'absFFT', 8)
+    trainGivenSetSize(dataset, 2000, 'adagrad', False, 1e-1, 'absFFT', 6)
+    trainGivenSetSize(dataset, 2000, 'adagrad', True, 3e-2, 'absFFT', 7)
+    trainGivenSetSize(dataset, 2000, 'adagrad', True, 1e-2, 'absFFT', 8)
+    trainGivenSetSize(dataset, 2000, 'adagrad', True, 3e-3, 'absFFT', 9)
 
 def trainErrorRedo(dataset, numExamples):
     error = True
