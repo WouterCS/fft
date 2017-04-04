@@ -139,7 +139,7 @@ def printShape(shape):
     print('Dim: ', map(lambda x: x.value, shape))
     
 def do_training(params, dataset): #, update_plots):
-    print('Do training: ', datetime.now().time())
+    print('Do training: %s'  % str(datetime.now()))
     # Shorten some variable names
     train_data          = dataset['training_set']['data']
     train_labels        = dataset['training_set']['labels']
@@ -153,7 +153,7 @@ def do_training(params, dataset): #, update_plots):
                                                 train_labels,
                                                 params.number_of_training_samples,
                                                 params.seed)
-    print('Start model def: ' , datetime.now().time())
+    print('Start model def: %s'  % str(datetime.now()))
     # Define model
     def model(data, weights, train=False):
 
@@ -201,7 +201,7 @@ def do_training(params, dataset): #, update_plots):
         l4 = l4 + weights['fc_b1']                                                                  # Bias
 
         return l4
-    print('End model def: ' , datetime.now().time())
+    print('End model def: %s'  % str(datetime.now()))
     # Set the random seed
     tf.set_random_seed(params.seed)
 
@@ -222,7 +222,7 @@ def do_training(params, dataset): #, update_plots):
     F2 = (params.order2 + 1) * ((params.order2 + 1) - 1) / 2 + (params.order2 + 1)
     F3 = (params.order3 + 1) * ((params.order3 + 1) - 1) / 2 + (params.order3 + 1)
 
-    print('Create weights: ' , datetime.now().time())
+    print('Create weights: %s'  % str(datetime.now()))
     # Create all the trainable variables
     weights = {
 
@@ -298,7 +298,7 @@ def do_training(params, dataset): #, update_plots):
 
     # Initialize variables
     sess.run(tf.global_variables_initializer())
-    print('Run session: ' , datetime.now().time())
+    print('Run session: %s'  % str(datetime.now()))
     # Append the initial weights to the history
     w = sess.run(weights)
 
@@ -308,7 +308,7 @@ def do_training(params, dataset): #, update_plots):
             cur_lr = optimizer._lr_t.eval(session=sess)
         else: # due to inconsistent naming in adagrad optimizer vs other optimizers
             cur_lr = optimizer._learning_rate
-        print('Epoch: %d, lr: %f, number of stepts: %d, at time: ' % (curEpoch, cur_lr, global_step.eval(session=sess)) , datetime.now().time())
+        print('Epoch: %d, lr: %f, number of stepts: %d, at time: %s' % (curEpoch, cur_lr, global_step.eval(session=sess), str(datetime.now())))
         if curEpoch in params.eval_epochs:
             evaluate(train_data, train_labels, validation_data, validation_labels, test_data, test_labels, sess, eval_data_node, prediction_eval, params, curEpoch)
             params.learning_rate.append(cur_lr)
