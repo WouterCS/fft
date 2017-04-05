@@ -20,15 +20,7 @@ def train():
     dataset = load_and_preprocess_dataset()
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
-    trainGivenSetSize(dataset, 2000, 'adadelta', False, 1, 'absFFT', 1)
-    trainGivenSetSize(dataset, 2000, 'adadelta', True, 3e-1, 'absFFT', 2)
-    trainGivenSetSize(dataset, 2000, 'adadelta', True, 1e-1, 'absFFT', 3)
-    trainGivenSetSize(dataset, 2000, 'adadelta', True, 3e-2, 'absFFT', 4)
-    trainGivenSetSize(dataset, 2000, 'adadelta', True, 1e-2, 'absFFT', 5)
-    trainGivenSetSize(dataset, 2000, 'adagrad', False, 1e-1, 'absFFT', 6)
-    trainGivenSetSize(dataset, 2000, 'adagrad', True, 3e-2, 'absFFT', 7)
-    trainGivenSetSize(dataset, 2000, 'adagrad', True, 1e-2, 'absFFT', 8)
-    trainGivenSetSize(dataset, 2000, 'adagrad', True, 3e-3, 'absFFT', 9)
+    trainGivenSetSize(dataset, 2000, 'adadelta', False, 10, 'absFFT', 1)
 
 def trainErrorRedo(dataset, numExamples):
     error = True
@@ -55,6 +47,17 @@ def trainGivenSetSize(dataset, numExamples, optimizer, fixed_lr, initial_lr, fft
     
     print('Initialized the parameters: %s' % str(datetime.now()))
     do_training(params, dataset)
+    
+    with open(directory + '/README.txt', 'wb') as f:
+        print('Training examples: %d' % numExamples, file = f)
+        print('Epochs: %d' % params.max_epochs, file = f)
+        print('Optimizer: %s' % optimizer, file = f)
+        if fixed_lr:
+            print('learning rate: %f' % params.initial_lr, file = f)
+        else:
+            print('learning rate: from %f to %f (exponential decay)' % (params.initial_lr, params.initial_lr * params.min_lr), file = f)
+        print('non-linearity: %s' % fftFunction, file = f)
+        
     
     params.save()
     #print('Final accuracy: %f' % params.acc_test[-1])
