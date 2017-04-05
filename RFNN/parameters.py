@@ -44,7 +44,7 @@ class parameters:
         self.fftFunction = 'absFFT'
 
         # Training parameters
-        self.max_epochs = 2
+        self.max_epochs = 600
         self.batchsize = 25
         self.eval_epochs = range(600) #[95,96,97,98,99,100]
         self.save_freq = 1
