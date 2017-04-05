@@ -21,7 +21,7 @@ def train():
     dataset = load_and_preprocess_dataset()
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
-    trainGivenSetSize(dataset, 2000, 'adadelta', False, 10, 'absFFT', 1)
+    trainGivenSetSize(dataset, 2000, 'adadelta', False, 3, 'absFFT', 1)
 
 def trainErrorRedo(dataset, numExamples):
     error = True
