@@ -5,7 +5,7 @@
 #from live_plotting import update_live_plots
 #from functools import partial
 import os.path
-
+from __future__ import print_function
 #print('line 8')
 #import tensorflow as tf
 #import numpy as np
