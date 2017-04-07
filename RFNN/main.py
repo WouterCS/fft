@@ -52,9 +52,6 @@ def trainGivenSetSize(dataset, numExamples, optimizer, fixed_lr, initial_lr, fft
     params.initial_lr = initial_lr
     params.fftFunction = fftFunction
     
-    print('Initialized the parameters: %s' % str(datetime.now()))
-    do_training(params, dataset)
-    
     with open(directory + '/README.txt', 'wb') as f:
         print('Training examples: %d' % numExamples, file = f)
         print('Epochs: %d' % params.max_epochs, file = f)
@@ -64,7 +61,9 @@ def trainGivenSetSize(dataset, numExamples, optimizer, fixed_lr, initial_lr, fft
         else:
             print('learning rate: from %f to %f (exponential decay)' % (params.initial_lr, params.initial_lr * params.min_lr), file = f)
         print('non-linearity: %s' % fftFunction, file = f)
-        
+    
+    print('Initialized the parameters: %s' % str(datetime.now()))
+    do_training(params, dataset)
     
     params.save()
-    #print('Final accuracy: %f' % params.acc_test[-1])
+    
