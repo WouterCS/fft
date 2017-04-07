@@ -17,6 +17,8 @@ from RFNN.dataset import load_and_preprocess_dataset
 
 
 def train():
+    print('test')
+    return
     print('Start main: %s'  % str(datetime.now()))
     dataset = load_and_preprocess_dataset()
     print('Loaded the dataset: %s'  % str(datetime.now()))
