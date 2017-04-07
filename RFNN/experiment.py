@@ -321,14 +321,14 @@ def do_training(params, dataset): #, update_plots):
     sess.close()
 
     
-def model32to1(params, data, weights, train=False):
+def model32to1(params, data, weights, inputDepth, train=False):
 
     # Dropout parameters
     KEEP_PROB_CONV      = 0.8
     KEEP_PROB_HIDDEN    = 0.3
 
     # Create basis filters
-    basis1 = create_basis_filters(params.grid, params.order1, weights['s1'], params.normalize, dataset['depth'])
+    basis1 = create_basis_filters(params.grid, params.order1, weights['s1'], params.normalize, inputDepth)
     basis2 = create_basis_filters(params.grid, params.order2, weights['s2'], params.normalize, params.N1)
     basis3 = create_basis_filters(params.grid, params.order3, weights['s3'], params.normalize, params.N2)
     basis4 = create_basis_filters(params.grid, params.order4, weights['s4'], params.normalize, params.N3)
