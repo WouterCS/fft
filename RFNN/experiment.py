@@ -229,7 +229,7 @@ def do_training(params, dataset): #, update_plots):
         model = model32to1
     elif params.model == 'model40to5':
         model = model40to5
-    logits = model(params, train_data_node, weights, train=True)
+    logits = model(params, train_data_node, weights, dataset['depth'], train=True)
     predition = tf.nn.softmax(logits)
     loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=train_labels_node, logits=logits), name="loss")
 
@@ -384,14 +384,14 @@ def model32to1(params, data, weights, train=False):
 
     return l4
  
-def model40to5(params, data, weights, train=False):
+def model40to5(params, data, weights, inputDepth, train=False):
 
     # Dropout parameters
     KEEP_PROB_CONV      = 0.8
     KEEP_PROB_HIDDEN    = 0.3
 
     # Create basis filters
-    basis1 = create_basis_filters(params.grid, params.order1, weights['s1'], params.normalize, dataset['depth'])
+    basis1 = create_basis_filters(params.grid, params.order1, weights['s1'], params.normalize, inputDepth)
     basis2 = create_basis_filters(params.grid, params.order2, weights['s2'], params.normalize, params.N1)
     basis3 = create_basis_filters(params.grid, params.order3, weights['s3'], params.normalize, params.N2)
 
