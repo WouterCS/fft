@@ -41,7 +41,7 @@ class parameters:
         self.initial_sigma2 = 1.0
         self.initial_sigma3 = 1.0
         self.fixed_sigmas = True
-        self.fftFunction = 'absoluteValueUntransposed'
+        self.fftFunction = 'absFFT'
 
         # Training parameters
         self.max_epochs = 600
