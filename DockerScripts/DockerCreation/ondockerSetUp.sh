@@ -8,4 +8,4 @@ mkdir -p /results
 #g++ -std=c++11 -shared gaussian_basis_filters.cc njet.cc -o gaussian_basis_filters.so -fPIC -I $TF_INC -O2
 #g++ -std=c++11 -shared gaussian_basis_filters_backprop_sigma.cc njet.cc -o gaussian_basis_filters_backprop_sigma.so -fPIC -I $TF_INC -O2
 
-python -c "print('Python commandline'); import RFNN.main as m; m.train()" 2>&1  | tee /results/log.txt
+python -c "print('Python commandline'); import RFNN.main as m; m.train()" 2>&1  | tee /notebooks/log.txt
