@@ -22,22 +22,22 @@ def train():
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
     reluEpochs = 1
-    trainGivenSetSize(dataset, 300, reluEpochs, 'adadelta', False, 3, 'abs', 1)
-    trainGivenSetSize(dataset, 1000, reluEpochs, 'adadelta', False, 3, 'absFFT', 1)
-    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', False, 3, 'absFFT', 1)
-    trainGivenSetSize(dataset, 5000, reluEpochs, 'adadelta', False, 3, 'absFFT', 1)
-    trainGivenSetSize(dataset, 10000, reluEpochs, 'adadelta', False, 3, 'absFFT', 1)
-    trainGivenSetSize(dataset, 20000, reluEpochs, 'adadelta', False, 3, 'absFFT', 1)
-    trainGivenSetSize(dataset, 60000, reluEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    trainGivenSetSize(dataset, 300, reluEpochs, 'adadelta', False, 3, 'relu', 1)
+    trainGivenSetSize(dataset, 1000, reluEpochs, 'adadelta', False, 3, 'relu', 2)
+    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', False, 3, 'relu', 3)
+    trainGivenSetSize(dataset, 5000, reluEpochs, 'adadelta', False, 3, 'relu', 4)
+    trainGivenSetSize(dataset, 10000, reluEpochs, 'adadelta', False, 3, 'relu', 5)
+    trainGivenSetSize(dataset, 20000, reluEpochs, 'adadelta', False, 3, 'relu', 6)
+    trainGivenSetSize(dataset, 60000, reluEpochs, 'adadelta', False, 3, 'relu', 7)
     
-    absFFTEpochs = 1
-    trainGivenSetSize(dataset, 300,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
-    trainGivenSetSize(dataset, 1000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
-    trainGivenSetSize(dataset, 2000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
-    trainGivenSetSize(dataset, 5000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
-    trainGivenSetSize(dataset, 10000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
-    trainGivenSetSize(dataset, 20000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
-    trainGivenSetSize(dataset, 60000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    absFFTEpochs = 600
+    trainGivenSetSize(dataset, 300,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 8)
+    trainGivenSetSize(dataset, 1000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 9)
+    trainGivenSetSize(dataset, 2000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 10)
+    trainGivenSetSize(dataset, 5000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 11)
+    trainGivenSetSize(dataset, 10000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 12)
+    trainGivenSetSize(dataset, 20000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 13)
+    trainGivenSetSize(dataset, 60000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 14)
 
 
 def trainErrorRedo(dataset, numExamples):
