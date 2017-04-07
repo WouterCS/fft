@@ -45,7 +45,7 @@ def trainGivenSetSize(dataset, numExamples, optimizer, fixed_lr, initial_lr, fft
     if not os.path.exists(directory):
         os.makedirs(directory)
     print('Start of training with %d examples.' % (numExamples))
-    params = para.parameters(directory + '/para')
+    params = para.parameters(directory + '/para', overwrite = True)
     params.number_of_training_samples = numExamples
     params.optimizer = optimizer
     params.fixed_lr = fixed_lr

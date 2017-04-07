@@ -3,7 +3,7 @@ import pickle
 
 class parameters:
 
-    def __init__(self, filepath):
+    def __init__(self, filepath, overwrite = False):
 
         # Set the filepaths
         self.filepath = filepath
@@ -13,7 +13,7 @@ class parameters:
         self.path_model_resize = path_without_extension + "-resize.ckpt"
 
         # Load if file exists else set to default values
-        if os.path.isfile(filepath):
+        if os.path.isfile(filepath) and not overwrite:
             self.load()
         else:
             self.reset()
