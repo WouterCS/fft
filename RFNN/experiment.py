@@ -221,6 +221,8 @@ def do_training(params, dataset): #, update_plots):
         weights['s1'] = tf.constant(params.initial_sigma1)
         weights['s2'] = tf.constant(params.initial_sigma2)
         weights['s3'] = tf.constant(params.initial_sigma3)
+        weights['s4'] = tf.constant(params.initial_sigma4)
+        weights['s5'] = tf.constant(params.initial_sigma5)
     else:
         weights['s1'] = tf.Variable(params.initial_sigma1)
         weights['s2'] = tf.Variable(params.initial_sigma2)

@@ -44,6 +44,8 @@ class parameters:
         self.initial_sigma1 = 1.5
         self.initial_sigma2 = 1.0
         self.initial_sigma3 = 1.0
+        self.initial_sigma4 = 1.0
+        self.initial_sigma5 = 1.0
         self.fixed_sigmas = True
         self.fftFunction = 'absFFT'
         self.model = 'model32to1'
