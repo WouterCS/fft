@@ -173,6 +173,7 @@ def do_training(params, dataset): #, update_plots):
     F1 = (params.order1 + 1) * ((params.order1 + 1) - 1) / 2 + (params.order1 + 1)
     F2 = (params.order2 + 1) * ((params.order2 + 1) - 1) / 2 + (params.order2 + 1)
     F3 = (params.order3 + 1) * ((params.order3 + 1) - 1) / 2 + (params.order3 + 1)
+    print(dir(params))
     F4 = (params.order4 + 1) * ((params.order4 + 1) - 1) / 2 + (params.order4 + 1)
     F5 = (params.order5 + 1) * ((params.order5 + 1) - 1) / 2 + (params.order5 + 1)
 
