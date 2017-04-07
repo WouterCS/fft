@@ -175,7 +175,6 @@ def do_training(params, dataset): #, update_plots):
     F1 = (params.order1 + 1) * ((params.order1 + 1) - 1) / 2 + (params.order1 + 1)
     F2 = (params.order2 + 1) * ((params.order2 + 1) - 1) / 2 + (params.order2 + 1)
     F3 = (params.order3 + 1) * ((params.order3 + 1) - 1) / 2 + (params.order3 + 1)
-    print(dir(params))
     F4 = (params.order4 + 1) * ((params.order4 + 1) - 1) / 2 + (params.order4 + 1)
     F5 = (params.order5 + 1) * ((params.order5 + 1) - 1) / 2 + (params.order5 + 1)
 
@@ -382,11 +381,11 @@ def model32to1(params, data, weights, inputDepth, train=False):
     # Fully connected
     shape = l5.get_shape().as_list()
     l6 = tf.reshape(l5, [shape[0], shape[1] * shape[2] * shape[3]])                             # Flat      1x1
-    if train: l4 = tf.nn.dropout(l4, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
+    if train: l6 = tf.nn.dropout(l6, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
     l6 = tf.matmul(l6, weights['fc_w1'])                                                        # FC
     l6 = l6 + weights['fc_b1']                                                                  # Bias
 
-    return l4
+    return l6
  
 def model40to5(params, data, weights, inputDepth, train=False):
 
@@ -432,5 +431,5 @@ def model40to5(params, data, weights, inputDepth, train=False):
     if train: l4 = tf.nn.dropout(l4, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
     l4 = tf.matmul(l4, weights['fc_w1'])                                                        # FC
     l4 = l4 + weights['fc_b1']                                                                  # Bias
-    printShape(l4.shape)
+
     return l4
