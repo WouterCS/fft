@@ -5,7 +5,7 @@ DROPBOXPATH='/home/uijenswr/Dropbox/thesis'
 
 PROJECTPATH="$(dirname "$(dirname "${BASH_SOURCE[0]}")")" 
 docker rm $(docker stop $(docker ps -aq --no-trunc))
-nvidia-docker run -itd -p 8888:8888 -p 6006:6006 --name $NAME -v $PROJECTPATH/notebooks:/notebooks -v $PROJECTPATH/RFNN:/usr/local/lib/python2.7/dist-packages/RFNN $IMAGENAME 
+nvidia-docker run -itd -p 8888:8888 -p 6006:6006 --name $NAME -v $DROPBOXPATH/results:/results -v $PROJECTPATH/RFNN:/usr/local/lib/python2.7/dist-packages/RFNN $IMAGENAME 
 
 cd $PROJECTPATH
 git pull
