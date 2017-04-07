@@ -201,12 +201,12 @@ def do_training(params, dataset): #, update_plots):
                                             minval=-1.0,
                                             maxval=1.0,
                                             dtype=tf.float32
-                                            ))
+                                            )),
         'a4': tf.Variable(tf.random_uniform([1, 1, params.N3 * F4, params.N4],
                                             minval=-1.0,
                                             maxval=1.0,
                                             dtype=tf.float32
-                                            ))
+                                            )),
         'a5': tf.Variable(tf.random_uniform([1, 1, params.N4 * F5, params.N5],
                                             minval=-1.0,
                                             maxval=1.0,
