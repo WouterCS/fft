@@ -21,7 +21,7 @@ def train():
     dataset = load_and_preprocess_dataset()
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
-    trainGivenSetSize(dataset, 2000, 'adadelta', False, 3, 'absoluteValueUntransposed', 1)
+    trainGivenSetSize(dataset, 2000, 'adadelta', False, 3, 'abs', 1)
     #trainGivenSetSize(dataset, 1000, 'adadelta', False, 3, 'absFFT', 1)
     #trainGivenSetSize(dataset, 2000, 'adadelta', False, 3, 'absFFT', 1)
     #trainGivenSetSize(dataset, 5000, 'adadelta', False, 3, 'absFFT', 1)
@@ -44,7 +44,7 @@ def trainGivenSetSize(dataset, numExamples, optimizer, fixed_lr, initial_lr, fft
     directory = '/results/results-%d-%d' % (numExamples, i)
     if not os.path.exists(directory):
         os.makedirs(directory)
-    print('Start of training with %d examples.' % (numExamples))
+    print('Start of training with %d examples and %s non-linearity.' % (numExamples, fftFunction))
     params = para.parameters(directory + '/para', overwrite = True)
     params.number_of_training_samples = numExamples
     params.optimizer = optimizer
