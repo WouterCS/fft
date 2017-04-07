@@ -46,7 +46,7 @@ class parameters:
         # Training parameters
         self.max_epochs = 10
         self.batchsize = 25
-        self.eval_epochs = range(10,600) #[95,96,97,98,99,100]
+        self.eval_epochs = range(600) #[95,96,97,98,99,100]
         self.save_freq = 1
         self.eval_batchsize = 100
         self.number_of_training_samples = 100
