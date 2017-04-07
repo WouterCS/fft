@@ -46,7 +46,7 @@ class parameters:
         self.initial_sigma3 = 1.0
         self.fixed_sigmas = True
         self.fftFunction = 'absFFT'
-        self.params.model = 'model40to5'
+        self.model = 'model40to5'
 
         # Training parameters
         self.max_epochs = 100
