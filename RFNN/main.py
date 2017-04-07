@@ -21,7 +21,7 @@ def train():
     dataset = load_and_preprocess_dataset()
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
-    trainGivenSetSize(dataset, 300, 'adadelta', False, 3, 'absFFT', 1)
+    trainGivenSetSize(dataset, 2000, 'adadelta', False, 3, 'absFFT', 1)
     #trainGivenSetSize(dataset, 1000, 'adadelta', False, 3, 'absFFT', 1)
     #trainGivenSetSize(dataset, 2000, 'adadelta', False, 3, 'absFFT', 1)
     #trainGivenSetSize(dataset, 5000, 'adadelta', False, 3, 'absFFT', 1)

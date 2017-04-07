@@ -41,10 +41,10 @@ class parameters:
         self.initial_sigma2 = 1.0
         self.initial_sigma3 = 1.0
         self.fixed_sigmas = True
-        self.fftFunction = 'absFFT'
+        self.fftFunction = 'absoluteValueUntransposed'
 
         # Training parameters
-        self.max_epochs = 50
+        self.max_epochs = 600
         self.batchsize = 25
         self.eval_epochs = range(600) #[95,96,97,98,99,100]
         self.save_freq = 1
