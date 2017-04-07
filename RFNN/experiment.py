@@ -184,7 +184,7 @@ def do_training(params, dataset): #, update_plots):
     weights = {
 
         # Fully connected weights
-        'fc_w1': tf.Variable(tf.random_normal([5 * 5 * params.N1, dataset['number_of_labels']],
+        'fc_w1': tf.Variable(tf.random_normal([1 * 1 * params.N1, dataset['number_of_labels']],
                                               stddev=0.01,
                                               dtype=tf.float32)),
         'fc_b1': tf.Variable(tf.random_normal([dataset['number_of_labels']])),
