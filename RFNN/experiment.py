@@ -259,7 +259,7 @@ def do_training(params, dataset): #, update_plots):
                                            dataset['height'],
                                            dataset['width'],
                                            dataset['depth']))
-    logits_eval = model(eval_data_node, weights, train=False)
+    logits_eval = model(params, eval_data_node, weights, dataset['depth'], train=False)
     prediction_eval = tf.nn.softmax(logits_eval)
 
     # Create session
