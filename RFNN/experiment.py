@@ -134,6 +134,8 @@ def fftReLu(layerIn, params):
         return tf.nn.relu(irfft2d(rfft2d(layerIn)))
     if params.fftFunction == 'abs':
         return tf.abs(layerIn)
+    if params.fftFunction == 'relu'
+        return tf.nn.relu(layerIn)        
 
 def printShape(shape):
     print('Dim: ', map(lambda x: x.value, shape))

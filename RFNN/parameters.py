@@ -46,12 +46,12 @@ class parameters:
         self.initial_sigma3 = 1.0
         self.fixed_sigmas = True
         self.fftFunction = 'absFFT'
-        self.model = 'model40to5'
+        self.model = 'model32to1'
 
         # Training parameters
         self.max_epochs = 100
         self.batchsize = 25
-        self.eval_epochs = range(600) #[95,96,97,98,99,100]
+        self.eval_epochs = range(2, 600) #[95,96,97,98,99,100]
         self.save_freq = 1
         self.eval_batchsize = 100
         self.number_of_training_samples = 100

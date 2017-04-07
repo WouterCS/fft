@@ -21,13 +21,24 @@ def train():
     dataset = load_and_preprocess_dataset()
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
-    trainGivenSetSize(dataset, 2000, 'adadelta', False, 3, 'abs', 1)
-    #trainGivenSetSize(dataset, 1000, 'adadelta', False, 3, 'absFFT', 1)
-    #trainGivenSetSize(dataset, 2000, 'adadelta', False, 3, 'absFFT', 1)
-    #trainGivenSetSize(dataset, 5000, 'adadelta', False, 3, 'absFFT', 1)
-    #trainGivenSetSize(dataset, 10000, 'adadelta', False, 3, 'absFFT', 1)
-    #trainGivenSetSize(dataset, 20000, 'adadelta', False, 3, 'absFFT', 1)
-    #trainGivenSetSize(dataset, 60000, 'adadelta', False, 3, 'absFFT', 1)
+    reluEpochs = 1
+    trainGivenSetSize(dataset, 300, reluEpochs, 'adadelta', False, 3, 'abs', 1)
+    trainGivenSetSize(dataset, 1000, reluEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    trainGivenSetSize(dataset, 5000, reluEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    trainGivenSetSize(dataset, 10000, reluEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    trainGivenSetSize(dataset, 20000, reluEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    trainGivenSetSize(dataset, 60000, reluEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    
+    absFFTEpochs = 1
+    trainGivenSetSize(dataset, 300,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    trainGivenSetSize(dataset, 1000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    trainGivenSetSize(dataset, 2000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    trainGivenSetSize(dataset, 5000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    trainGivenSetSize(dataset, 10000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    trainGivenSetSize(dataset, 20000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
+    trainGivenSetSize(dataset, 60000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 1)
+
 
 def trainErrorRedo(dataset, numExamples):
     error = True
@@ -40,7 +51,7 @@ def trainErrorRedo(dataset, numExamples):
             error = True
             i = i + 1
     
-def trainGivenSetSize(dataset, numExamples, optimizer, fixed_lr, initial_lr, fftFunction, i):
+def trainGivenSetSize(dataset, numExamples, numEpochs, optimizer, fixed_lr, initial_lr, fftFunction, i):
     directory = '/results/results-%d-%d' % (numExamples, i)
     if not os.path.exists(directory):
         os.makedirs(directory)
@@ -51,6 +62,7 @@ def trainGivenSetSize(dataset, numExamples, optimizer, fixed_lr, initial_lr, fft
     params.fixed_lr = fixed_lr
     params.initial_lr = initial_lr
     params.fftFunction = fftFunction
+    params.max_epochs = numEpochs
     
     with open(directory + '/README.txt', 'wb') as f:
         print('Training examples: %d' % numExamples, file = f)
