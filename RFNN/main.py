@@ -22,9 +22,10 @@ def train():
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
     reluEpochs = 100
-    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', True, 3, 'relu', 'model40to5', 1)
-    trainGivenSetSize(dataset, 20000, reluEpochs, 'adadelta', True, 3, 'relu', 'model40to5', 1)
-    trainGivenSetSize(dataset, 60000, reluEpochs, 'adadelta', True, 3, 'relu', 'model40to5', 1)
+    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', True, 3, 'absFFT', 'model32to1', 1)
+    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', True, 1, 'absFFT', 'model32to1', 1)
+    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', True, 0.3, 'absFFT', 'model32to1', 1)
+    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', True, 0.1, 'absFFT', 'model32to1', 1)
     # trainGivenSetSize(dataset, 1000, reluEpochs, 'adadelta', False, 3, 'relu', 2)
     # trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', False, 3, 'relu', 3)
     # trainGivenSetSize(dataset, 5000, reluEpochs, 'adadelta', False, 3, 'relu', 4)
