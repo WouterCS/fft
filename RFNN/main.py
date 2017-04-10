@@ -23,7 +23,7 @@ def train():
     
     
     
-    numEpochs = 200
+    numEpochs = 2
     trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', False, 3, 'x-absFFT', 'model40to5', 1)
     trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', False, 3, 'y-absFFT', 'model40to5', 2)
     trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', True, 3, 'x-absFFT', 'model40to5', 3)

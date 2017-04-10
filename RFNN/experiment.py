@@ -140,7 +140,7 @@ def fftReLu(layerIn, params):
         shape1 = layerIn.shape
         layerIn = tf.transpose(layerIn, [0, 3, 1, 2])
         shape2 = layerIn.shape
-        layerOut = irfft1d(tf.cast(tf.abs(rfft1d(layerIn)), tf.complex64))
+        layerOut = irfft(tf.cast(tf.abs(rfft(layerIn)), tf.complex64))
         shape3 = layerOut.shape
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         shape4 = layerOut.shape
@@ -153,7 +153,7 @@ def fftReLu(layerIn, params):
         shape1 = layerIn.shape
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
         shape2 = layerIn.shape
-        layerOut = irfft1d(tf.cast(tf.abs(rfft1d(layerIn)), tf.complex64))
+        layerOut = irfft(tf.cast(tf.abs(rfft(layerIn)), tf.complex64))
         shape3 = layerOut.shape
         layerOut = tf.transpose(layerOut, [0, 3, 2, 1])
         shape4 = layerOut.shape
