@@ -21,7 +21,7 @@ def train():
     dataset = load_and_preprocess_dataset()
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
-    reluEpochs = 200
+    reluEpochs = 100
     trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', True, 3, 'relu', 1)
     trainGivenSetSize(dataset, 20000, reluEpochs, 'adadelta', True, 3, 'relu', 1)
     trainGivenSetSize(dataset, 60000, reluEpochs, 'adadelta', True, 3, 'relu', 1)
