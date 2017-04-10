@@ -22,9 +22,9 @@ def train():
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
     reluEpochs = 100
-    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', True, 3, 'relu', 1)
-    trainGivenSetSize(dataset, 20000, reluEpochs, 'adadelta', True, 3, 'relu', 1)
-    trainGivenSetSize(dataset, 60000, reluEpochs, 'adadelta', True, 3, 'relu', 1)
+    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', True, 3, 'relu', 'model40to5', 1)
+    trainGivenSetSize(dataset, 20000, reluEpochs, 'adadelta', True, 3, 'relu', 'model40to5', 1)
+    trainGivenSetSize(dataset, 60000, reluEpochs, 'adadelta', True, 3, 'relu', 'model40to5', 1)
     # trainGivenSetSize(dataset, 1000, reluEpochs, 'adadelta', False, 3, 'relu', 2)
     # trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', False, 3, 'relu', 3)
     # trainGivenSetSize(dataset, 5000, reluEpochs, 'adadelta', False, 3, 'relu', 4)
@@ -53,7 +53,7 @@ def trainErrorRedo(dataset, numExamples):
             error = True
             i = i + 1
     
-def trainGivenSetSize(dataset, numExamples, numEpochs, optimizer, fixed_lr, initial_lr, fftFunction, i):
+def trainGivenSetSize(dataset, numExamples, numEpochs, optimizer, fixed_lr, initial_lr, fftFunction, model, i):
     directory = '/results/results-%d-%d' % (numExamples, i)
     if not os.path.exists(directory):
         os.makedirs(directory)
@@ -65,10 +65,12 @@ def trainGivenSetSize(dataset, numExamples, numEpochs, optimizer, fixed_lr, init
     params.initial_lr = initial_lr
     params.fftFunction = fftFunction
     params.max_epochs = numEpochs
+    params.model = model
     
     with open(directory + '/README.txt', 'wb') as f:
         print('Training examples: %d' % numExamples, file = f)
         print('Epochs: %d' % params.max_epochs, file = f)
+        print('Model: %s' % params.model, file = f)
         print('Optimizer: %s' % optimizer, file = f)
         if fixed_lr:
             print('learning rate: %f' % params.initial_lr, file = f)
