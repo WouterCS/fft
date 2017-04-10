@@ -21,11 +21,12 @@ def train():
     dataset = load_and_preprocess_dataset()
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
-    reluEpochs = 100
-    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', True, 3, 'absFFT', 'model32to1', 1)
-    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', True, 1, 'absFFT', 'model32to1', 1)
-    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', True, 0.3, 'absFFT', 'model32to1', 1)
-    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', True, 0.1, 'absFFT', 'model32to1', 1)
+    # ToDo vannacht:
+    # trainGivenSetSize(dataset, 60000, 100, 'adadelta', False, 3, 'relu', 'model40to5', 7)
+    
+    
+    reluEpochs = 300
+    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', True, 2, 'absFFT', 'model32to1', 1)
     # trainGivenSetSize(dataset, 1000, reluEpochs, 'adadelta', False, 3, 'relu', 2)
     # trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', False, 3, 'relu', 3)
     # trainGivenSetSize(dataset, 5000, reluEpochs, 'adadelta', False, 3, 'relu', 4)
