@@ -178,12 +178,21 @@ def do_training(params, dataset): #, update_plots):
     F4 = (params.order4 + 1) * ((params.order4 + 1) - 1) / 2 + (params.order4 + 1)
     F5 = (params.order5 + 1) * ((params.order5 + 1) - 1) / 2 + (params.order5 + 1)
 
-    print('Create weights: %s'  % str(datetime.now()))
+
+    
+    if params.model == 'model32to1':
+        model = model32to1
+        sizeFinalImage = 1*1
+    elif params.model == 'model40to5':
+        model = model40to5
+        sizeFinalImage = 5*5
+    
     # Create all the trainable variables
+    print('Create weights: %s'  % str(datetime.now()))
     weights = {
 
         # Fully connected weights
-        'fc_w1': tf.Variable(tf.random_normal([1 * 1 * params.N1, dataset['number_of_labels']],
+        'fc_w1': tf.Variable(tf.random_normal([sizeFinalImage * params.N1, dataset['number_of_labels']],
                                               stddev=0.01,
                                               dtype=tf.float32)),
         'fc_b1': tf.Variable(tf.random_normal([dataset['number_of_labels']])),
@@ -228,10 +237,6 @@ def do_training(params, dataset): #, update_plots):
         weights['s3'] = tf.Variable(params.initial_sigma3)
 
     # Define the loss function
-    if params.model == 'model32to1':
-        model = model32to1
-    elif params.model == 'model40to5':
-        model = model40to5
     logits = model(params, train_data_node, weights, dataset['depth'], train=True)
     predition = tf.nn.softmax(logits)
     loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=train_labels_node, logits=logits), name="loss")
