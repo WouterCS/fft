@@ -21,8 +21,6 @@ def train():
     dataset = load_and_preprocess_dataset()
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
-    # ToDo vannacht:
-    # trainGivenSetSize(dataset, 60000, 100, 'adadelta', False, 3, 'relu', 'model40to5', 7)
     
     
     numEpochs = 200
