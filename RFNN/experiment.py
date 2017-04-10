@@ -5,8 +5,8 @@ from datetime import datetime
 from RFNN.datasets.utils import show_samples, shuffle_samples, split_dataset
 
 #fft relu
-from tensorflow.python.ops.spectral_ops import rfft2d, rfftd
-from tensorflow.python.ops.spectral_ops import irfft2d, irfftd
+from tensorflow.python.ops.spectral_ops import rfft2d, rfft
+from tensorflow.python.ops.spectral_ops import irfft2d, irfft
 
 
 
