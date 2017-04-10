@@ -135,8 +135,33 @@ def fftReLu(layerIn, params):
     if params.fftFunction == 'abs':
         return tf.abs(layerIn)
     if params.fftFunction == 'relu':
-        return tf.nn.relu(layerIn)        
-
+        return tf.nn.relu(layerIn)  
+    if params.fftFunction == 'y-absFFT'
+        shape1 = layerIn.shape
+        layerIn = tf.transpose(layerIn, [0, 3, 1, 2])
+        shape2 = layerIn.shape
+        layerOut = irfft1d(tf.cast(tf.abs(rfft1d(layerIn)), tf.complex64))
+        shape3 = layerOut.shape
+        layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
+        shape4 = layerOut.shape
+        printShape(shape1)
+        printShape(shape2)
+        printShape(shape3)
+        printShape(shape4)
+        return layerOut
+    if params.fftFunction == 'x-absFFT'
+        shape1 = layerIn.shape
+        layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
+        shape2 = layerIn.shape
+        layerOut = irfft1d(tf.cast(tf.abs(rfft1d(layerIn)), tf.complex64))
+        shape3 = layerOut.shape
+        layerOut = tf.transpose(layerOut, [0, 3, 2, 1])
+        shape4 = layerOut.shape
+        printShape(shape1)
+        printShape(shape2)
+        printShape(shape3)
+        printShape(shape4)
+        return layerOut
 def printShape(shape):
     print('Dim: ', map(lambda x: x.value, shape))
     

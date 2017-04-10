@@ -25,8 +25,14 @@ def train():
     # trainGivenSetSize(dataset, 60000, 100, 'adadelta', False, 3, 'relu', 'model40to5', 7)
     
     
-    reluEpochs = 600
-    trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', False, 2, 'absFFT', 'model32to1', 1)
+    numEpochs = 200
+    trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', False, 3, 'x-absFFT', 'model40to5', 1)
+    trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', False, 3, 'y-absFFT', 'model40to5', 2)
+    trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', True, 3, 'x-absFFT', 'model40to5', 3)
+    trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', True, 3, 'y-absFFT', 'model40to5', 4)
+    trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', True, 0.3, 'x-absFFT', 'model40to5', 5)
+    trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', True, 0.3, 'y-absFFT', 'model40to5', 6)
+    trainGivenSetSize(dataset, 60000, 100, 'adadelta', False, 3, 'relu', 'model40to5', 7)
     # trainGivenSetSize(dataset, 1000, reluEpochs, 'adadelta', False, 3, 'relu', 2)
     # trainGivenSetSize(dataset, 2000, reluEpochs, 'adadelta', False, 3, 'relu', 3)
     # trainGivenSetSize(dataset, 5000, reluEpochs, 'adadelta', False, 3, 'relu', 4)

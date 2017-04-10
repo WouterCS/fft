@@ -60,7 +60,7 @@ class parameters:
         self.optimizer = 'adam'
         self.fixed_lr = False
         self.initial_lr = 1
-        self.min_lr = 3.0e-2
+        self.min_lr = 1.0e-2
         self.learning_rate = []
 
         # Regularization
