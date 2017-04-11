@@ -27,20 +27,22 @@ def createPlot(folders, targetName, labels = map(lambda x: 'label %d' % x, range
  #
 #createPlot(map(lambda x: 'results-%d00-1' % x, [50,100,200,600]), 'test',map(lambda x: 'Number of examples: %d00' % x, [3,10,20,50,100,200,600]), 'Adadelta 3 to 3e-2', xlabel = 'Epochs', ylabel = 'test error-rate')
 
+i = 5/0
+
+
 plt.clf()
-lpara = para.parameters('/home/wouter/Dropbox/thesis/stored_results/results-300-10000-relu/results-2000/para')
-plt.plot(lpara.acc_test, color = 'darkblue', label = 'ReLu - 40 to 5')
-lpara = para.parameters('/home/wouter/Dropbox/thesis/stored_results/results-allSizes-adadelta-3-0.03/results-2000-1/para')
-plt.plot(lpara.acc_test, color = 'darkgreen', label = 'norm of Fourier transform - 40 to 5')
-lpara = para.parameters('/home/wouter/Dropbox/thesis/stored_results/relu-300-60000-model32-to-1/results-2000-1/para')
-plt.plot(lpara.acc_test, color = 'lightblue', label = 'ReLu - 32 to 1')
+lpara = para.parameters('/home/wouter/Dropbox/thesis/results/results-300-10000-relu/results-2000/para')
+plt.plot(lpara.acc_test, color = 'darkblue', label = 'ReLu')
 lpara = para.parameters('/home/wouter/Dropbox/thesis/results/results-2000-1/para')
-plt.plot(lpara.acc_test, color = 'lightgreen', label = 'norm of Fourier transform - 32 to 1')
+plt.plot(lpara.acc_test, color = 'darkgreen', label = 'norm of x-Fourier transform')
+lpara = para.parameters('/home/wouter/Dropbox/thesis/results/results-2000-2/para')
+plt.plot(lpara.acc_test, color = 'darkgreen', label = 'norm of y-Fourier transform')
+lpara = para.parameters('/home/wouter/Dropbox/thesis/stored_results/results-allSizes-adadelta-3-0.03/results-2000-1/para')
+plt.plot(lpara.acc_test, color = 'lightgreen', label = 'norm of xy-Fourier transform')
 #plt.xticks(range(7), ['60,000', '20,000', '10,000', '5,000', '2,000', '1,000', '300'])
 plt.legend(prop={'size':15}, loc = 'upper right')
 plt.figure(num =1, figsize = (20,20), dpi = 800)
 plt.xlabel('epochs')
 plt.ylabel('test error-rate (%)')
 plt.title('Comparison of non-linearities on 2000 training-examples')
-plt.ylim(0,30)
-plt.savefig('/home/wouter/Dropbox/thesis/%s.jpg' % 'Relu-VS-absFFT-VS-non-transposed')
+plt.savefig('/home/wouter/Dropbox/thesis/%s.jpg' % 'ComparingArchitectures')
