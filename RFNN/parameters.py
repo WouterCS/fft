@@ -49,6 +49,8 @@ class parameters:
         self.fixed_sigmas = True
         self.fftFunction = 'absFFT'
         self.model = 'model32to1'
+        self.KEEP_PROB_CONV = 0.8
+        self.KEEP_PROB_HIDDEN = 0.3
 
         # Training parameters
         self.max_epochs = 100
