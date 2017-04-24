@@ -111,5 +111,5 @@ class parameters:
             with open(self.filepath, 'wb') as f:
                 pickle.dump(self.__dict__, f)
             print("Parameters saved to: %s" % self.filepath)
-        except Exception,e:
-            print('saving failed: %s' % str(e))
+        except: # Exception,e:
+            print('saving failed')#: %s' % str(e))
