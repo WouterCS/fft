@@ -14,5 +14,5 @@ docker cp $PROJECTPATH/RFNN     $NAME:/RFNN
 docker cp $PROJECTPATH/DockerScripts/DockerCreation $NAME:/scripts
 docker start $NAME 
 docker exec -it $NAME /bin/bash /scripts/ondockerSetUp.sh
-docker cp $LOCALPATH              $DROPBOXPATH
+mv $LOCALPATH              $DROPBOXPATH
 
