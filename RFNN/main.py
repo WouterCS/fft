@@ -23,7 +23,7 @@ def train():
     
     #todo: model 32 doorrekenen
     
-    numEpochs = 2
+    numEpochs = 600
     #trainGivenSetSize(dataset, 300, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
     #trainGivenSetSize(dataset, 1000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
     trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
