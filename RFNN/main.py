@@ -21,7 +21,7 @@ def train():
     dataset = load_and_preprocess_dataset()
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
-    #todo: model 32 doorrekenen
+    #todo: model 32 doorrekenen, testen met dropbox uit
     
     # numEpochs = 600
     # trainGivenSetSize(dataset, 300, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', 1)
@@ -33,7 +33,7 @@ def train():
     # trainGivenSetSize(dataset, 60000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', 1)
     
     numEpochs = 600
-    trainGivenSetSize(dataset, 2000,  numEpochs, 'adadelta', False, 3, 'absFFT', 'model40to5', True, 1)
+    trainGivenSetSize(dataset, 2000,  numEpochs, 'adadelta', False, 3, 'absFFT', 'model40to5', False, 1)
     # trainGivenSetSize(dataset, 1000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 9)
     # trainGivenSetSize(dataset, 2000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 10)
     # trainGivenSetSize(dataset, 5000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 11)
@@ -80,7 +80,7 @@ def trainGivenSetSize(dataset, numExamples, numEpochs, optimizer, fixed_lr, init
         else:
             print('learning rate: from %f to %f (exponential decay)' % (params.initial_lr, params.initial_lr * params.min_lr), file = f)
         print('non-linearity: %s' % fftFunction, file = f)
-        print('Dropout conv layer: %f, dropout hidden layer: %f' % (params.KEEP_PROB_CONV, params.KEEP_PROB_HIDDEN))
+        print('Dropout conv layer: %f, dropout hidden layer: %f' % (params.KEEP_PROB_CONV, params.KEEP_PROB_HIDDEN), f)
     
     print('Initialized the parameters: %s' % str(datetime.now()))
     do_training(params, dataset)
