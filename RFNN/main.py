@@ -67,8 +67,8 @@ def trainGivenSetSize(dataset, numExamples, numEpochs, optimizer, fixed_lr, init
     params.max_epochs = numEpochs
     params.model = model
     if not useDropout:
-        params.KEEP_PROB_CONV = 0.0
-        params.KEEP_PROB_HIDDEN = 0.0
+        params.KEEP_PROB_CONV = 1.0
+        params.KEEP_PROB_HIDDEN = 1.0
     
     with open(directory + '/README.txt', 'wb') as f:
         print('Training examples: %d' % numExamples, file = f)
