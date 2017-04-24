@@ -85,5 +85,7 @@ def trainGivenSetSize(dataset, numExamples, numEpochs, optimizer, fixed_lr, init
     print('Initialized the parameters: %s' % str(datetime.now()))
     do_training(params, dataset)
     
+    print('Done with training.')
+    
     params.save()
     
