@@ -107,7 +107,9 @@ class parameters:
         print("Parameters restored from: %s" % self.filepath)
 
     def save(self):
-        
-        with open(self.filepath, 'wb') as f:
-            pickle.dump(self.__dict__, f)
-        print("Parameters saved to: %s" % self.filepath)
+        try:
+            with open(self.filepath, 'wb') as f:
+                pickle.dump(self.__dict__, f)
+            print("Parameters saved to: %s" % self.filepath)
+        except Exception,e:
+            print('saving failed: %s' % str(e))
