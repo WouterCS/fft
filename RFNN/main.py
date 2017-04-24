@@ -33,7 +33,7 @@ def train():
     # trainGivenSetSize(dataset, 60000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', 1)
     
     numEpochs = 2
-    trainGivenSetSize(dataset, 2000,  numEpochs, 'adadelta', false, 3, 'absFFT', 'model40to5', True, 1)
+    trainGivenSetSize(dataset, 2000,  numEpochs, 'adadelta', False, 3, 'absFFT', 'model40to5', True, 1)
     # trainGivenSetSize(dataset, 1000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 9)
     # trainGivenSetSize(dataset, 2000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 10)
     # trainGivenSetSize(dataset, 5000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 11)
