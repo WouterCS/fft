@@ -154,6 +154,7 @@ def fftReLu(layerIn, params):
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
         shape2 = layerIn.shape
         layerOut = irfft(tf.cast(tf.abs(rfft(layerIn)), tf.complex64))
+        layerOut = irfft(tf.cast(tf.abs(rfft(layerIn)), tf.complex64))
         shape3 = layerOut.shape
         layerOut = tf.transpose(layerOut, [0, 3, 2, 1])
         shape4 = layerOut.shape
@@ -355,8 +356,8 @@ def do_training(params, dataset): #, update_plots):
 def model32to1(params, data, weights, inputDepth, train=False):
 
     # Dropout parameters
-    KEEP_PROB_CONV      = 0.8
-    KEEP_PROB_HIDDEN    = 0.3
+    KEEP_PROB_CONV  = params.KEEP_PROB_CONV
+    KEEP_PROB_HIDDEN = params.KEEP_PROB_HIDDEN
 
     # Create basis filters
     basis1 = create_basis_filters(params.grid, params.order1, weights['s1'], params.normalize, inputDepth)
@@ -420,8 +421,8 @@ def model32to1(params, data, weights, inputDepth, train=False):
 def model40to5(params, data, weights, inputDepth, train=False):
 
     # Dropout parameters
-    KEEP_PROB_CONV      = 0.8
-    KEEP_PROB_HIDDEN    = 0.3
+    KEEP_PROB_CONV      = params.KEEP_PROB_CONV
+    KEEP_PROB_HIDDEN    = params.KEEP_PROB_HIDDEN
 
     # Create basis filters
     basis1 = create_basis_filters(params.grid, params.order1, weights['s1'], params.normalize, inputDepth)
