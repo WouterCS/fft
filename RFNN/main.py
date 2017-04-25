@@ -90,7 +90,7 @@ def trainGivenSetSize(dataset, hyperParam, i):
     plt.ylabel('test error-rate (%)')
     plt.ylim(0,100)
     plt.savefig(directory + '/conversionPlot.png')
-    if len(params.acc_test) > 50
+    if len(params.acc_test) > 50:
         plt.xlim(params.acc_test -50, params.acc_test)
     plt.ylim(0,15)
     plt.savefig(directory + '/conversionPlot-detailed.png')
