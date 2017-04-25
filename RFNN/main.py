@@ -4,6 +4,10 @@ from datetime import datetime
 import RFNN.parameters as para
 from RFNN.experiment import do_training
 from RFNN.dataset import load_and_preprocess_dataset
+
+import matplotlib
+# Force matplotlib to not use any Xwindows backend.
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 def train():
@@ -83,6 +87,7 @@ def trainGivenSetSize(dataset, hyperParam, i):
         print('Confusion matrix:', file = f)
         print(str(params.confusionMatrix), file = f)
     
+    plt.clf()
     plt.plot(params.acc_test, color = 'blue')
     plt.figure(num =1, figsize = (20,20), dpi = 800)
     plt.xlabel('epochs')
