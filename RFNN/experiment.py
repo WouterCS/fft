@@ -357,7 +357,7 @@ def do_training(params, dataset): #, update_plots):
                                                                                                                                             prediction_eval,
                                                                                                                                             params.eval_batchsize)
                                                                                                                  , 1),
-                                                                num_classes = 10)
+                                                                num_classes = 10).eval(session=sess)
     print(str(params.confusionMatrix))
     params
     # Close the session
