@@ -85,7 +85,7 @@ def trainGivenSetSize(dataset, hyperParam, i):
     print('Initialized the parameters: %s' % str(datetime.now()))
     do_training(params, dataset)
     
-    with open(directory + '/README.txt', 'wb') as f:
+    with open(directory + '/README.txt', 'a') as f:
         print('', file = f)
         print('Training finished', file = f)
         print('Final train error-rate: %f' % params.acc_train[-1], file = f)
