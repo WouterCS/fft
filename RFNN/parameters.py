@@ -80,6 +80,7 @@ class parameters:
         self.loss = []
         self.alphas_normal = []
         self.alphas_resize = []
+        self.confusionMatrix = []
 
         #self.basis_normal = []
         #self.basis_resize = []

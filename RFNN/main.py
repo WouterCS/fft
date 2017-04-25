@@ -23,21 +23,16 @@ def train():
     
     #todo: model 32 doorrekenen
     
-    numEpochs = 600
+    numEpochs = 100
+    trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', True, 1, 'relu', 'model40to5', True, 1)
     #trainGivenSetSize(dataset, 300, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
     #trainGivenSetSize(dataset, 1000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
-    trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
-    trainGivenSetSize(dataset, 5000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
-    trainGivenSetSize(dataset, 10000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
-    trainGivenSetSize(dataset, 20000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
-    trainGivenSetSize(dataset, 60000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
-    
-    # trainGivenSetSize(dataset, 1000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 9)
-    # trainGivenSetSize(dataset, 2000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 10)
-    # trainGivenSetSize(dataset, 5000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 11)
-    # trainGivenSetSize(dataset, 10000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 12)
-    # trainGivenSetSize(dataset, 20000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 13)
-    # trainGivenSetSize(dataset, 60000,  absFFTEpochs, 'adadelta', False, 3, 'absFFT', 14)
+    # trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
+    # trainGivenSetSize(dataset, 5000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
+    # trainGivenSetSize(dataset, 10000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
+    # trainGivenSetSize(dataset, 20000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
+    # trainGivenSetSize(dataset, 60000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
+
 
 
 def trainErrorRedo(dataset, numExamples):
