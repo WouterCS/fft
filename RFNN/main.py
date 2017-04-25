@@ -22,16 +22,23 @@ def train():
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
     #todo: model 32 doorrekenen
+    class hyperParameters:
+        def __init__(self):
+            self.numExamples = 2000
+            self.numEpochs = 600
+            self.optimizer = 'adadelta' # 'adadelta'   'adam'   'adagrad'
+            self.fixed_lr = True
+            self.initial_lr = 1
+            self.fftFunction = 'absFFT'  # 'absFFT'    'absoluteValueUntransposed'    'emptyFFT'    'abs'      'relu'     'y-absFFT'     'x-absFFT'
+            self.model = 'model40to5'  #  'model40to5'    'model32to1'
+            self.useDropout = True
     
-    numEpochs = 100
-    trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', True, 1, 'relu', 'model40to5', True, 1)
-    #trainGivenSetSize(dataset, 300, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
-    #trainGivenSetSize(dataset, 1000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
-    # trainGivenSetSize(dataset, 2000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
-    # trainGivenSetSize(dataset, 5000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
-    # trainGivenSetSize(dataset, 10000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
-    # trainGivenSetSize(dataset, 20000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
-    # trainGivenSetSize(dataset, 60000, numEpochs, 'adadelta', False, 3, 'absFFT', 'model32to1', True, 1)
+    hyperParam = hyperParameters()
+
+    
+    hyperParam.numEpochs = 2
+    hyperParam.fftFunction = 'relu'
+    trainGivenSetSize(dataset, hyperParam, 1)
 
 
 
@@ -46,37 +53,45 @@ def trainErrorRedo(dataset, numExamples):
             error = True
             i = i + 1
     
-def trainGivenSetSize(dataset, numExamples, numEpochs, optimizer, fixed_lr, initial_lr, fftFunction, model, useDropout, i):
-    directory = '/results/results-%d-%d' % (numExamples, i)
+def trainGivenSetSize(dataset, hyperParam, i):
+    directory = '/results/results-%d-%d' % (hyperParam.numExamples, i)
     if not os.path.exists(directory):
         os.makedirs(directory)
-    print('Start of training with %d examples and %s non-linearity.' % (numExamples, fftFunction))
+    print('Start of training with %d examples and %s non-linearity.' % (hyperParam.numExamples, hyperParam.fftFunction))
     params = para.parameters(directory + '/para', overwrite = True)
-    params.number_of_training_samples = numExamples
-    params.optimizer = optimizer
-    params.fixed_lr = fixed_lr
-    params.initial_lr = initial_lr
-    params.fftFunction = fftFunction
-    params.max_epochs = numEpochs
-    params.model = model
-    if not useDropout:
+    params.number_of_training_samples = hyperParam.numExamples
+    params.optimizer = hyperParam.optimizer
+    params.fixed_lr = hyperParam.fixed_lr
+    params.initial_lr = hyperParam.initial_lr
+    params.fftFunction = hyperParam.fftFunction
+    params.max_epochs = hyperParam.numEpochs
+    params.model = hyperParam.model
+    if not hyperParam.useDropout:
         params.KEEP_PROB_CONV = 1.0
         params.KEEP_PROB_HIDDEN = 1.0
     
     with open(directory + '/README.txt', 'wb') as f:
-        print('Training examples: %d' % numExamples, file = f)
+        print('Training examples: %d' % params.number_of_training_samples, file = f)
         print('Epochs: %d' % params.max_epochs, file = f)
         print('Model: %s' % params.model, file = f)
-        print('Optimizer: %s' % optimizer, file = f)
-        if fixed_lr:
+        print('Optimizer: %s' % params.optimizer, file = f)
+        if params.fixed_lr:
             print('learning rate: %f' % params.initial_lr, file = f)
         else:
             print('learning rate: from %f to %f (exponential decay)' % (params.initial_lr, params.initial_lr * params.min_lr), file = f)
-        print('non-linearity: %s' % fftFunction, file = f)
+        print('non-linearity: %s' % params.fftFunction, file = f)
         print('Dropout conv layer: %f, dropout hidden layer: %f' % (params.KEEP_PROB_CONV, params.KEEP_PROB_HIDDEN), file = f)
     
     print('Initialized the parameters: %s' % str(datetime.now()))
     do_training(params, dataset)
+    
+    with open(directory + '/README.txt', 'wb') as f:
+        print('', file = f)
+        print('Training finished', file = f)
+        print('Final train error-rate: %f' % params.acc_train[-1], file = f)
+        print('Final test error-rate: %f' % params.acc_test[-1], file = f)
+        print('Confusion matrix:', file = f)
+        print(str(params.confusionMatrix), file = f)
     
     print('Done with training.')
     

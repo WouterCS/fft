@@ -349,15 +349,15 @@ def do_training(params, dataset): #, update_plots):
     evaluate(train_data, train_labels, validation_data, validation_labels, test_data, test_labels, sess, eval_data_node, prediction_eval, params, params.max_epochs)
     params.learning_rate.append(cur_lr)
 
-    # Confusion matrix
+    # Create confusion matrix
     params.confusionMatrix = tf.confusion_matrix(labels = test_labels, 
-                                                                predictions = numpy.argmax(eval_in_batches(test_data,
-                                                                                                                                            sess,
-                                                                                                                                            eval_data_node,
-                                                                                                                                            prediction_eval,
-                                                                                                                                            params.eval_batchsize)
-                                                                                                                 , 1),
-                                                                num_classes = 10).eval(session=sess)
+                                                                                predictions = numpy.argmax(eval_in_batches(test_data,
+                                                                                                                                                            sess,
+                                                                                                                                                            eval_data_node,
+                                                                                                                                                            prediction_eval,
+                                                                                                                                                            params.eval_batchsize)
+                                                                                                                                 , 1),
+                                                                                num_classes = 10).eval(session=sess)
     print(str(params.confusionMatrix))
     params
     # Close the session
