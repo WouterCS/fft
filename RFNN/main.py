@@ -15,7 +15,7 @@ def train():
     dataset = load_and_preprocess_dataset()
     print('Loaded the dataset: %s'  % str(datetime.now()))
     
-    #todo: model 32 doorrekenen
+    
     class hyperParameters:
         def __init__(self):
             self.numExamples = 2000
@@ -29,12 +29,13 @@ def train():
     
     hyperParam = hyperParameters()
 
+    #todo: model 32 doorrekenen
     
-    hyperParam.numEpochs = 100
+    hyperParam.numEpochs = 10
     hyperParam.fftFunction = 'relu'
     trainGivenSetSize(dataset, hyperParam, 1)
 
-
+    print('finished all training')
 
 def trainErrorRedo(dataset, numExamples):
     error = True
@@ -92,6 +93,9 @@ def trainGivenSetSize(dataset, hyperParam, i):
     plt.figure(num =1, figsize = (20,20), dpi = 800)
     plt.xlabel('epochs')
     plt.ylabel('test error-rate (%)')
+    plt.grid(b=True, which='major', color='black', linestyle='-')
+    plt.minorticks_on()
+    plt.grid(b=True, which='minor', color='black', linestyle='--')
     plt.ylim(0,100)
     plt.savefig(directory + '/conversionPlot.png')
     if len(params.acc_test) > 50:
@@ -99,7 +103,7 @@ def trainGivenSetSize(dataset, hyperParam, i):
     plt.ylim(0,15)
     plt.savefig(directory + '/conversionPlot-detailed.png')
     
-    print('Done with training.')
+    print('Current run done.')
     
     params.save()
     
