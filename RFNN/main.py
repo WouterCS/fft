@@ -1,20 +1,10 @@
-#imports for images
-#import matplotlib
-#matplotlib.use('Agg')
-#import matplotlib.pyplot as plt
-#from live_plotting import update_live_plots
-#from functools import partial
 from __future__ import print_function
 import os.path
-
-#print('line 8')
-#import tensorflow as tf
-#import numpy as np
 from datetime import datetime
 import RFNN.parameters as para
 from RFNN.experiment import do_training
 from RFNN.dataset import load_and_preprocess_dataset
-
+import matplotlib.pyplot as plt
 
 def train():
     print('Start main: %s'  % str(datetime.now()))
@@ -36,7 +26,7 @@ def train():
     hyperParam = hyperParameters()
 
     
-    hyperParam.numEpochs = 2
+    hyperParam.numEpochs = 10
     hyperParam.fftFunction = 'relu'
     trainGivenSetSize(dataset, hyperParam, 1)
 
@@ -92,6 +82,18 @@ def trainGivenSetSize(dataset, hyperParam, i):
         print('Final test error-rate: %f' % params.acc_test[-1], file = f)
         print('Confusion matrix:', file = f)
         print(str(params.confusionMatrix), file = f)
+    
+    plt.clf()
+    plt.plot(params.acc_test, color = 'blue')
+    plt.figure(num =1, figsize = (20,20), dpi = 800)
+    plt.xlabel('epochs')
+    plt.ylabel('test error-rate (%)')
+    plt.ylim(0,100)
+    plt.savefig(directory + '/conversionPlot.png')
+    if len(params.acc_test) > 50
+        plt.xlim(params.acc_test -50, params.acc_test)
+    plt.ylim(0,15)
+    plt.savefig(directory + '/conversionPlot-detailed.png')
     
     print('Done with training.')
     
