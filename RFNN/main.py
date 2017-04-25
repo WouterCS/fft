@@ -30,7 +30,7 @@ def train():
     hyperParam = hyperParameters()
 
     
-    hyperParam.numEpochs = 10
+    hyperParam.numEpochs = 100
     hyperParam.fftFunction = 'relu'
     trainGivenSetSize(dataset, hyperParam, 1)
 
