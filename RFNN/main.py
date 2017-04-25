@@ -83,7 +83,6 @@ def trainGivenSetSize(dataset, hyperParam, i):
         print('Confusion matrix:', file = f)
         print(str(params.confusionMatrix), file = f)
     
-    plt.clf()
     plt.plot(params.acc_test, color = 'blue')
     plt.figure(num =1, figsize = (20,20), dpi = 800)
     plt.xlabel('epochs')
