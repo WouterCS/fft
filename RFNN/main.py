@@ -31,8 +31,24 @@ def train():
 
     #todo: model 32 doorrekenen
     
-    hyperParam.numEpochs = 10
-    hyperParam.fftFunction = 'relu'
+    hyperParam.numEpochs = 600
+    hyperParam.fftFunction = 'absFFT'
+    hyperParam.fixed_lr = False
+    hyperParam.initial_lr = 3
+    
+    hyperParam.numExamples = 300
+    trainGivenSetSize(dataset, hyperParam, 1)
+    hyperParam.numExamples = 1000
+    trainGivenSetSize(dataset, hyperParam, 1)
+    hyperParam.numExamples = 2000
+    trainGivenSetSize(dataset, hyperParam, 1)
+    hyperParam.numExamples = 5000
+    trainGivenSetSize(dataset, hyperParam, 1)
+    hyperParam.numExamples = 10000
+    trainGivenSetSize(dataset, hyperParam, 1)
+    hyperParam.numExamples = 20000
+    trainGivenSetSize(dataset, hyperParam, 1)
+    hyperParam.numExamples = 60000
     trainGivenSetSize(dataset, hyperParam, 1)
 
     print('finished all training')
