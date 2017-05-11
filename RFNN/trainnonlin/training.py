@@ -5,8 +5,8 @@ from RFNN.datasets.utils import select_n_samples
 from RFNN.trainnonlin.generateData import loadData, generateData
 import RFNN.trainnonlin.parameters as para
 
-def test_do_training():
-    dataset = loadData('/home/wouter/Documents/git/fft/RFNN/trainnonlin/storedData.npz')
+def test_do_training(path): # '/home/wouter/Documents/git/fft/RFNN/trainnonlin/storedData.npz')
+    dataset = loadData(path)
     params = para.parameters('/home/wouter/Documents/git/fft/RFNN/trainnonlin/para')
     return do_training(params, dataset)
 
@@ -108,3 +108,27 @@ def do_training(params, dataset):
             _, l, w = sess.run([train_op, loss, weights], feed_dict=feed_dict)
             
             print('Loss: %f', l)
+            
+            
+def model(params, data, weights, train=False):
+    
+    # Dropout parameters
+    KEEP_PROB_CONV  = params.KEEP_PROB_CONV
+    KEEP_PROB_HIDDEN = params.KEEP_PROB_HIDDEN
+    shape = data.get_shape().as_list()
+    
+    l1 = tf.reshape(data, [shape[0], shape[1] * shape[2] * shape[3]])                            
+    if train: l1 = tf.nn.dropout(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
+    l1 = tf.matmul(l1, weights['fc_w1'])                                                        # FC
+    l1 = l1 + weights['fc_b1']   
+                            
+    if train: l2 = tf.nn.dropout(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
+    l2 = tf.matmul(l2, weights['fc_w2'])                                                        # FC
+    l2 = l2 + weights['fc_b2']   
+                        
+    if train: l3 = tf.nn.dropout(l2, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
+    l3 = tf.matmul(l3, weights['fc_w3'])                                                        # FC
+    l3 = l3 + weights['fc_b3']   
+    l3 = tf.reshape([shape[0], shape[1], shape[2], shape[3]])
+    
+    return l3

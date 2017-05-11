@@ -28,10 +28,15 @@ class parameters:
         
         # training parameters
         self.batchsize = 25
+        self.optimizer = 'adam'
+        self.fixed_lr = True
+        self.initial_lr = 1
+        self.max_epochs = 10
+        self.min_lr = 1e-1
         
         # model parameters
         self.weightType = 'complex'
-        
+        self.KEEP_PROB_HIDDEN = 0.3
         
     def load(self):
         restoredFilepath = self.filepath

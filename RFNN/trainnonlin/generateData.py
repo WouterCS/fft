@@ -26,7 +26,7 @@ def convWithNRandom(data, n):
     train_labels = np.fft.rfft2(np.maximum(originalFilteredImage, 0)).astype('complex64', casting = 'same_kind')
     return train_data, train_labels
 
-def generateData(storeData = False, path = ''):
+def generateData(returnData = True, storeData = False, path = ''):
     dataset = load_and_preprocess_dataset()
     
     #split up the data
