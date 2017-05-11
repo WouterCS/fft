@@ -53,7 +53,7 @@ def generateData(returnData = True, storeData = False, path = ''):
     }
     
     if storeData:
-        if not os.path.exists(directory):
+        if not os.path.exists(os.path.dirname(path)):
             os.makedirs(os.path.dirname(path))
         with open(path, 'wb') as f:
             np.savez_compressed(path, data = datasetOut)
