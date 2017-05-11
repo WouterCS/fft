@@ -62,3 +62,6 @@ def generateData(returnData = True, storeData = False, path = ''):
 def loadData(path):
     with open(path, 'rb') as f:
         return np.load(f)['data'].tolist()
+        
+def generateDataFixedArg():
+    return generateData(False, True, '/data/storedData.npz')

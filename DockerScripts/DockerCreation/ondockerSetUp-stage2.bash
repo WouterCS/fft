@@ -8,5 +8,5 @@ cd /usr/local/lib/python2.7/dist-packages/tensorflow/python/user_ops
 g++ -std=c++11 -shared gaussian_basis_filters.cc njet.cc -o gaussian_basis_filters.so -fPIC -I $TF_INC -O2
 g++ -std=c++11 -shared gaussian_basis_filters_backprop_sigma.cc njet.cc -o gaussian_basis_filters_backprop_sigma.so -fPIC -I $TF_INC -O2
 
-echo "import RFNN.trainnonlin.generateData as gd; gd.generateData(False, True, \'/data/storedData.npz\')"
-python -c "import RFNN.trainnonlin.generateData as gd; gd.generateData(False, True, \'/data/storedData.npz\')"
+
+python -c "import RFNN.trainnonlin.generateData as gd; gd.generateDataFixedArg()"
