@@ -122,7 +122,6 @@ def do_training(params, dataset):
 def model(params, data, weights, train=False):
     
     # Dropout parameters
-    KEEP_PROB_CONV  = params.KEEP_PROB_CONV
     KEEP_PROB_HIDDEN = params.KEEP_PROB_HIDDEN
     shape = data.get_shape().as_list()
     
