@@ -26,7 +26,6 @@ def do_training(params, dataset):
                                                 train_labels,
                                                 params.number_of_training_samples,
                                                 params.seed)
-    return train_data
     # Set the random seed
     tf.set_random_seed(params.seed)
     
