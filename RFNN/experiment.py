@@ -166,7 +166,7 @@ def fftReLu(layerIn, params):
 def printShape(shape):
     print('Dim: ', map(lambda x: x.value, shape))
     
-def do_training(params, dataset): #, update_plots):
+def do_training(params, dataset):
     print('Do training: %s'  % str(datetime.now()))
     # Shorten some variable names
     train_data          = dataset['training_set']['data']

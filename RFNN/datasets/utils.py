@@ -88,3 +88,12 @@ def show_samples(fig, samples, labels=None):
 
         grid[i].axis('off')
 
+def select_n_samples(data, labels, n, random_seed=None):
+    """ Select randomly n samples from the set
+    """
+
+    # Shuffle first
+    data, labels = shuffle_samples(data, labels, random_seed)
+
+    # Return the first n samples
+    return data[:n], labels[:n]
