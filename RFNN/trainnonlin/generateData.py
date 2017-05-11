@@ -1,7 +1,7 @@
 from RFNN.dataset import load_and_preprocess_dataset
 import numpy as np
 from scipy.signal import convolve2d
-
+import os
 
 def splitComplexIntoReals(data):
         return data.view('Float64').reshape(data.shape+(2,)).transpose((5,0,1,2,3,4))
