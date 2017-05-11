@@ -56,10 +56,10 @@ def do_training(params, dataset):
         # Fully connected weights, layer 1
         'fc_w1': tf.Variable(tf.complex( tf.random_normal([sizeImage, sizeImage],
                                                         stddev=0.01
-                                                        ), dtype =  tf.float32,
+                                                        , dtype =  tf.float32),
                                                     tf.random_normal([sizeImage, sizeImage],
                                                         stddev=0.01
-                                                        ), dtype =  tf.float32, )),
+                                                        , dtype =  tf.float32))),
         'fc_b1': tf.Variable(tf.random_normal([sizeImage])),
         
         # Fully connected weights, layer 2
