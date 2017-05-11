@@ -4,6 +4,7 @@ from datetime import datetime
 from RFNN.datasets.utils import select_n_samples
 from RFNN.trainnonlin.generateData import loadData, generateData
 import RFNN.trainnonlin.parameters as para
+import tensorflow as tf
 
 def test_do_training(path): # '/home/wouter/Documents/git/fft/RFNN/trainnonlin/storedData.npz')
     dataset = loadData(path)
