@@ -9,4 +9,4 @@ g++ -std=c++11 -shared gaussian_basis_filters.cc njet.cc -o gaussian_basis_filte
 g++ -std=c++11 -shared gaussian_basis_filters_backprop_sigma.cc njet.cc -o gaussian_basis_filters_backprop_sigma.so -fPIC -I $TF_INC -O2
 
 
-import RFNN.trainnonlin.generateData as gd; gd.generateData(False, True, '/data/storedData.npz')
+python -c "import RFNN.trainnonlin.generateData as gd; gd.generateData(False, True, \'/data/storedData.npz\')"
