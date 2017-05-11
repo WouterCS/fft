@@ -59,7 +59,7 @@ def do_training(params, dataset):
                                                         ), dtype =  tf.float32,
                                                     tf.random_normal([sizeImage, sizeImage],
                                                         stddev=0.01
-                                                        ), dtype =  tf.float32, ))
+                                                        ), dtype =  tf.float32, )),
         'fc_b1': tf.Variable(tf.random_normal([sizeImage])),
         
         # Fully connected weights, layer 2
