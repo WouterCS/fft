@@ -55,20 +55,20 @@ def do_training(params, dataset):
 
         # Fully connected weights, layer 1
         'fc_w1': tf.Variable(tf.random_normal([sizeImage, sizeImage],
-                                              stddev=0.01,
-                                              dtype=weightType)),
+                                              stddev=0.01
+                                              ), dtype = weightType),
         'fc_b1': tf.Variable(tf.random_normal([sizeImage])),
         
         # Fully connected weights, layer 2
         'fc_w2': tf.Variable(tf.random_normal([sizeImage, sizeImage],
-                                              stddev=0.01,
-                                              dtype=weightType)),
+                                              stddev=0.01
+                                              ), dtype = weightType),
         'fc_b2': tf.Variable(tf.random_normal([sizeImage])),
         
         # Fully connected weights, layer 3
         'fc_w3': tf.Variable(tf.random_normal([sizeImage, sizeImage],
-                                              stddev=0.01,
-                                              dtype=weightType)),
+                                              stddev=0.01
+                                              ), dtype = weightType),
         'fc_b3': tf.Variable(tf.random_normal([sizeImage], dtype = weightType))
         }
     
