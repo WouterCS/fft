@@ -111,7 +111,7 @@ def do_training(params, dataset):
     for curEpoch in range(params.max_epochs):
         train_data, train_labels = shuffle_samples(train_data, train_labels)
         print('Epoch: %d' % curEpoch)
-        for i in range(int(np.floor(params.max_epochs / params.batchsize))):
+        for i in range(int(np.floor(params.number_of_training_samples / params.batchsize))):
             print('Batch: %d' % i)
             
             batch_data = train_data[i * params.batchsize:(i + 1) * params.batchsize,...]
