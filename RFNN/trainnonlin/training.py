@@ -1,5 +1,5 @@
 #import tensorflow as tf
-import numpy
+import numpy as np
 from datetime import datetime
 from RFNN.datasets.utils import select_n_samples, shuffle_samples
 from RFNN.trainnonlin.generateData import loadData, generateData
