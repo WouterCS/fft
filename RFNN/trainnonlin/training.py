@@ -111,17 +111,18 @@ def do_training(params, dataset):
     sess.run(tf.global_variables_initializer())
     for curEpoch in range(params.max_epochs):
         train_data, train_labels = shuffle_samples(train_data, train_labels)
+        lossInCurEpoch = []
         print('Epoch: %d' % curEpoch)
         for i in range(int(np.floor(params.number_of_training_samples / params.batchsize))):
             print('Batch: %d' % i)
             
             batch_data = train_data[i * params.batchsize:(i + 1) * params.batchsize,...]
             batch_labels = train_labels[i * params.batchsize:(i + 1) * params.batchsize,...]
-            print(len(batch_data))
+
             feed_dict = {train_data_node: batch_data, train_labels_node: batch_labels}
             _, l, w = sess.run([train_op, loss, weights], feed_dict=feed_dict)
-            
-            print('Loss: %f', l)
+            lossInCurEpoch.append(l)
+        print('In epoch %d, the average loss was: %f' % (curEpoch, np.mean(lossInCurEpoch)))
             
             
 def model(params, data, weights, train=False):
