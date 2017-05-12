@@ -130,15 +130,15 @@ def model(params, data, weights, train=False):
     shape = data.get_shape().as_list()
     
     l1 = tf.reshape(data, [shape[0], shape[1] * shape[2] * shape[3]])                            
-    if train: l1 = dropoutForComplex(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
+    #if train: l1 = dropoutForComplex(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
     l1 = tf.matmul(l1, weights['fc_w1'])                                                        # FC
     l1 = l1 + weights['fc_b1']   
                             
-    if train: l2 = dropoutForComplex(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
+    #if train: l2 = dropoutForComplex(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
     l2 = tf.matmul(l2, weights['fc_w2'])                                                        # FC
     l2 = l2 + weights['fc_b2']   
                         
-    if train: l3 = dropoutForComplex(l2, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
+    #if train: l3 = dropoutForComplex(l2, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
     l3 = tf.matmul(l3, weights['fc_w3'])                                                        # FC
     l3 = l3 + weights['fc_b3']   
     l4 = tf.reshape(l3, [shape[0], shape[1], shape[2], shape[3]])
