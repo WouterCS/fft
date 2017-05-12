@@ -22,6 +22,6 @@ def do_training():
     train_op = tf.train.AdamOptimizer(learning_rate=1.0).minimize(loss)
             
 def model(data, weights):
-    l1 = tf.matmul(data, weights['fc_w1'])                                                        # FC
+    l1 = tf.matmul(data, tf.cast(weights['fc_w1'], tf.complex64))                                                        # FC
     #l1 = l1 + weights['fc_b1']
     return l1
