@@ -73,30 +73,12 @@ def model(params, data, weights, train=False):
     KEEP_PROB_HIDDEN = params.KEEP_PROB_HIDDEN
     shape = data.get_shape().as_list()
     
-    l1 = tf.reshape(data, [shape[0], shape[1] * shape[2] * shape[3]])                            
-    if train: l1 = dropoutForComplex(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
+    l1 = tf.reshape(data, [shape[0], shape[1] * shape[2] * shape[3]])
     l1 = tf.matmul(l1, weights['fc_w1'])                                                        # FC
-    l1 = l1 + weights['fc_b1']   
+    l1 = l1 + weights['fc_b1']
     
-    return tf.reshape(data, [shape[0], shape[1], shape[2], shape[3]])    
+    return tf.reshape(data, [shape[0], shape[1], shape[2], shape[3]])
     
-def dropoutForComplex(data, keep_prob):
-    keep_prob = tf.convert_to_tensor(keep_prob,
-                                                        dtype=tf.float32,
-                                                        name="keep_prob")
-    
-    random_tensor = keep_prob
-    random_tensor += tf.random_uniform(tf.shape(data),
-                                               dtype=tf.float32)
-    # 0. if [keep_prob, 1.0) and 1. if [1.0, 1.0 + keep_prob)
-    binary_tensor = tf.floor(random_tensor)
-    
-    keep_prob = tf.cast(keep_prob, tf.complex64)
-    binary_tensor = tf.cast(binary_tensor, tf.complex64)
-    
-    ret = tf.div(data, keep_prob) * binary_tensor
-    ret.set_shape(data.get_shape())
-    return ret
 
 
 
