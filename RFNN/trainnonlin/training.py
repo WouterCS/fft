@@ -147,7 +147,7 @@ def dropoutForComplex(data, keep_prob):
                                                         name="keep_prob")
     
     random_tensor = keep_prob
-    random_tensor += tf.random_uniform(noise_shape,
+    random_tensor += tf.random_uniform(tf.shape(data),
                                                seed=seed,
                                                dtype=x.dtype)
     # 0. if [keep_prob, 1.0) and 1. if [1.0, 1.0 + keep_prob)
