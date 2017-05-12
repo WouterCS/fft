@@ -37,7 +37,7 @@ def generateData(returnData = True, storeData = False, path = ''):
     test_data           = dataset['test_set']['data']
     test_labels         = dataset['test_set']['labels']
     
-    (newtrain_data, newtrain_labels) = convWithNRandom(train_data[1:10,...], 1)
+    (newtrain_data, newtrain_labels) = convWithNRandom(train_data[...], 1)
     
     datasetOut = {
 
