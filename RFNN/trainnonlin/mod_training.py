@@ -78,7 +78,7 @@ def model(params, data, weights, train=False):
     l1 = tf.matmul(l1, weights['fc_w1'])                                                        # FC
     l1 = l1 + weights['fc_b1']   
     
-    return l1
+    return tf.reshape(data, [shape[0], shape[1], shape[2], shape[3]])    
     
 def dropoutForComplex(data, keep_prob):
     keep_prob = tf.convert_to_tensor(keep_prob,
