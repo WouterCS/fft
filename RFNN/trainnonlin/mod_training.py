@@ -13,7 +13,7 @@ def do_training():
     # create and initialise the weights
     weights = {
         'fc_w1': tf.Variable(tf.random_normal([10, 10], stddev=0.01, dtype =  tf.float32)),
-        'fc_b1': tf.Variable(tf.random_normal([10]), tf.random_normal([10])),
+        'fc_b1': tf.Variable(tf.random_normal([10])
         }
     
     prediction = model(train_data_node, weights)
