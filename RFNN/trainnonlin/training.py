@@ -137,9 +137,9 @@ def model(params, data, weights, train=False):
     if train: l3 = dropoutForComplex(l2, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
     l3 = tf.matmul(l3, weights['fc_w3'])                                                        # FC
     l3 = l3 + weights['fc_b3']   
-    l3 = tf.reshape([shape[0], shape[1], shape[2], shape[3]])
+    l4 = tf.reshape(l3, [shape[0], shape[1], shape[2], shape[3]])
     
-    return l3
+    return l4
     
 def dropoutForComplex(data, keep_prob):
     keep_prob = tf.convert_to_tensor(keep_prob,
