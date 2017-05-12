@@ -84,7 +84,7 @@ def do_training(params, dataset):
     logits = model(params, train_data_node, weights, True)
     loss = tf.real(tf.norm(logits - train_labels_node))
     
-    print(loss).dtype
+    
     
     global_step = tf.Variable(0, trainable=False)
     if params.fixed_lr:
@@ -102,6 +102,7 @@ def do_training(params, dataset):
     elif params.optimizer == 'adagrad':
         optimizer = tf.train.AdagradOptimizer(learning_rate=learning_rate)
     
+    print(loss.dtype)
     train_op = optimizer.minimize(loss, global_step=global_step)
     
     
