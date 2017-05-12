@@ -107,7 +107,7 @@ def do_training(params, dataset):
     train_op = tf.train.AdamOptimizer(learning_rate=1.0).minimize(loss)
     
     sess = tf.Session()
-    
+    sess.run(tf.global_variables_initializer())
     for curEpoch in range(params.max_epochs):
         train_data, train_labels = shuffle_samples(train_data, train_labels)
         print('Epoch: %d' % curEpoch)
