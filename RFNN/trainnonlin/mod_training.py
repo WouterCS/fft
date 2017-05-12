@@ -12,8 +12,8 @@ def do_training():
     
     # create and initialise the weights
     weights = {
-        'fc_w1': tf.Variable(tf.random_normal([10, 10], stddev=0.01, dtype =  tf.float32))
-        #,'fc_b1': tf.Variable(tf.random_normal([10]))
+        'fc_w1': tf.Variable(tf.random_normal([10, 10], stddev=0.01, dtype =  tf.float32)),
+        'fc_b1': tf.Variable(tf.random_normal([10]))
         }
     
     prediction = model(train_data_node, weights)
@@ -23,5 +23,5 @@ def do_training():
             
 def model(data, weights):
     l1 = tf.matmul(data, tf.cast(weights['fc_w1'], tf.complex64))                                                        # FC
-    #l1 = l1 + weights['fc_b1']
+    l1 = l1 + tf.cast(weights['fc_b1'], tf.complex64)
     return l1
