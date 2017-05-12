@@ -102,7 +102,7 @@ def do_training(params, dataset):
     elif params.optimizer == 'adagrad':
         optimizer = tf.train.AdagradOptimizer(learning_rate=learning_rate)
     
-    print(loss.dtype)
+    print('Type of loss: %s' % loss.dtype)
     train_op = optimizer.minimize(loss, global_step=global_step)
     
     
