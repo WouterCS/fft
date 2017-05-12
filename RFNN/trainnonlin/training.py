@@ -82,7 +82,7 @@ def do_training(params, dataset):
         }
     
     logits = model(params, train_data_node, weights, True)
-    loss = tf.norm(logits - train_labels_node)
+    loss = tf.real(tf.norm(logits - train_labels_node))
     
     global_step = tf.Variable(0, trainable=False)
     if params.fixed_lr:
