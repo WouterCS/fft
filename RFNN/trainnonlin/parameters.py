@@ -23,7 +23,7 @@ class parameters:
 
         # Reset everything except filepaths
         self.seed = 66478
-        self.number_of_training_samples = 9
+        self.number_of_training_samples = 60000
         
         
         # training parameters
