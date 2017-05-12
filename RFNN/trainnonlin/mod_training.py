@@ -15,35 +15,25 @@ def test_do_training(path): # '/home/wouter/Documents/git/fft/RFNN/trainnonlin/s
 def do_training(params, dataset):
     print('Do training: %s'  % str(datetime.now()))
 
-    # Set the random seed
-    tf.set_random_seed(params.seed)
-    
     # Create placeholders
     train_data_node = tf.placeholder(tf.complex64,
-                                     shape=(params.batchsize,
-                                            dataset['depth'],
-                                            dataset['height'],
-                                            dataset['width']),
+                                     shape=(25, 10),
                                      name="train_data_node")
 
     train_labels_node = tf.placeholder(tf.complex64,
-                                       shape=(params.batchsize,
-                                            dataset['depth'],
-                                            dataset['height'],
-                                            dataset['width']),
+                                       shape=(25, 10),
                                        name="train_labels_node")
      
-    sizeImage = dataset['height'] * dataset['width'] * dataset['depth']
     weights = {
 
         # Fully connected weights, layer 1
-        'fc_w1': tf.Variable(tf.complex( tf.random_normal([sizeImage, sizeImage],
+        'fc_w1': tf.Variable(tf.complex( tf.random_normal([10, 10],
                                                         stddev=0.01
                                                         , dtype =  tf.float32),
-                                                    tf.random_normal([sizeImage, sizeImage],
+                                                    tf.random_normal([10, 10],
                                                         stddev=0.01
                                                         , dtype =  tf.float32))),
-        'fc_b1': tf.Variable(tf.complex(tf.random_normal([sizeImage]), tf.random_normal([sizeImage]))),
+        'fc_b1': tf.Variable(tf.complex(tf.random_normal([10]), tf.random_normal([10]))),
         }
     
     logits = model(params, train_data_node, weights, True)
@@ -53,14 +43,10 @@ def do_training(params, dataset):
     train_op = tf.train.AdamOptimizer(learning_rate=1.0).minimize(loss)
             
             
-def model(params, data, weights, train=False):
-    shape = data.get_shape().as_list()
+def model(data, weights):
     
-    l1 = tf.reshape(data, [shape[0], shape[1] * shape[2] * shape[3]])
-    l1 = tf.matmul(l1, weights['fc_w1'])                                                        # FC
-    l1 = l1 + weights['fc_b1']
-    
-    return tf.reshape(data, [shape[0], shape[1], shape[2], shape[3]])
+    l1 = tf.matmul(data, weights['fc_w1'])                                                        # FC
+    return = l1 + weights['fc_b1']
     
 
 
