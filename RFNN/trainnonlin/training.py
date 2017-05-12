@@ -116,7 +116,7 @@ def do_training(params, dataset):
             
             batch_data = train_data[i * params.batchsize:(i + 1) * params.batchsize,...]
             batch_labels = train_labels[i * params.batchsize:(i + 1) * params.batchsize,...]
-            
+            print(len(batch_data))
             feed_dict = {train_data_node: batch_data, train_labels_node: batch_labels}
             _, l, w = sess.run([train_op, loss, weights], feed_dict=feed_dict)
             
