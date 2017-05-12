@@ -11,4 +11,4 @@ mkdir -p /results
 
 
 #python -c "print('Python commandline'); import RFNN.main as m; m.train()" 2>&1  | tee /results/log.txt#
-python -c "print('Python commandline'); import RFNN.trainnonlin.training as train; train.test_do_training()" 2>&1  | tee /results/log.txt
+python -c "print('Python commandline'); import RFNN.trainnonlin.training as train; train.test_do_training('/data/storedData.npz')" 2>&1  | tee /results/log.txt
