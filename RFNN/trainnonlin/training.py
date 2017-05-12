@@ -148,7 +148,7 @@ def dropoutForComplex(data, keep_prob):
     
     random_tensor = keep_prob
     random_tensor += tf.random_uniform(tf.shape(data),
-                                               dtype=x.dtype)
+                                               dtype=tf.float32)
     # 0. if [keep_prob, 1.0) and 1. if [1.0, 1.0 + keep_prob)
     binary_tensor = tf.floor(random_tensor)
     
