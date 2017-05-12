@@ -84,6 +84,8 @@ def do_training(params, dataset):
     logits = model(params, train_data_node, weights, True)
     loss = tf.real(tf.norm(logits - train_labels_node))
     
+    print(str(dir(loss)))
+    
     global_step = tf.Variable(0, trainable=False)
     if params.fixed_lr:
         learning_rate = params.initial_lr
