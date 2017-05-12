@@ -114,8 +114,8 @@ def do_training(params, dataset):
         for i in range(int(np.floor(params.max_epochs / params.batchsize))):
             print('Batch: %d' % i)
             
-            batch_data = train_data[i * params.batchsize:(i + 1) * params.batchsize]
-            batch_labels = train_labels[i * params.batchsize:(i + 1) * params.batchsize]
+            batch_data = train_data[i * params.batchsize:(i + 1) * params.batchsize,...]
+            batch_labels = train_labels[i * params.batchsize:(i + 1) * params.batchsize,...]
             
             feed_dict = {train_data_node: batch_data, train_labels_node: batch_labels}
             _, l, w = sess.run([train_op, loss, weights], feed_dict=feed_dict)
