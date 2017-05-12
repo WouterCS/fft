@@ -102,7 +102,6 @@ def do_training(params, dataset):
     elif params.optimizer == 'adagrad':
         optimizer = tf.train.AdagradOptimizer(learning_rate=learning_rate)
     
-    print('Type of loss: %s' % loss.dtype)
     train_op = optimizer.minimize(loss, global_step=global_step)
     
     train_op = tf.train.AdamOptimizer(learning_rate=1.0).minimize(loss)
@@ -111,8 +110,9 @@ def do_training(params, dataset):
     
     for curEpoch in range(params.max_epochs):
         train_data, train_labels = shuffle_samples(train_data, train_labels)
+        print('Epoch: %d' % curEpoch)
         for i in range(int(np.floor(params.max_epochs / params.batchsize))):
-            
+            print('Batch: %d' % i)
             
             batch_data = train_data[i * params.batchsize:(i + 1) * params.batchsize]
             batch_labels = train_labels[i * params.batchsize:(i + 1) * params.batchsize]
