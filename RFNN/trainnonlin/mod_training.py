@@ -60,7 +60,7 @@ def do_training(params, dataset):
         'fc_b1': tf.Variable(tf.complex(tf.random_normal([sizeImage]), tf.random_normal([sizeImage]))),
         }
     
-    logits = train_data_node #model(params, train_data_node, weights, True)
+    logits = model(params, train_data_node, weights, True)
     loss = tf.real(tf.norm(logits - train_labels_node))
 
     
