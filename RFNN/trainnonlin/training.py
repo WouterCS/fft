@@ -105,7 +105,7 @@ def do_training(params, dataset):
     # print('Type of loss: %s' % loss.dtype)
     # train_op = optimizer.minimize(loss, global_step=global_step)
     
-    train_op = tf.train.AdamOptimizer(learning_rate=1.0).optimizer.minimize(loss)
+    train_op = tf.train.AdamOptimizer(learning_rate=1.0).minimize(loss)
     
     sess = tf.Session()
     
