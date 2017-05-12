@@ -82,6 +82,8 @@ def do_training(params, dataset):
         }
     
     logits = model(params, train_data_node, weights, True)
+    print('Dim logit: ', map(lambda x: x.value, logits.shape))
+    print('Labels logit: ', map(lambda x: x.value, train_labels_node.shape))
     loss = tf.norm(logits - train_labels_node)
     
     global_step = tf.Variable(0, trainable=False)
