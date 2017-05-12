@@ -140,3 +140,24 @@ def model(params, data, weights, train=False):
     l3 = tf.reshape([shape[0], shape[1], shape[2], shape[3]])
     
     return l3
+    
+def dropoutForComplex(data, keep_prob):
+    keep_prob = ops.convert_to_tensor(keep_prob,
+                                                        dtype=tf.float32,
+                                                        name="keep_prob")
+    
+    random_tensor = keep_prob
+    random_tensor += random_ops.random_uniform(noise_shape,
+                                               seed=seed,
+                                               dtype=x.dtype)
+    # 0. if [keep_prob, 1.0) and 1. if [1.0, 1.0 + keep_prob)
+    binary_tensor = math_ops.floor(random_tensor)
+    
+    x = tf.cast(data, tf.complex64)
+    
+    ret = math_ops.div(x, keep_prob) * binary_tensor
+    ret.set_shape(x.get_shape())
+    return ret
+
+
+
