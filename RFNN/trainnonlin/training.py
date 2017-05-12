@@ -142,7 +142,7 @@ def model(params, data, weights, train=False):
     return l3
     
 def dropoutForComplex(data, keep_prob):
-    keep_prob = ops.convert_to_tensor(keep_prob,
+    keep_prob = tf.convert_to_tensor(keep_prob,
                                                         dtype=tf.float32,
                                                         name="keep_prob")
     
