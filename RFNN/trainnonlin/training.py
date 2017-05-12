@@ -21,6 +21,7 @@ def do_training(params, dataset):
     # reshape to combine the MNIST-examples dimension and the kernal-dimension
     train_data = train_data.reshape((train_data.shape[0] * train_data.shape[1], train_data.shape[2], train_data.shape[3], train_data.shape[4]))
     train_labels = train_labels.reshape((train_labels.shape[0] * train_labels.shape[1], train_labels.shape[2], train_labels.shape[3], train_labels.shape[4]))
+    print('Shape of training data: %s'  str(train_data.shape))
     
     # Modify training set
     train_data, train_labels = select_n_samples(train_data,
