@@ -18,7 +18,7 @@ def do_training():
         }
     
     prediction = model(train_data_node, weights)
-    loss = tf.real(tf.norm(prediction - train_labels_node))
+    loss = tf.cast(tf.norm(prediction - train_labels_node), tf.float32)
 
     train_op = tf.train.AdamOptimizer(learning_rate=1.0).minimize(loss)
             
