@@ -27,7 +27,7 @@ class parameters:
         
         
         # training parameters
-        self.batchsize = 2
+        self.batchsize = 25
         self.optimizer = 'adam'
         self.fixed_lr = True
         self.initial_lr = 1
