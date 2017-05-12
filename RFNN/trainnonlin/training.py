@@ -131,16 +131,16 @@ def model(params, data, weights, train=False):
     
     l1 = tf.reshape(data, [shape[0], shape[1] * shape[2] * shape[3]])                            
     if train: l1 = dropoutForComplex(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
-    l1 = tf.matmul(l1, weights['fc_w1'])                                                        # FC
-    l1 = l1 + weights['fc_b1']   
+    l1 = tf.matmul(l1, tf.cast(weights['fc_w1'], tf.complex64))                                                        # FC
+    l1 = l1 + tf.cast(weights['fc_b1'], tf.complex64)   
                             
     if train: l2 = dropoutForComplex(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
-    l2 = tf.matmul(l2, weights['fc_w2'])                                                        # FC
-    l2 = l2 + weights['fc_b2']   
+    l2 = tf.matmul(l2, tf.cast(weights['fc_w2'], tf.complex64))                                                        # FC
+    l2 = l2 + tf.cast(weights['fc_b2'], tf.complex64)   
                         
     if train: l3 = dropoutForComplex(l2, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
-    l3 = tf.matmul(l3, weights['fc_w3'])                                                        # FC
-    l3 = l3 + weights['fc_b3']   
+    l3 = tf.matmul(l3, tf.cast(weights['fc_w3'], tf.complex64))                                                        # FC
+    l3 = l3 + tf.cast(weights['fc_b3'], tf.complex64)   
     l4 = tf.reshape(l3, [shape[0], shape[1], shape[2], shape[3]])
     
     return l4
