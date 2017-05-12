@@ -86,25 +86,26 @@ def do_training(params, dataset):
     
     
     
-    global_step = tf.Variable(0, trainable=False)
-    if params.fixed_lr:
-        learning_rate = params.initial_lr
-    else:
-        learning_rate = tf.train.exponential_decay(float(params.initial_lr), global_step, params.max_epochs *( params.number_of_training_samples // params.batchsize ), params.min_lr, staircase=False)
+    # global_step = tf.Variable(0, trainable=False)
+    # if params.fixed_lr:
+        # learning_rate = params.initial_lr
+    # else:
+        # learning_rate = tf.train.exponential_decay(float(params.initial_lr), global_step, params.max_epochs *( params.number_of_training_samples // params.batchsize ), params.min_lr, staircase=False)
         
-    if params.optimizer == 'adadelta':
-        optimizer = tf.train.AdadeltaOptimizer(learning_rate=learning_rate,
-                                               rho=0.95,
-                                               epsilon=1e-06,
-                                               name="optimizer")
-    elif params.optimizer == 'adam':
-        optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
-    elif params.optimizer == 'adagrad':
-        optimizer = tf.train.AdagradOptimizer(learning_rate=learning_rate)
+    # if params.optimizer == 'adadelta':
+        # optimizer = tf.train.AdadeltaOptimizer(learning_rate=learning_rate,
+                                               # rho=0.95,
+                                               # epsilon=1e-06,
+                                               # name="optimizer")
+    # elif params.optimizer == 'adam':
+        # optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
+    # elif params.optimizer == 'adagrad':
+        # optimizer = tf.train.AdagradOptimizer(learning_rate=learning_rate)
     
-    print('Type of loss: %s' % loss.dtype)
-    train_op = optimizer.minimize(loss, global_step=global_step)
+    # print('Type of loss: %s' % loss.dtype)
+    # train_op = optimizer.minimize(loss, global_step=global_step)
     
+     train_op = tf.train.AdamOptimizer(learning_rate=1.0).optimizer.minimize(loss)
     
     sess = tf.Session()
     
