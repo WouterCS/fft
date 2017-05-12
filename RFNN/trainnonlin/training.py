@@ -45,8 +45,8 @@ def do_training(params, dataset):
                                             dataset['height'],
                                             dataset['width']),
                                        name="train_labels_node")
-     
-    sizeImage = dataset['height'] * dataset['width'] * dataset['depth']
+    # The size of the image is twice as large, because we consider the real and imaginary parts seperately
+    sizeImage = 2*dataset['height'] * dataset['width'] * dataset['depth']
     if params.weightType == 'complex':
         weightType = tf.complex64
     elif params.weightType == 'real':
