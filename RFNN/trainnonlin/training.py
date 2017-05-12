@@ -152,9 +152,10 @@ def dropoutForComplex(data, keep_prob):
     # 0. if [keep_prob, 1.0) and 1. if [1.0, 1.0 + keep_prob)
     binary_tensor = tf.floor(random_tensor)
     
-    x = tf.cast(data, tf.complex64)
+    keep_prob = tf.cast(keep_prob, tf.complex64)
+    binary_tensor = tf.cast(binary_tensor, tf.complex64)
     
-    ret = tf.div(x, keep_prob) * binary_tensor
+    ret = tf.div(data, keep_prob) * binary_tensor
     ret.set_shape(x.get_shape())
     return ret
 
