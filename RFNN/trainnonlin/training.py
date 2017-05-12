@@ -22,8 +22,8 @@ def do_training(params, dataset):
     train_data = train_data.reshape((train_data.shape[0] * train_data.shape[1], train_data.shape[2], train_data.shape[3], train_data.shape[4]))
     train_labels = train_labels.reshape((train_labels.shape[0] * train_labels.shape[1], train_labels.shape[2], train_labels.shape[3], train_labels.shape[4]))
     
-    print('Dim logit: ', map(lambda x: x.value, train_data.shape))
-    print('Labels logit: ', map(lambda x: x.value, train_labels.shape))
+    print('Dim logit: ', train_data.shape)
+    print('Labels logit: ', train_labels.shape)
     
     # Modify training set
     train_data, train_labels = select_n_samples(train_data,
