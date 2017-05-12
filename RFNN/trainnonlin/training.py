@@ -140,6 +140,7 @@ def model(params, data, weights, train=False):
     l2 = tf.matmul(l2, weights['fc_w2'])                                                        # FC
     l2 = l2 + weights['fc_b2']   
                         
+    l3 = l2
     #if train: l3 = dropoutForComplex(l2, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
     l3 = tf.matmul(l3, weights['fc_w3'])                                                        # FC
     l3 = l3 + weights['fc_b3']   
