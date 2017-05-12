@@ -132,15 +132,15 @@ def model(params, data, weights, train=False):
     
     l0 = tf.reshape(data, [shape[0], shape[1] * shape[2] * shape[3]])
     l1 = tf.concat([tf.real(l0), tf.imag(l0)], axis = 1)
-    if train: l1 = dropout(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
+    if train: l1 = tf.dropout(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
     l1 = tf.matmul(l1, weights['fc_w1'])                                                        # FC
     l1 = l1 + weights['fc_b1']
                             
-    if train: l2 = dropout(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
+    if train: l2 = tf.dropout(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
     l2 = tf.matmul(l2, weights['fc_w2'])                                                        # FC
     l2 = l2 + weights['fc_b2']
                         
-    if train: l3 = dropout(l2, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
+    if train: l3 = tf.dropout(l2, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
     l3 = tf.matmul(l3, weights['fc_w3'])                                                        # FC
     l3 = l3 + weights['fc_b3']   
 
