@@ -47,7 +47,7 @@ def apply_model():
     new_saver = tf.train.import_meta_graph('/results/weights.meta')
     new_saver.restore(sess, tf.train.latest_checkpoint('/results'))
     
-    print(model(np.random.random(5).astype(np.float32), weights))
+    print(model(np.random.random(5).astype(np.float32), weights).eval(session=sess))
             
             
 def model(data, weights):
