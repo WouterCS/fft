@@ -43,7 +43,7 @@ def checkLossForTestSet(weights, params, testSet, sess):
         input = np.fft.rfft2(randomImage).astype('complex64', casting = 'same_kind')
         groundTruth = np.fft.rfft2(np.maximum(randomImage, 0)).astype('complex64', casting = 'same_kind')
         prediction = model(params, input, weights, train=False)
-        loss = tf.reduce_mean(tf.complex_abs(prediction - groundTruth), axis = [2,3]).eval(session=sess)
+        loss = tf.reduce_mean(tf.abs(prediction - groundTruth), axis = [2,3]).eval(session=sess)
         storedLoss.append(loss)
     print('Max loss: %f, average loss: %f' % (np.max(storedLoss), np.mean(storedLoss)))
     
@@ -92,7 +92,7 @@ def do_training(params, dataset):
         
     error = model(params, train_data_node, weights, train = True, tfData = True) - train_labels_node
     errorShape = map(lambda x: x.value, error.shape)
-    loss = tf.reduce_mean(tf.complex_abs(error), axis = [2,3])
+    loss = tf.reduce_mean(tf.abs(error), axis = [2,3])
     
     
     
