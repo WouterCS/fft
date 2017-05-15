@@ -38,11 +38,10 @@ def checkLossForTestSet(weights, params, testSet, sess):
     storedLoss = []
     for i in range(len(testSet)):
         randomImage = testSet[i]
-        inImage = np.fft.rfft2(randomImage).astype('complex64', casting = 'same_kind')
+        input = np.fft.rfft2(randomImage).astype('complex64', casting = 'same_kind')
         groundTruth = np.fft.rfft2(np.maximum(randomImage, 0)).astype('complex64', casting = 'same_kind')
-        error = model(params, inImage, weights, train=False) - groundTruth
-        errorShape = map(lambda x: x.value, error.shape)
-        loss = tf.reduce_mean(tf.real(tf.norm(tf.reshape(error, [errorShape[0] * errorShape[1], errorShape[2] * errorShape[3]]), axis = 1))).eval(session=sess)
+        prediction = model(params, input, weights, train=False)
+        loss = tf.reduce_mean(tf.complex_abs(prediction - groundTruth), axis = [2,3]).eval(session=sess)
         storedLoss.append(loss)
     print('Max loss: %f, average loss: %f' % (np.max(storedLoss), np.mean(storedLoss)))
     
@@ -91,7 +90,7 @@ def do_training(params, dataset):
         
     error = model(params, train_data_node, weights, train = True, tfData = True) - train_labels_node
     errorShape = map(lambda x: x.value, error.shape)
-    loss = tf.reduce_mean(tf.real(tf.norm(tf.reshape(error, [errorShape[0] * errorShape[1], errorShape[2] * errorShape[3]]), axis = 1)))
+    loss = tf.reduce_mean(tf.complex_abs(error), axis = [2,3])
     
     
     
@@ -150,17 +149,17 @@ def model(params, data, weights, train=False, tfData = False):
     l0 = tf.reshape(data, [shape[0], shape[1] * shape[2] * shape[3]])
     l1 = tf.concat([tf.real(l0), tf.imag(l0)], axis = 1)
     if train: l1 = tf.nn.dropout(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
-    l1 = tf.matmul(l1, weights['fc_w1'])                                                        # FC
+    l1 = tf.multiply(l1, weights['fc_w1'])                                                        # FC
     l1 = l1 + weights['fc_b1']
     l2 = tf.nn.relu(l1)
                             
     if train: l2 = tf.nn.dropout(l2, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
-    l2 = tf.matmul(l2, weights['fc_w2'])                                                        # FC
+    l2 = tf.multiply(l2, weights['fc_w2'])                                                        # FC
     l2 = l2 + weights['fc_b2']
     l3 = tf.nn.relu(l2)
                         
     if train: l3 = tf.nn.dropout(l3, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
-    l3 = tf.matmul(l3, weights['fc_w3'])                                                        # FC
+    l3 = tf.multiply(l3, weights['fc_w3'])                                                        # FC
     l3 = l3 + weights['fc_b3']   
 
     treal, timag = tf.split(l3, 2, axis = 1)
