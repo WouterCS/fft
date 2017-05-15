@@ -74,11 +74,9 @@ def checkLossForTestSet(weights, params, testSet):
         randomImage = testSet[i]
         inImage = np.fft.rfft2(randomImage).astype('complex64', casting = 'same_kind')
         groundTruth = np.fft.rfft2(np.maximum(randomImage, 0)).astype('complex64', casting = 'same_kind')
-        print('Ground truth shape: %s' % str(groundTruth.shape))
         error = model(params, inImage, weights, train=False) - groundTruth
-        print(str(dir(error)))
-        test = np.reshape(error, (params.batchsize * 1, 28 * 15))
-        loss = np.mean(np.linalg.norm(test, axis = 1)).astype('float32')
+        errorShape = map(lambda x: x.value, error.shape)
+        oss = tf.reduce_mean(tf.real(tf.norm(tf.reshape(error, [errorShape[0] * errorShape[1], errorShape[2] * errorShape[3]]), axis = 1)))
         storedLoss.append(loss)
     print('Max loss: %f, average loss: %f' % (np.max(loss), np.mean(loss)))
     
