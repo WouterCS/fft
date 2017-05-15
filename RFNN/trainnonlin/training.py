@@ -9,8 +9,18 @@ import tensorflow as tf
 def test_do_training(path): # '/home/wouter/Documents/git/fft/RFNN/trainnonlin/storedData.npz')
     dataset = loadData(path)
     params = para.parameters('/home/wouter/Documents/git/fft/RFNN/trainnonlin/para')
-    return do_training(params, dataset)
-
+    do_training(params, dataset)
+    
+    
+def test_model(params):
+    
+    sess = tf.Session()
+    
+    new_saver = tf.train.import_meta_graph(params.saveDirectory+ '/weights.meta')
+    new_saver.restore(sess, tf.train.latest_checkpoint(params.saveDirectory))
+    
+    print(str(dir(weights)))
+    
 def do_training(params, dataset):
     print('Do training: %s'  % str(datetime.now()))
     

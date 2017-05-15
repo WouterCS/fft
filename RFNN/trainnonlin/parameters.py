@@ -38,6 +38,9 @@ class parameters:
         self.weightType = 'complex'
         self.KEEP_PROB_HIDDEN = 0.3
         
+        # saving parameters
+        self.saveDirectory = '/results'
+        
     def load(self):
         restoredFilepath = self.filepath
         with open(self.filepath, 'rb') as f:
