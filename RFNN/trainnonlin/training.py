@@ -173,6 +173,7 @@ def do_training(params, dataset):
             _, l, w = sess.run([train_op, loss, weights], feed_dict=feed_dict)
             lossInCurEpoch.append(l)
         saver.save(sess, params.saveDirectory + params.filename, global_step = global_step)
+        print(lossInCurEpoch)
         print('In epoch %d, the average loss was: %f' % (curEpoch, np.mean(lossInCurEpoch)))
             
             
