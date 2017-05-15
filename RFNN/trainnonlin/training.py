@@ -131,11 +131,10 @@ def do_training(params, dataset):
             lossInCurEpoch = np.concatenate((lossInCurEpoch,l))
         saver.save(sess, params.saveDirectory + params.filename, global_step = global_step)
         sortedLoss = np.sort(lossInCurEpoch)
-        #print("Highest loss in epoch: %s" % str(sortedLoss[-10:]))
-        #print( "Indices of worst cases: %s" % str(np.argsort(lossInCurEpoch)[-10:]))
-        #print("Lowest loss in epoch: %s" % str(sortedLoss[:10]))
-        #print('In epoch %d, the average loss was: %f' % (curEpoch, np.mean(lossInCurEpoch)))
-        print(lossInCurEpoch[0].shape)
+        print("Highest loss in epoch: %s" % str(sortedLoss[-10:]))
+        print( "Indices of worst cases: %s" % str(np.argsort(lossInCurEpoch)[-10:]))
+        print("Lowest loss in epoch: %s" % str(sortedLoss[:10]))
+        print('In epoch %d, the average loss was: %f' % (curEpoch, np.mean(lossInCurEpoch)))
             
             
 def model(params, data, weights, train=False, tfData = False):
