@@ -50,7 +50,7 @@ def checkLossForTestSet(weights, params, testSet, sess):
         errorShape = map(lambda x: x.value, error.shape)
         loss = tf.reduce_mean(tf.real(tf.norm(tf.reshape(error, [errorShape[0] * errorShape[1], errorShape[2] * errorShape[3]]), axis = 1))).eval(session=sess)
         storedLoss.append(loss)
-    print('Max loss: %f, average loss: %f' % (np.max(loss), np.mean(loss)))
+    print('Max loss: %f, average loss: %f' % (np.max(storedLoss), np.mean(storedLoss)))
     
 def do_training(params, dataset):
     print('Do training: %s'  % str(datetime.now()))
