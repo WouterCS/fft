@@ -12,11 +12,11 @@ def train_model():
     train_data  = np.random.random((100,5))
     train_labels = np.random.random((100,5))
 
-    train_data_node = tf.placeholder(tf.float64,
+    train_data_node = tf.placeholder(tf.float32,
                                      shape=(5),
                                      name="train_data_node")
 
-    train_labels_node = tf.placeholder(tf.float64,
+    train_labels_node = tf.placeholder(tf.float32,
                                        shape=(5),
                                        name="train_labels_node")
         
@@ -47,7 +47,7 @@ def apply_model():
     new_saver = tf.train.import_meta_graph('/results/weights.meta')
     new_saver.restore(sess, tf.train.latest_checkpoint('/results'))
     
-    return model(np.random.random(5), weights)
+    return model(np.random.random(5).astype(float32), weights)
             
             
 def model(data, weights):
@@ -59,7 +59,7 @@ def defineWeights():
     weights = {
         'a': tf.Variable(tf.random_normal([5, 5],
                                                         stddev=0.01, 
-                                                        dtype =  tf.float64),
+                                                        dtype =  tf.float32),
                                                         name = 'a'),
         'b': tf.Variable(tf.random_normal([5]), name = 'b'),
         }
