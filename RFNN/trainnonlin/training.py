@@ -66,7 +66,7 @@ def test_model(params):
 def testWithRandomInput(weights, params, N):
     
     randomImages = np.random.random((N, params.batchsize, 1, 28,28))
-    checkLossForTestSet(weights, params, randomImages.tolist())
+    checkLossForTestSet(weights, params, randomImages)
 
 def checkLossForTestSet(weights, params, testSet):
     storedLoss = []
@@ -150,7 +150,7 @@ def do_training(params, dataset):
         'fc_b3': tf.Variable(tf.random_normal([sizeImage])),
         }
     
-    error = model(params, train_data_node, weights, True) - train_labels_node
+    error = model(params, train_data_node, weights, train = True, tfData = True) - train_labels_node
     errorShape = map(lambda x: x.value, error.shape)
     loss = tf.reduce_mean(tf.real(tf.norm(tf.reshape(error, [errorShape[0] * errorShape[1], errorShape[2] * errorShape[3]]), axis = 1)))
     
@@ -195,12 +195,15 @@ def do_training(params, dataset):
         print('In epoch %d, the average loss was: %f' % (curEpoch, np.mean(lossInCurEpoch)))
             
             
-def model(params, data, weights, train=False):
+def model(params, data, weights, train=False, tfData = False):
     
     # Dropout parameters
     KEEP_PROB_HIDDEN = params.KEEP_PROB_HIDDEN
-    shape = data.get_shape().as_list()
-    
+    if tfData:
+        shape = data.get_shape().as_list()
+    else:
+        shape = list(data.shape)
+        
     l0 = tf.reshape(data, [shape[0], shape[1] * shape[2] * shape[3]])
     l1 = tf.concat([tf.real(l0), tf.imag(l0)], axis = 1)
     if train: l1 = tf.nn.dropout(l1, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
