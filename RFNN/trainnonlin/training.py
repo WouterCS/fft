@@ -175,6 +175,7 @@ def do_training(params, dataset):
         saver.save(sess, params.saveDirectory + params.filename, global_step = global_step)
         sortedLoss = np.sort(lossInCurEpoch)
         print("Highest loss in epoch: %s" % str(sortedLoss[-10:]))
+        print( "Indices of worst cases: %s" % sr(lossInCurEpoch.argsort()[-10:]))
         print("Lowest loss in epoch: %s" % str(sortedLoss[:10]))
         print('In epoch %d, the average loss was: %f' % (curEpoch, np.mean(lossInCurEpoch)))
             
