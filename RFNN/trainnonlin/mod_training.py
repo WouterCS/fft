@@ -31,7 +31,7 @@ def train_model():
     sess.run(tf.global_variables_initializer())
     # train for 50 epochs on all 100 training examples, with a batchsize of 1.
     for _ in range(50):
-        for i in range(100);
+        for i in range(100):
             batch_data = train_data[i,:]
             batch_labels = train_labels[i,:]
 
