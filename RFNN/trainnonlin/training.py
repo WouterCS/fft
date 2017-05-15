@@ -28,6 +28,7 @@ def test_model(params):
     
     weights = {}
     weightCollection = tf.get_collection('weights')
+    print(weightCollection)
     for w in weightCollection:
         print(w.name)
         weights = w
