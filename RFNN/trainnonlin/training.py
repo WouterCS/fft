@@ -114,7 +114,10 @@ def do_training(params, dataset):
         }
     
     error = model(params, train_data_node, weights, True) - train_labels_node
-    loss = tf.reduce_mean(tf.real(tf.norm(tf.reshape(error, (error.shape[0] * error.shape[1], error.shape[2] * error.shape[3])), axis = 1)))
+    a = tf.reshape(error, (error.shape[0] * error.shape[1], error.shape[2] * error.shape[3]))
+    b = tf.norm(a, axis = 1)
+    c = tf.real(b)
+    loss = tf.reduce_mean(d)
     
     
     
