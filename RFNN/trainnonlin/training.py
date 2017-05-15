@@ -129,6 +129,7 @@ def do_training(params, dataset):
         'fc_b3': tf.Variable(tf.random_normal([sizeImage], name = 'fc_b3')),
         }
     for w in weights:
+    print(weights[w].name)
         tf.add_to_collection('weights', weights[w])
         
     error = model(params, train_data_node, weights, train = True, tfData = True) - train_labels_node
