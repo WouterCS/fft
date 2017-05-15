@@ -135,7 +135,7 @@ def do_training(params, dataset):
         #print( "Indices of worst cases: %s" % str(np.argsort(lossInCurEpoch)[-10:]))
         #print("Lowest loss in epoch: %s" % str(sortedLoss[:10]))
         #print('In epoch %d, the average loss was: %f' % (curEpoch, np.mean(lossInCurEpoch)))
-        print(dir(lossInCurEpoch[0]))
+        print(lossInCurEpoch[0].shape)
             
             
 def model(params, data, weights, train=False, tfData = False):
