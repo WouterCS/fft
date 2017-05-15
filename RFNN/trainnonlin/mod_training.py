@@ -37,15 +37,15 @@ def train_model():
 
             feed_dict = {train_data_node: batch_data, train_labels_node: batch_labels}
             sess.run([train_op, loss, weights], feed_dict=feed_dict)
-        saver.save(sess, '/storedWeights/weights')
+        saver.save(sess, '/results/weights')
     
 def apply_model(params):
     sess = tf.Session()
 
     weights = defineWeights()
     
-    new_saver = tf.train.import_meta_graph('/storedWeights/weights.meta')
-    new_saver.restore(sess, tf.train.latest_checkpoint('/storedWeights'))
+    new_saver = tf.train.import_meta_graph('/results/weights.meta')
+    new_saver.restore(sess, tf.train.latest_checkpoint('/results'))
     
     return model(np.random.random(5), weights)
             
