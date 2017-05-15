@@ -10,7 +10,7 @@ def test_do_training(path): # '/home/wouter/Documents/git/fft/RFNN/trainnonlin/s
     print('start')
     dataset = loadData(path)
     params = para.parameters('/home/wouter/Documents/git/fft/RFNN/trainnonlin/para')
-    do_training(params, dataset)
+    #do_training(params, dataset)
     test_model(params)
     print('finish')
     
