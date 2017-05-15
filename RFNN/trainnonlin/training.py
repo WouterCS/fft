@@ -118,7 +118,7 @@ def do_training(params, dataset):
     a = tf.reshape(error, [errorShape[0] * errorShape[1], errorShape[2] * errorShape[3]])
     b = tf.norm(a, axis = 1)
     c = tf.real(b)
-    loss = tf.reduce_mean(d)
+    loss = tf.reduce_mean(c)
     
     
     
