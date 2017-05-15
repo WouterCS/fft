@@ -40,8 +40,9 @@ def test_model(params):
         # Fully connected complex weights, layer 1
         'fc_w1': tf.Variable(tf.random_normal([sizeImage, sizeImage],
                                                         stddev=0.01, 
-                                                        dtype =  tf.float32)),
-        'fc_b1': tf.Variable(tf.random_normal([sizeImage])),
+                                                        dtype =  tf.float32,
+                                                        name = 'fc_w1')),
+        'fc_b1': tf.Variable(tf.random_normal([sizeImage], name = 'fc_b1')),
         
         # Fully connected complex weights, layer 1
         'fc_w2': tf.Variable(tf.random_normal([sizeImage, sizeImage],
@@ -135,8 +136,9 @@ def do_training(params, dataset):
         # Fully connected complex weights, layer 1
         'fc_w1': tf.Variable(tf.random_normal([sizeImage, sizeImage],
                                                         stddev=0.01, 
-                                                        dtype =  tf.float32)),
-        'fc_b1': tf.Variable(tf.random_normal([sizeImage])),
+                                                        dtype =  tf.float32,
+                                                        name = 'fc_w1')),
+        'fc_b1': tf.Variable(tf.random_normal([sizeImage], name = 'fc_b1')),
         
         # Fully connected complex weights, layer 1
         'fc_w2': tf.Variable(tf.random_normal([sizeImage, sizeImage],
