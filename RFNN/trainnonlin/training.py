@@ -114,7 +114,7 @@ def do_training(params, dataset):
         }
     
     error = model(params, train_data_node, weights, True) - train_labels_node
-    print(dir(error.shape[0] ))
+    print(dir(error.shape))
     a = tf.reshape(error, [error.shape[0] * error.shape[1], error.shape[2] * error.shape[3]])
     b = tf.norm(a, axis = 1)
     c = tf.real(b)
