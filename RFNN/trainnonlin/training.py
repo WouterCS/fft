@@ -20,7 +20,7 @@ def test_model(params):
     sess = tf.Session()
     
     # The size of the image is twice as large, because we consider the real and imaginary parts seperately
-    sizeImage = 2*dataset['height'] * dataset['width'] * dataset['depth']
+    sizeImage = 2*1*28*15
     if params.weightType == 'complex':
         weightType = tf.complex64
     elif params.weightType == 'real':
