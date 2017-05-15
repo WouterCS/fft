@@ -29,7 +29,9 @@ def test_model(params):
     weights = {}
     weightCollection = tf.get_collection('weights')
     for w in weightCollection:
+        print(w.name)
         weights = w
+    
     new_saver = tf.train.import_meta_graph(params.saveDirectory + params.filename + '.meta')
     new_saver.restore(sess, tf.train.latest_checkpoint(params.saveDirectory))
     
