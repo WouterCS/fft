@@ -66,7 +66,7 @@ def test_model(params):
 def testWithRandomInput(weights, params, N):
     
     randomImages = np.random.random((N, params.batchsize, 1, 28,28))
-    checkLossForTestSet(weights, params, randomImages)
+    checkLossForTestSet(weights, params, randomImages.tolist())
 
 def checkLossForTestSet(weights, params, testSet):
     storedLoss = []
