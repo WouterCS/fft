@@ -8,7 +8,8 @@ import tensorflow as tf
 
 def test_do_training(path): # '/home/wouter/Documents/git/fft/RFNN/trainnonlin/storedData.npz')
     print('start')
-    print(tf.VERSION)
+    for n in dir(tf)
+        print(n)
     dataset = loadData(path)
     params = para.parameters('/home/wouter/Documents/git/fft/RFNN/trainnonlin/para')
     do_training(params, dataset)
