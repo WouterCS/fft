@@ -56,7 +56,9 @@ def test_model(params):
                                                         dtype =  tf.float32)),
         'fc_b3': tf.Variable(tf.random_normal([sizeImage])),
         }
-    
+    weightCollection = tf.get_collection('weights')
+    for w in weightCollection:
+        weights[w] = weightCollection[w]
     new_saver = tf.train.import_meta_graph(params.saveDirectory + params.filename + '.meta')
     new_saver.restore(sess, tf.train.latest_checkpoint(params.saveDirectory))
     
@@ -152,7 +154,9 @@ def do_training(params, dataset):
                                                         dtype =  tf.float32)),
         'fc_b3': tf.Variable(tf.random_normal([sizeImage])),
         }
-    
+    for w in weights:
+        tf.add_to_collection('weights', weights[w])
+        
     error = model(params, train_data_node, weights, train = True, tfData = True) - train_labels_node
     errorShape = map(lambda x: x.value, error.shape)
     loss = tf.reduce_mean(tf.real(tf.norm(tf.reshape(error, [errorShape[0] * errorShape[1], errorShape[2] * errorShape[3]]), axis = 1)))
