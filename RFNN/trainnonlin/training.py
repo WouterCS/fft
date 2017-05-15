@@ -59,16 +59,16 @@ def test_model(params):
     new_saver = tf.train.import_meta_graph(params.saveDirectory + params.filename + '.meta')
     new_saver.restore(sess, tf.train.latest_checkpoint(params.saveDirectory))
     
-    testWithRandomInput(weights, params, 100)
+    testWithRandomInput(weights, params, 100, sess)
     
     print(str(dir(weights)))
     
-def testWithRandomInput(weights, params, N):
+def testWithRandomInput(weights, params, N, sess):
     
     randomImages = np.random.random((N, params.batchsize, 1, 28,28))
-    checkLossForTestSet(weights, params, randomImages)
+    checkLossForTestSet(weights, params, randomImages, sess)
 
-def checkLossForTestSet(weights, params, testSet):
+def checkLossForTestSet(weights, params, testSet, sess):
     storedLoss = []
     for i in range(len(testSet)):
         randomImage = testSet[i]
@@ -76,7 +76,7 @@ def checkLossForTestSet(weights, params, testSet):
         groundTruth = np.fft.rfft2(np.maximum(randomImage, 0)).astype('complex64', casting = 'same_kind')
         error = model(params, inImage, weights, train=False) - groundTruth
         errorShape = map(lambda x: x.value, error.shape)
-        loss = tf.reduce_mean(tf.real(tf.norm(tf.reshape(error, [errorShape[0] * errorShape[1], errorShape[2] * errorShape[3]]), axis = 1))).eval()
+        loss = tf.reduce_mean(tf.real(tf.norm(tf.reshape(error, [errorShape[0] * errorShape[1], errorShape[2] * errorShape[3]]), axis = 1))).eval(sess=sess)
         storedLoss.append(loss)
     print('Max loss: %f, average loss: %f' % (np.max(loss), np.mean(loss)))
     
