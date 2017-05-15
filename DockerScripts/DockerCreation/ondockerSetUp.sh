@@ -11,5 +11,5 @@ mkdir -p /results
 
 
 #python -c "print('Python commandline'); import RFNN.main as m; m.train()" 2>&1  | tee /results/log.txt#
-#python -c "print('Python commandline'); import RFNN.trainnonlin.training as train; train.test_do_training('/data/storedData.npz')" 2>&1  | tee /results/log.txt
-python -c "import RFNN.trainnonlin.mod_training as train; train.run()" 2>&1  | tee /results/log.txt
+python -c "print('Python commandline'); import RFNN.trainnonlin.training as train; train.test_do_training('/data/storedData.npz')" 2>&1  | tee /results/log.txt
+#python -c "import RFNN.trainnonlin.mod_training as train; train.run()" 2>&1  | tee /results/log.txt

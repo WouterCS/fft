@@ -12,17 +12,13 @@ def train_model():
     train_data  = np.random.random((100,5))
     train_labels = np.random.random((100,5))
 
-    train_data_node = tf.placeholder(tf.float32,
-                                     shape=(5),
-                                     name="train_data_node")
-
-    train_labels_node = tf.placeholder(tf.float32,
-                                       shape=(5),
-                                       name="train_labels_node")
+    train_data_node = tf.placeholder(tf.float32, shape=(5), name="train_data_node")
+    train_labels_node = tf.placeholder(tf.float32, shape=(5), name="train_labels_node")
         
     weights = defineWeights()
-        
-    loss = tf.norm(model(train_data_node, weights) - train_labels_node)
+    
+    prediction = model(train_data_node, weights)
+    loss = tf.norm(prediction - train_labels_node)
     train_op = tf.train.AdagradOptimizer(learning_rate=1).minimize(loss)
     
     saver = tf.train.Saver(weights)
@@ -51,6 +47,7 @@ def apply_model():
             
             
 def model(data, weights):
+    # multiply the matrix weights['a'] with the vector data
     l1 = tf.matmul(tf.expand_dims(data,0), weights['a'])
     l1 = l1 + weights['b']
     return l1
