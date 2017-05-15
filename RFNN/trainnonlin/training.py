@@ -7,6 +7,12 @@ import RFNN.trainnonlin.parameters as para
 import tensorflow as tf
 
 def test_do_training(path): # '/home/wouter/Documents/git/fft/RFNN/trainnonlin/storedData.npz')
+    v = tf.Variable(tf.random_normal([sizeImage, sizeImage],
+                                                        stddev=0.01, 
+                                                        dtype =  tf.float32,
+                                                        name = 'fc_w1'))
+    print(v.name)
+    return
     print('start')
     dataset = loadData(path)
     params = para.parameters('/home/wouter/Documents/git/fft/RFNN/trainnonlin/para')
