@@ -115,10 +115,7 @@ def do_training(params, dataset):
     
     error = model(params, train_data_node, weights, True) - train_labels_node
     errorShape = map(lambda x: x.value, error.shape)
-    a = tf.reshape(error, [errorShape[0] * errorShape[1], errorShape[2] * errorShape[3]])
-    b = tf.norm(a, axis = 1)
-    c = tf.real(b)
-    loss = tf.reduce_mean(c)
+    loss = tf.reduce_mean(tf.real(tf.norm(tf.reshape(error, [errorShape[0] * errorShape[1], errorShape[2] * errorShape[3]]), axis = 1)))
     
     
     
