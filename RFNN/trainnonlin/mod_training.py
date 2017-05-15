@@ -39,7 +39,7 @@ def train_model():
             sess.run([train_op, loss, weights], feed_dict=feed_dict)
         saver.save(sess, '/results/weights')
     
-def apply_model(params):
+def apply_model():
     sess = tf.Session()
 
     weights = defineWeights()
