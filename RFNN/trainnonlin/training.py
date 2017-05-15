@@ -124,7 +124,7 @@ def do_training(params, dataset):
         # Fully connected complex weights, layer 1
         'fc_w3': tf.Variable(tf.random_normal([sizeImage, sizeImage],
                                                         stddev=0.01, 
-                                                        dtype =  tf.float32,)
+                                                        dtype =  tf.float32),
                                                         name = 'fc_w3'),
         'fc_b3': tf.Variable(tf.random_normal([sizeImage]), name = 'fc_b3'),
         }
