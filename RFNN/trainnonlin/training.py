@@ -128,7 +128,7 @@ def do_training(params, dataset):
 
             feed_dict = {train_data_node: batch_data, train_labels_node: batch_labels}
             _, l, w = sess.run([train_op, loss, weights], feed_dict=feed_dict)
-            lossInCurEpoch.append(l)
+            lossInCurEpoch = np.concatenate((lossInCurEpoch,l))
         saver.save(sess, params.saveDirectory + params.filename, global_step = global_step)
         sortedLoss = np.sort(lossInCurEpoch)
         #print("Highest loss in epoch: %s" % str(sortedLoss[-10:]))
