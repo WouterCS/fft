@@ -19,16 +19,22 @@ def test_model(params):
     
     sess = tf.Session()
     
-    new_saver = tf.train.import_meta_graph(params.saveDirectory+ '/weights.meta')
+    new_saver = tf.train.import_meta_graph(params.saveDirectory + params.filename + '.meta')
     new_saver.restore(sess, tf.train.latest_checkpoint(params.saveDirectory))
+    
+    testWithRandomInput(weights, params, 100)
     
     print(str(dir(weights)))
     
 def testWithRandomInput(weights, params, N):
     
+    randomImages = np.random.random((N, params.batchsize, 1, 28,28))
+    checkLossForTestSet(weights, params, randomImages)
+
+def checkLossForTestSet(weights, params, testSet):
     storedLoss = []
-    for i in range(N):
-        randomImage = np.random.random((params.batchsize, 1, 28,28))
+    for i in range(len(testSet)):
+        randomImage = testSet[i]
         inImage = np.fft.rfft2(randomImage).astype('complex64', casting = 'same_kind')
         groundTruth = np.fft.rfft2(np.maximum(randomImage, 0)).astype('complex64', casting = 'same_kind')
         error = model(params, randomImage, weights, train=False) - groundTruth
@@ -107,8 +113,8 @@ def do_training(params, dataset):
         'fc_b3': tf.Variable(tf.random_normal([sizeImage])),
         }
     
-    logits = model(params, train_data_node, weights, True)
-    loss = tf.real(tf.norm(logits - train_labels_node))
+    error = model(params, train_data_node, weights, True) - train_labels_node
+    loss = tf.mean(tf.real(tf.norm(tf.reshape(error, (error.shape[0] * error.shape[1], error.shape[2] * error.shape[3])), axis = 1)))
     
     
     
@@ -147,7 +153,7 @@ def do_training(params, dataset):
             feed_dict = {train_data_node: batch_data, train_labels_node: batch_labels}
             _, l, w = sess.run([train_op, loss, weights], feed_dict=feed_dict)
             lossInCurEpoch.append(l)
-        saver.save(sess, '/results/weights')
+        saver.save(sess, params.saveDirectory + params.filename, global_step = global_step)
         print('In epoch %d, the average loss was: %f' % (curEpoch, np.mean(lossInCurEpoch)))
             
             

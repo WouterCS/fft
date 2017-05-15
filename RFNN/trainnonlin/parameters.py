@@ -31,7 +31,7 @@ class parameters:
         self.optimizer = 'adam'
         self.fixed_lr = True
         self.initial_lr = 1
-        self.max_epochs = 10
+        self.max_epochs = 1
         self.min_lr = 1e-1
         
         # model parameters
@@ -40,6 +40,7 @@ class parameters:
         
         # saving parameters
         self.saveDirectory = '/results'
+        self.filename = '/weights'
         
     def load(self):
         restoredFilepath = self.filepath
