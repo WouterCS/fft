@@ -62,4 +62,5 @@ def defineWeights():
                                                         dtype =  tf.float32),
                                                         name = 'a'),
         'b': tf.Variable(tf.random_normal([5]), name = 'b'),
+        }
     return weights
