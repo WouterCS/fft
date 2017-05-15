@@ -25,13 +25,38 @@ def test_model(params):
         weightType = tf.complex64
     elif params.weightType == 'real':
         weightType = tf.float32
-    
-    weights = {}
-    weightCollection = tf.get_collection('weights')
-    print(weightCollection)
-    for w in weightCollection:
-        print(w.name)
-        weights = w
+    weights = {
+
+        # # Fully connected complex weights, layer 1
+        # 'fc_w1': tf.Variable(tf.complex( tf.random_normal([sizeImage, sizeImage],
+                                                        # stddev=0.01
+                                                        # , dtype =  tf.float32),
+                                                    # tf.random_normal([sizeImage, sizeImage],
+                                                        # stddev=0.01
+                                                        # , dtype =  tf.float32))),
+        # 'fc_b1': tf.Variable(tf.complex(tf.random_normal([sizeImage]), tf.random_normal([sizeImage]))),
+        
+        # Fully connected complex weights, layer 1
+        'fc_w1': tf.Variable(tf.random_normal([sizeImage, sizeImage],
+                                                        stddev=0.01, 
+                                                        dtype =  tf.float32),
+                                                        name = 'fc_w1'),
+        'fc_b1': tf.Variable(tf.random_normal([sizeImage]), name = 'fc_b1'),
+        
+        # Fully connected complex weights, layer 1
+        'fc_w2': tf.Variable(tf.random_normal([sizeImage, sizeImage],
+                                                        stddev=0.01, 
+                                                        dtype =  tf.float32),
+                                                        name = 'fc_w2'),
+        'fc_b2': tf.Variable(tf.random_normal([sizeImage]), name = 'fc_b2'),
+        
+        # Fully connected complex weights, layer 1
+        'fc_w3': tf.Variable(tf.random_normal([sizeImage, sizeImage],
+                                                        stddev=0.01, 
+                                                        dtype =  tf.float32),
+                                                        name = 'fc_w3'),
+        'fc_b3': tf.Variable(tf.random_normal([sizeImage]), name = 'fc_b3'),
+        }
     
     new_saver = tf.train.import_meta_graph(params.saveDirectory + params.filename + '.meta')
     new_saver.restore(sess, tf.train.latest_checkpoint(params.saveDirectory))
@@ -128,7 +153,7 @@ def do_training(params, dataset):
                                                         name = 'fc_w3'),
         'fc_b3': tf.Variable(tf.random_normal([sizeImage]), name = 'fc_b3'),
         }
-    tf.add_to_collection('weights', weights)
+    #tf.add_to_collection('weights', weights)
     # for w in weights:
         # print(w)
         # print(weights[w].name)
