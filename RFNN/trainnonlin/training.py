@@ -8,8 +8,6 @@ import tensorflow as tf
 
 def test_do_training(path): # '/home/wouter/Documents/git/fft/RFNN/trainnonlin/storedData.npz')
     print('start')
-    for n in dir(tf):
-        print(n)
     dataset = loadData(path)
     params = para.parameters('/home/wouter/Documents/git/fft/RFNN/trainnonlin/para')
     do_training(params, dataset)
@@ -92,7 +90,7 @@ def do_training(params, dataset):
         
     error = model(params, train_data_node, weights, train = True, tfData = True) - train_labels_node
     errorShape = map(lambda x: x.value, error.shape)
-    loss = tf.reduce_mean(tf.abs(error), axis = [2,3])
+    loss = tf.reduce_mean(tf.abs(error), axis = [1, 2,3])
     
     
     
