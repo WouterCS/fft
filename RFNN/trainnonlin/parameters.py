@@ -31,7 +31,7 @@ class parameters:
         self.optimizer = 'adam'
         self.fixed_lr = True
         self.initial_lr = 1
-        self.max_epochs = 100
+        self.max_epochs = 5
         self.min_lr = 1e-1
         
         # model parameters
