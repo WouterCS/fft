@@ -29,8 +29,8 @@ def test_model(params):
     weights = {}
     weightCollection = tf.get_collection('weights')
     for w in weightCollection:
-        print(w.name)
-        weights[w.name] = w
+        print(w)
+        weights = w
     new_saver = tf.train.import_meta_graph(params.saveDirectory + params.filename + '.meta')
     new_saver.restore(sess, tf.train.latest_checkpoint(params.saveDirectory))
     
@@ -128,10 +128,11 @@ def do_training(params, dataset):
                                                         name = 'fc_w3'),
         'fc_b3': tf.Variable(tf.random_normal([sizeImage]), name = 'fc_b3'),
         }
-    for w in weights:
-        print(w)
-        print(weights[w].name)
-        tf.add_to_collection('weights', weights[w])
+    tf.add_to_collection('weights', weights)
+    # for w in weights:
+        # print(w)
+        # print(weights[w].name)
+        # tf.add_to_collection('weights', weights[w])
         
     error = model(params, train_data_node, weights, train = True, tfData = True) - train_labels_node
     errorShape = map(lambda x: x.value, error.shape)
