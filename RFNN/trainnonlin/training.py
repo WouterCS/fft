@@ -77,7 +77,8 @@ def checkLossForTestSet(weights, params, testSet):
         print('Ground truth shape: %s' % str(groundTruth.shape))
         error = model(params, inImage, weights, train=False) - groundTruth
         print('Error shape: %s' % str(error.shape))
-        loss = np.mean(np.linalg.norm(np.reshape(error, (params.batchsize * 1, 28 * 15)), axis = 1)).astype('float32')
+        test = np.reshape(error, (params.batchsize * 1, 28 * 15))
+        loss = np.mean(np.linalg.norm(test, axis = 1)).astype('float32')
         storedLoss.append(loss)
     print('Max loss: %f, average loss: %f' % (np.max(loss), np.mean(loss)))
     
