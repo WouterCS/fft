@@ -7,12 +7,6 @@ import RFNN.trainnonlin.parameters as para
 import tensorflow as tf
 
 def test_do_training(path): # '/home/wouter/Documents/git/fft/RFNN/trainnonlin/storedData.npz')
-    v = tf.Variable(tf.random_normal([5, 5],
-                                                        stddev=0.01, 
-                                                        dtype =  tf.float32),
-                                                        name = 'fc_w1')
-    print(v.name)
-    return
     print('start')
     dataset = loadData(path)
     params = para.parameters('/home/wouter/Documents/git/fft/RFNN/trainnonlin/para')
@@ -116,23 +110,23 @@ def do_training(params, dataset):
         # Fully connected complex weights, layer 1
         'fc_w1': tf.Variable(tf.random_normal([sizeImage, sizeImage],
                                                         stddev=0.01, 
-                                                        dtype =  tf.float32,
-                                                        name = 'fc_w1')),
-        'fc_b1': tf.Variable(tf.random_normal([sizeImage], name = 'fc_b1')),
+                                                        dtype =  tf.float32),
+                                                        name = 'fc_w1'),
+        'fc_b1': tf.Variable(tf.random_normal([sizeImage]), name = 'fc_b1'),
         
         # Fully connected complex weights, layer 1
         'fc_w2': tf.Variable(tf.random_normal([sizeImage, sizeImage],
                                                         stddev=0.01, 
-                                                        dtype =  tf.float32,
-                                                        name = 'fc_w2')),
-        'fc_b2': tf.Variable(tf.random_normal([sizeImage], name = 'fc_b2')),
+                                                        dtype =  tf.float32),
+                                                        name = 'fc_w2'),
+        'fc_b2': tf.Variable(tf.random_normal([sizeImage]), name = 'fc_b2'),
         
         # Fully connected complex weights, layer 1
         'fc_w3': tf.Variable(tf.random_normal([sizeImage, sizeImage],
                                                         stddev=0.01, 
-                                                        dtype =  tf.float32,
-                                                        name = 'fc_w3')),
-        'fc_b3': tf.Variable(tf.random_normal([sizeImage], name = 'fc_b3')),
+                                                        dtype =  tf.float32,)
+                                                        name = 'fc_w3'),
+        'fc_b3': tf.Variable(tf.random_normal([sizeImage]), name = 'fc_b3'),
         }
     for w in weights:
         print(w)
