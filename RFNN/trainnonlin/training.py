@@ -7,9 +7,11 @@ import RFNN.trainnonlin.parameters as para
 import tensorflow as tf
 
 def test_do_training(path): # '/home/wouter/Documents/git/fft/RFNN/trainnonlin/storedData.npz')
+    print('start')
     dataset = loadData(path)
     params = para.parameters('/home/wouter/Documents/git/fft/RFNN/trainnonlin/para')
     do_training(params, dataset)
+    print('finish')
     
     
 def test_model(params):
