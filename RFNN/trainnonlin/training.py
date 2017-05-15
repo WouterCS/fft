@@ -19,6 +19,36 @@ def test_model(params):
     
     sess = tf.Session()
     
+    weights = {
+
+        # # Fully connected complex weights, layer 1
+        # 'fc_w1': tf.Variable(tf.complex( tf.random_normal([sizeImage, sizeImage],
+                                                        # stddev=0.01
+                                                        # , dtype =  tf.float32),
+                                                    # tf.random_normal([sizeImage, sizeImage],
+                                                        # stddev=0.01
+                                                        # , dtype =  tf.float32))),
+        # 'fc_b1': tf.Variable(tf.complex(tf.random_normal([sizeImage]), tf.random_normal([sizeImage]))),
+        
+        # Fully connected complex weights, layer 1
+        'fc_w1': tf.Variable(tf.random_normal([sizeImage, sizeImage],
+                                                        stddev=0.01, 
+                                                        dtype =  tf.float32)),
+        'fc_b1': tf.Variable(tf.random_normal([sizeImage])),
+        
+        # Fully connected complex weights, layer 1
+        'fc_w2': tf.Variable(tf.random_normal([sizeImage, sizeImage],
+                                                        stddev=0.01, 
+                                                        dtype =  tf.float32)),
+        'fc_b2': tf.Variable(tf.random_normal([sizeImage])),
+        
+        # Fully connected complex weights, layer 1
+        'fc_w3': tf.Variable(tf.random_normal([sizeImage, sizeImage],
+                                                        stddev=0.01, 
+                                                        dtype =  tf.float32)),
+        'fc_b3': tf.Variable(tf.random_normal([sizeImage])),
+        }
+    
     new_saver = tf.train.import_meta_graph(params.saveDirectory + params.filename + '.meta')
     new_saver.restore(sess, tf.train.latest_checkpoint(params.saveDirectory))
     
