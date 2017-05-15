@@ -51,7 +51,7 @@ def apply_model(params):
             
             
 def model(data, weights):
-    l1 = tf.matmul(data, weights['a']) 
+    l1 = tf.matmul(weights['a'], data) 
     l1 = l1 + weights['b']
     return l1
 
