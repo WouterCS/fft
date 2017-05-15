@@ -203,7 +203,6 @@ def model(params, data, weights, train=False, tfData = False):
     if train: l3 = tf.nn.dropout(l3, keep_prob=KEEP_PROB_HIDDEN)                                # Drop
     l3 = tf.matmul(l3, weights['fc_w3'])                                                        # FC
     l3 = l3 + weights['fc_b3']   
-    l3 = tf.nn.relu(l3)
 
     treal, timag = tf.split(l3, 2, axis = 1)
     l4 = tf.complex(treal, timag)
