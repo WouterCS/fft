@@ -105,7 +105,8 @@ def do_training(params, dataset):
     
     train_op = optimizer.minimize(loss, global_step=global_step)
     
-    train_op = tf.train.AdamOptimizer(learning_rate=1.0).minimize(loss)
+    saver = tf.train.Saver(weights, max_to_keep = 2)
+
     
     sess = tf.Session()
     sess.run(tf.global_variables_initializer())
@@ -121,6 +122,7 @@ def do_training(params, dataset):
             feed_dict = {train_data_node: batch_data, train_labels_node: batch_labels}
             _, l, w = sess.run([train_op, loss, weights], feed_dict=feed_dict)
             lossInCurEpoch.append(l)
+        saver.save(sess, '/results/weights')
         print('In epoch %d, the average loss was: %f' % (curEpoch, np.mean(lossInCurEpoch)))
             
             
