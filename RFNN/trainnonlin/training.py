@@ -129,6 +129,7 @@ def do_training(params, dataset):
         'fc_b3': tf.Variable(tf.random_normal([sizeImage], name = 'fc_b3')),
         }
     for w in weights:
+        print(w)
         print(weights[w].name)
         tf.add_to_collection('weights', weights[w])
         
