@@ -59,7 +59,7 @@ def defineWeights():
     weights = {
         'a': tf.Variable(tf.random_normal([5, 5],
                                                         stddev=0.01, 
-                                                        dtype =  tf.float32),
+                                                        dtype =  tf.float64),
                                                         name = 'a'),
         'b': tf.Variable(tf.random_normal([5]), name = 'b'),
         }
