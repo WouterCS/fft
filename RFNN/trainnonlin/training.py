@@ -26,36 +26,36 @@ def test_model(params):
     elif params.weightType == 'real':
         weightType = tf.float32
     
-    weights = {
+    weights = {}
 
+        # # # Fully connected complex weights, layer 1
+        # # 'fc_w1': tf.Variable(tf.complex( tf.random_normal([sizeImage, sizeImage],
+                                                        # # stddev=0.01
+                                                        # # , dtype =  tf.float32),
+                                                    # # tf.random_normal([sizeImage, sizeImage],
+                                                        # # stddev=0.01
+                                                        # # , dtype =  tf.float32))),
+        # # 'fc_b1': tf.Variable(tf.complex(tf.random_normal([sizeImage]), tf.random_normal([sizeImage]))),
+        
         # # Fully connected complex weights, layer 1
-        # 'fc_w1': tf.Variable(tf.complex( tf.random_normal([sizeImage, sizeImage],
-                                                        # stddev=0.01
-                                                        # , dtype =  tf.float32),
-                                                    # tf.random_normal([sizeImage, sizeImage],
-                                                        # stddev=0.01
-                                                        # , dtype =  tf.float32))),
-        # 'fc_b1': tf.Variable(tf.complex(tf.random_normal([sizeImage]), tf.random_normal([sizeImage]))),
+        # 'fc_w1': tf.Variable(tf.random_normal([sizeImage, sizeImage],
+                                                        # stddev=0.01, 
+                                                        # dtype =  tf.float32,
+                                                        # name = 'fc_w1')),
+        # 'fc_b1': tf.Variable(tf.random_normal([sizeImage], name = 'fc_b1')),
         
-        # Fully connected complex weights, layer 1
-        'fc_w1': tf.Variable(tf.random_normal([sizeImage, sizeImage],
-                                                        stddev=0.01, 
-                                                        dtype =  tf.float32,
-                                                        name = 'fc_w1')),
-        'fc_b1': tf.Variable(tf.random_normal([sizeImage], name = 'fc_b1')),
+        # # Fully connected complex weights, layer 1
+        # 'fc_w2': tf.Variable(tf.random_normal([sizeImage, sizeImage],
+                                                        # stddev=0.01, 
+                                                        # dtype =  tf.float32)),
+        # 'fc_b2': tf.Variable(tf.random_normal([sizeImage])),
         
-        # Fully connected complex weights, layer 1
-        'fc_w2': tf.Variable(tf.random_normal([sizeImage, sizeImage],
-                                                        stddev=0.01, 
-                                                        dtype =  tf.float32)),
-        'fc_b2': tf.Variable(tf.random_normal([sizeImage])),
-        
-        # Fully connected complex weights, layer 1
-        'fc_w3': tf.Variable(tf.random_normal([sizeImage, sizeImage],
-                                                        stddev=0.01, 
-                                                        dtype =  tf.float32)),
-        'fc_b3': tf.Variable(tf.random_normal([sizeImage])),
-        }
+        # # Fully connected complex weights, layer 1
+        # 'fc_w3': tf.Variable(tf.random_normal([sizeImage, sizeImage],
+                                                        # stddev=0.01, 
+                                                        # dtype =  tf.float32)),
+        # 'fc_b3': tf.Variable(tf.random_normal([sizeImage])),
+        # }
     weightCollection = tf.get_collection('weights')
     for w in weightCollection:
         print(dir(w))
@@ -146,14 +146,16 @@ def do_training(params, dataset):
         # Fully connected complex weights, layer 1
         'fc_w2': tf.Variable(tf.random_normal([sizeImage, sizeImage],
                                                         stddev=0.01, 
-                                                        dtype =  tf.float32)),
-        'fc_b2': tf.Variable(tf.random_normal([sizeImage])),
+                                                        dtype =  tf.float32,
+                                                        name = 'fc_w2')),
+        'fc_b2': tf.Variable(tf.random_normal([sizeImage], name = 'fc_b2')),
         
         # Fully connected complex weights, layer 1
         'fc_w3': tf.Variable(tf.random_normal([sizeImage, sizeImage],
                                                         stddev=0.01, 
-                                                        dtype =  tf.float32)),
-        'fc_b3': tf.Variable(tf.random_normal([sizeImage])),
+                                                        dtype =  tf.float32,
+                                                        name = 'fc_w3')),
+        'fc_b3': tf.Variable(tf.random_normal([sizeImage], name = 'fc_b3')),
         }
     for w in weights:
         tf.add_to_collection('weights', weights[w])
