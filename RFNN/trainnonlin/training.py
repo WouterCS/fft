@@ -16,20 +16,14 @@ def test_do_training(path): # '/home/wouter/Documents/git/fft/RFNN/trainnonlin/s
     
     
 def test_model(params):
-    
     sess = tf.Session()
-    
-    # The size of the image is twice as large, because we consider the real and imaginary parts seperately
-    sizeImage = 2*1*28*15
-    
-    #weights = defineWeights(sizeImage)
     
     new_saver = tf.train.import_meta_graph(params.saveDirectory + params.filename + '.meta')
     new_saver.restore(sess, tf.train.latest_checkpoint(params.saveDirectory))
     
     prediction = tf.get_default_graph().get_tensor_by_name("prediction:0")
     train_data_node = tf.get_default_graph().get_tensor_by_name("train_data_node:0")
-    #print(sess.run(['fc_w1_1:0','b:0']))
+    print(sess.run(['fc_w1:0','fc_b1:0, fc_w2:0','fc_b2:0, fc_w3:0','fc_b3:0']))
     
     testWithRandomInput(params, 100, sess, prediction, train_data_node)
     
@@ -47,7 +41,7 @@ def checkLossForTestSet(params, testSet, sess, prediction, train_data_node):
         pred = sess.run([prediction],feed_dict={train_data_node:input})[0]
         loss = np.mean(np.absolute(pred - groundTruth), axis = (1,2,3))
         storedLoss = np.concatenate((storedLoss,loss))
-    print('Max loss: %f, average loss: %f' % (np.max(storedLoss), np.mean(storedLoss)))
+    print('Max loss: %f, average loss: %f, median: %f' % (np.max(storedLoss), np.mean(storedLoss), np.median(storedLoss)))
     
     
 def do_training(params, dataset):
