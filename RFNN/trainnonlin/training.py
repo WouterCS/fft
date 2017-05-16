@@ -23,7 +23,8 @@ def test_model(params):
     
     prediction = tf.get_default_graph().get_tensor_by_name("prediction:0")
     train_data_node = tf.get_default_graph().get_tensor_by_name("train_data_node:0")
-    print(sess.run(['fc_w1:0','fc_b1:0', 'fc_w2:0','fc_b2:0', 'fc_w3:0','fc_b3:0']))
+    trainedWeights = sess.run(['fc_w1:0','fc_b1:0', 'fc_w2:0','fc_b2:0', 'fc_w3:0','fc_b3:0'])
+    print(map(lambda x: np.max(x), trainedWeights))
     
     testWithRandomInput(params, 100, sess, prediction, train_data_node)
     
