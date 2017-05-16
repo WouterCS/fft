@@ -47,7 +47,8 @@ def checkLossForTestSet(weights, params, testSet, sess, prediction, train_data_n
         p = sess.run([prediction],feed_dict={train_data_node:input})
         loss = tf.reduce_mean(tf.abs(p - groundTruth), axis = [2,3])#.eval(session=sess)
         storedLoss.append(loss)
-    print('Max loss: %f, average loss: %f' % (np.max(storedLoss), np.mean(storedLoss)))
+    #print('Max loss: %f, average loss: %f' % (np.max(storedLoss), np.mean(storedLoss)))
+    print(storedLoss)
     
 def do_training(params, dataset):
     print('Do training: %s'  % str(datetime.now()))
