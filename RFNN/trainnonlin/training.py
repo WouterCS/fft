@@ -22,14 +22,14 @@ def test_model(params):
     # The size of the image is twice as large, because we consider the real and imaginary parts seperately
     sizeImage = 2*1*28*15
     
-    weights = defineWeights(sizeImage)
+    #weights = defineWeights(sizeImage)
     
     new_saver = tf.train.import_meta_graph(params.saveDirectory + params.filename + '.meta')
     new_saver.restore(sess, tf.train.latest_checkpoint(params.saveDirectory))
     
     prediction = tf.get_default_graph().get_tensor_by_name("prediction:0")
     train_data_node = tf.get_default_graph().get_tensor_by_name("train_data_node:0")
-    print(weights)
+    #print(sess.run(['fc_w1_1:0','b:0']))
     
     testWithRandomInput(params, 100, sess, prediction, train_data_node)
     
