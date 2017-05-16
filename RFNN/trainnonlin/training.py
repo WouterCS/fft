@@ -31,12 +31,12 @@ def test_model(params):
     train_data_node = tf.get_default_graph().get_tensor_by_name("train_data_node:0")
     
     
-    testWithRandomInput(weights, params, 100, sess)
+    testWithRandomInput(weights, params, 100, sess, prediction, train_data_node)
     
-def testWithRandomInput(weights, params, N, sess):
+def testWithRandomInput(weights, params, N, sess, prediction, train_data_node):
     
     randomImages = np.random.random((N, params.batchsize, 1, 28,28))
-    checkLossForTestSet(weights, params, randomImages, sess)
+    checkLossForTestSet(weights, params, randomImages, sess, prediction, train_data_node)
 
 def checkLossForTestSet(weights, params, testSet, sess, prediction, train_data_node):
     storedLoss = []
