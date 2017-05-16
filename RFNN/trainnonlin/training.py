@@ -27,6 +27,10 @@ def test_model(params):
     new_saver = tf.train.import_meta_graph(params.saveDirectory + params.filename + '.meta')
     new_saver.restore(sess, tf.train.latest_checkpoint(params.saveDirectory))
     
+    prediction = tf.get_default_graph().get_tensor_by_name("prediction:0")
+    train_data_node = tf.get_default_graph().get_tensor_by_name("train_data_node:0")
+    
+    
     testWithRandomInput(weights, params, 100, sess)
     
 def testWithRandomInput(weights, params, N, sess):
@@ -34,14 +38,14 @@ def testWithRandomInput(weights, params, N, sess):
     randomImages = np.random.random((N, params.batchsize, 1, 28,28))
     checkLossForTestSet(weights, params, randomImages, sess)
 
-def checkLossForTestSet(weights, params, testSet, sess):
+def checkLossForTestSet(weights, params, testSet, sess, prediction, train_data_node):
     storedLoss = []
     for i in range(len(testSet)):
         randomImage = testSet[i]
         input = np.fft.rfft2(randomImage).astype('complex64', casting = 'same_kind')
         groundTruth = np.fft.rfft2(np.maximum(randomImage, 0)).astype('complex64', casting = 'same_kind')
-        prediction = model(params, input, weights, train=False)
-        loss = tf.reduce_mean(tf.abs(prediction - groundTruth), axis = [2,3]).eval(session=sess)
+        p = sess.run([prediction],feed_dict={train_data_node:test_data})
+        loss = tf.reduce_mean(tf.abs(p - groundTruth), axis = [2,3])#.eval(session=sess)
         storedLoss.append(loss)
     print('Max loss: %f, average loss: %f' % (np.max(storedLoss), np.mean(storedLoss)))
     
@@ -88,9 +92,9 @@ def do_training(params, dataset):
         
     weights = defineWeights(sizeImage)
         
-    error = model(params, train_data_node, weights, train = True, tfData = True) - train_labels_node
-    errorShape = map(lambda x: x.value, error.shape)
-    loss = tf.reduce_mean(tf.abs(error), axis = [1, 2,3])
+    prediction = model(params, train_data_node, weights, train = True, tfData = True)
+    prediction = tf.identity(prediction, name="prediction")
+    loss = tf.reduce_mean(tf.abs(prediction - train_labels_node), axis = [1, 2,3])
     
     
     
@@ -112,7 +116,7 @@ def do_training(params, dataset):
     
     train_op = optimizer.minimize(loss, global_step=global_step)
     
-    saver = tf.train.Saver(weights, max_to_keep = 2)
+    saver = tf.train.Saver(max_to_keep = 2)
 
     
     sess = tf.Session()
