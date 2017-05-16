@@ -36,6 +36,7 @@ def test_model(params):
 def testWithRandomInput(weights, params, N, sess, prediction, train_data_node):
     randomImages = np.random.random((N, params.batchsize, 1, 28,28))
     checkLossForTestSet(weights, params, randomImages, sess, prediction, train_data_node)
+    
 
 def checkLossForTestSet(weights, params, testSet, sess, prediction, train_data_node):
     storedLoss = []
@@ -47,7 +48,7 @@ def checkLossForTestSet(weights, params, testSet, sess, prediction, train_data_n
         loss = np.mean(np.absolute(p - groundTruth))#.eval(session=sess)
         if loss > 100:
             print('Loss is %f for image:' % loss)
-            print('randomImage')
+            print(randomImage)
         storedLoss.append(loss)
     print('Max loss: %f, average loss: %f' % (np.max(storedLoss), np.mean(storedLoss)))
     
