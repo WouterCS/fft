@@ -29,27 +29,23 @@ def test_model(params):
     
     prediction = tf.get_default_graph().get_tensor_by_name("prediction:0")
     train_data_node = tf.get_default_graph().get_tensor_by_name("train_data_node:0")
+    print(weights)
     
+    testWithRandomInput(params, 100, sess, prediction, train_data_node)
     
-    testWithRandomInput(weights, params, 100, sess, prediction, train_data_node)
-    
-def testWithRandomInput(weights, params, N, sess, prediction, train_data_node):
+def testWithRandomInput(params, N, sess, prediction, train_data_node):
     randomImages = np.random.random((N, params.batchsize, 1, 28,28))
-    checkLossForTestSet(weights, params, randomImages, sess, prediction, train_data_node)
+    checkLossForTestSet(params, randomImages, sess, prediction, train_data_node)
     
 
-def checkLossForTestSet(weights, params, testSet, sess, prediction, train_data_node):
+def checkLossForTestSet(params, testSet, sess, prediction, train_data_node):
     storedLoss = []
     for i in range(len(testSet)):
         randomImage = testSet[i]
         input = np.fft.rfft2(randomImage).astype('complex64', casting = 'same_kind')
         groundTruth = np.fft.rfft2(np.maximum(randomImage, 0)).astype('complex64', casting = 'same_kind')
-        p = sess.run([prediction],feed_dict={train_data_node:input})[0]
-        loss = np.mean(np.absolute(p - groundTruth), axis = (1,2,3))#.eval(session=sess)
-        for j in range(len(loss)):
-            if loss[j] > 100:
-                print('Loss is %f for image:' % loss[j])
-                print(randomImage[j])
+        pred = sess.run([prediction],feed_dict={train_data_node:input})[0]
+        loss = np.mean(np.absolute(pred - groundTruth), axis = (1,2,3))
         storedLoss = np.concatenate((storedLoss,loss))
     print('Max loss: %f, average loss: %f' % (np.max(storedLoss), np.mean(storedLoss)))
     
