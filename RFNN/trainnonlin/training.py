@@ -42,9 +42,9 @@ def checkLossForTestSet(weights, params, testSet, sess, prediction, train_data_n
     storedLoss = []
     feed_data_node = tf.placeholder(tf.complex64,
                                      shape=(1,
-                                            dataset['depth'],
-                                            dataset['height'],
-                                            dataset['width']),
+                                            1,
+                                            28,
+                                            15),
                                      name="train_data_node")
     for i in range(len(testSet)):
         randomImage = testSet[i]
