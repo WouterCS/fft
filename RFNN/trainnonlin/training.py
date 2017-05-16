@@ -34,7 +34,6 @@ def test_model(params):
     testWithRandomInput(weights, params, 100, sess, prediction, train_data_node)
     
 def testWithRandomInput(weights, params, N, sess, prediction, train_data_node):
-    
     randomImages = np.random.random((N, params.batchsize, 1, 28,28))
     checkLossForTestSet(weights, params, randomImages, sess, prediction, train_data_node)
 
@@ -46,9 +45,12 @@ def checkLossForTestSet(weights, params, testSet, sess, prediction, train_data_n
         groundTruth = np.fft.rfft2(np.maximum(randomImage, 0)).astype('complex64', casting = 'same_kind')
         p = sess.run([prediction],feed_dict={train_data_node:input})
         loss = np.mean(np.absolute(p - groundTruth))#.eval(session=sess)
+        if loss > 100:
+            print('Loss is %f for image:' % loss)
+            print('randomImage')
         storedLoss.append(loss)
-    #print('Max loss: %f, average loss: %f' % (np.max(storedLoss), np.mean(storedLoss)))
-    print(storedLoss)
+    print('Max loss: %f, average loss: %f' % (np.max(storedLoss), np.mean(storedLoss)))
+    
     
 def do_training(params, dataset):
     print('Do training: %s'  % str(datetime.now()))
