@@ -46,8 +46,8 @@ def checkLossForTestSet(weights, params, testSet, sess, prediction, train_data_n
         groundTruth = np.fft.rfft2(np.maximum(randomImage, 0)).astype('complex64', casting = 'same_kind')
         p = sess.run([prediction],feed_dict={train_data_node:input})
         loss = np.mean(np.absolute(p - groundTruth), axis = [1,2,3])#.eval(session=sess)
-        for j in len(loss)
-            if loss[j] > 100
+        for j in len(loss):
+            if loss[j] > 100:
                 print('Loss is %f for image:' % loss[j])
                 print(randomImage[j])
         storedLoss = np.concatenate((storedLoss,loss))
