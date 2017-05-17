@@ -51,7 +51,7 @@ def testWithMNIST(params, sess, prediction, train_data_node):
     test_input = np.fft.rfft2(test_data).astype('complex64', casting = 'same_kind')
     test_output = np.fft.rfft2(np.maximum(test_data, 0)).astype('complex64', casting = 'same_kind')
     
-    checkLossForTestSet(params, test_data, test_labels, sess, prediction, train_data_node)
+    checkLossForTestSet(params, test_input, test_output, sess, prediction, train_data_node)
 
 def testWithRandomInput(params, N, sess, prediction, train_data_node):
     randomImages = np.random.random((N, params.batchsize, 1, 28,28))
