@@ -14,7 +14,7 @@ def splitComplexIntoReals(data):
 def convWithNRandom(data, n):
     
     randomFilter =  np.ndarray.tolist(np.random.random((n, 5, 5)))
-    data = np.ndarray.tolist(np.transpose(data, (0, 3, 1, 2) ))
+    #data = np.ndarray.tolist(np.transpose(data, (0, 3, 1, 2) ))
     
     #sampleImage = np.fft.rfft2(np.array(convolve2d( data[0][0], randomFilter[0] , 'same')))
     

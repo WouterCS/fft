@@ -48,6 +48,9 @@ def testWithMNIST(params, sess, prediction, train_data_node):
     shape = test_data.shape
     test_data = np.transpose(test_data, (0, 3, 1, 2) ).reshape((-1,25, shape[1], shape[2], shape[3]))
     
+    test_data = np.fft.rfft2(test_data).astype('complex64', casting = 'same_kind')
+    test_labels = np.fft.rfft2(np.maximum(test_data, 0)).astype('complex64', casting = 'same_kind')
+    
     checkLossForTestSet(params, test_data, test_labels, sess, prediction, train_data_node)
 
 def testWithRandomInput(params, N, sess, prediction, train_data_node):
