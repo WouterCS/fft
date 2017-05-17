@@ -45,8 +45,9 @@ def testWithMNIST(params, sess, prediction, train_data_node):
     dataset = load_and_preprocess_dataset()
     test_data = dataset['test_set']['data']
     
+    test_data = np.transpose(test_data, (0, 3, 1, 2) )
     shape = test_data.shape
-    test_data = np.transpose(test_data, (0, 3, 1, 2) ).reshape((-1,25, shape[1], shape[2], shape[3]))
+    test_data = test_data.reshape((-1,25, shape[1], shape[2], shape[3]))
     
     test_input = np.fft.rfft2(test_data).astype('complex64', casting = 'same_kind')
     test_output = np.fft.rfft2(np.maximum(test_data, 0)).astype('complex64', casting = 'same_kind')
