@@ -72,7 +72,7 @@ def checkLossForTestSet(params, testData, testLabels, sess, prediction, train_da
         # storedLoss = np.concatenate((storedLoss,loss))
     # print('Max loss: %f, average loss: %f, median: %f' % (np.max(storedLoss), np.mean(storedLoss), np.median(storedLoss)))
     storedLoss = []
-    for i in range(train_data.shape[0]):
+    for i in range(testData.shape[0]):
         input = testData[i]
         pred = sess.run([prediction],feed_dict={train_data_node:input})[0]
         loss = np.mean(np.absolute(pred - testLabels[i]), axis = (1,2,3))
