@@ -2,6 +2,7 @@ import numpy as np
 from RFNN.trainnonlin.generateData import loadData, generateData
 import RFNN.trainnonlin.parameters as para
 from RFNN.trainnonlin.training import do_training
+from RFNN.dataset import load_and_preprocess_dataset
 import tensorflow as tf
 
 dataPath = '/data/storedData.npz'
@@ -23,8 +24,9 @@ def test_model(params):
     print('Maximum values in weights: %s' % str(map(lambda x: np.max(np.abs(x)), trainedWeights)))
     
     
-    testWithRandomInput(params, 100, sess, prediction, train_data_node)
-    testWithTrainingData(params, sess, prediction, train_data_node)
+    #testWithRandomInput(params, 100, sess, prediction, train_data_node)
+    #testWithTrainingData(params, sess, prediction, train_data_node)
+    testWithMNIST(params, sess, prediction, train_data_node)
     
 def testWithTrainingData(params, sess, prediction, train_data_node):
     dataset = loadData(path)
@@ -39,9 +41,18 @@ def testWithTrainingData(params, sess, prediction, train_data_node):
     
     checkLossForTestSet(params, train_data, train_labels, sess, prediction, train_data_node)
 
+def testWithMNIST(params, sess, prediction, train_data_node):
+    dataset = load_and_preprocess_dataset()
+    test_data = dataset['test_set']['data']
+    
+    shape = test_data.shape
+    test_data = np.transpose(test_data, (0, 3, 1, 2) ).reshape((-1,25, shape[1], shape[2], shape[3]))
+    
+    checkLossForTestSet(params, test_data, test_labels, sess, prediction, train_data_node)
+
 def testWithRandomInput(params, N, sess, prediction, train_data_node):
     randomImages = np.random.random((N, params.batchsize, 1, 28,28))
-    testData = np.fft.rfft2(randomImage).astype('complex64', casting = 'same_kind')
+    testData = np.fft.rfft2(randomImages).astype('complex64', casting = 'same_kind')
     testLabels = np.fft.rfft2(np.maximum(randomImage, 0)).astype('complex64', casting = 'same_kind')
     
     checkLossForTestSet(params, testData, testLabels, sess, prediction, train_data_node)
