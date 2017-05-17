@@ -1,5 +1,4 @@
 TF_INC=$(python -c 'import tensorflow as tf; print(tf.sysconfig.get_include())')
-git pull
 rm -r /usr/local/lib/python2.7/dist-packages/tensorflow/python/user_ops
 mv /user_ops /usr/local/lib/python2.7/dist-packages/tensorflow/python
 #mv /RFNN /usr/local/lib/python2.7/dist-packages/
