@@ -55,9 +55,9 @@ def do_training(params, dataset):
         
     weights = defineWeights(sizeImage)
         
-    prediction = model(params, train_data_node, weights, train = True, tfData = True)
-    prediction = tf.identity(prediction, name="prediction")
-    loss = tf.reduce_mean(tf.abs(prediction - train_labels_node), axis = [1, 2,3])
+    trainPrediction = model(params, train_data_node, weights, train = True, tfData = True)
+    prediction = tf.identity(model(params, train_data_node, weights, train = False, tfData = True), name="prediction")
+    loss = tf.reduce_mean(tf.abs(trainPrediction - train_labels_node), axis = [1, 2,3])
     
     
     
