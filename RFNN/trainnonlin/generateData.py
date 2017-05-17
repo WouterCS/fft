@@ -55,14 +55,14 @@ def generateData(returnData = True, storeData = False, path = ''):
         'number_of_MNIST': newtrain_data.shape[0]
     }
     
-    if storeData:
-        if not os.path.exists(os.path.dirname(path)):
-            os.makedirs(os.path.dirname(path))
-        with open(path, 'wb') as f:
-            np.savez_compressed(path, data = datasetOut)
-        loadData(path)
-    else:
-        return datasetOut
+    # if storeData:
+        # if not os.path.exists(os.path.dirname(path)):
+            # os.makedirs(os.path.dirname(path))
+        # with open(path, 'wb') as f:
+            # np.savez_compressed(path, data = datasetOut)
+        # loadData(path)
+    # else:
+        # return datasetOut
         
 def loadData(path):
     with open(path, 'rb') as f:
