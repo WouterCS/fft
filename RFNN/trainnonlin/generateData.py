@@ -4,7 +4,9 @@ from scipy.signal import convolve2d
 import os
 
 def run():
-    return generateData(False, True, '/data/storedData.npz')
+    print('start generating')
+    generateData(False, True, '/data/storedData.npz')
+    print('finish generating')
 
 def splitComplexIntoReals(data):
         return data.view('Float64').reshape(data.shape+(2,)).transpose((5,0,1,2,3,4))
