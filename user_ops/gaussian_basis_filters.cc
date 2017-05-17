@@ -1,5 +1,5 @@
-#include "./tensorflow/include/tensorflow/core/framework/op.h"
-#include "./tensorflow/include/tensorflow/core/framework/op_kernel.h"
+#include "../../include/tensorflow/core/framework/op.h"
+#include "../../include/tensorflow/core/framework/op_kernel.h"
 
 #include "njet.h"
 
