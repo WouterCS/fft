@@ -24,7 +24,7 @@ def convWithNRandom(data, n):
                 # # convolve   randomFilter[j, :, :] with data[i, k, :, :]
                 # originalFilteredImage[i,j,k,...] = np.array(convolve2d( data[i][k], randomFilter[j] , 'same'))
     #print('Convolutions done')
-    originalFilteredImage = np.expand_dims((np.transpose(data, (0, 3, 1, 2) ), 1)
+    originalFilteredImage = np.expand_dims(np.transpose(data, (0, 3, 1, 2) ), 1)
     train_data = np.fft.rfft2(originalFilteredImage).astype('complex64', casting = 'same_kind')
     train_labels = np.fft.rfft2(np.maximum(originalFilteredImage, 0)).astype('complex64', casting = 'same_kind')
     return train_data, train_labels
