@@ -168,7 +168,7 @@ def fftReLu(layerIn, params):
         layerOut = rfft2d(layerIn)
         print('Layer in sqrt-magnitude, shape: %s, dtype: %s' % (str(layerOut.shape), str(layerOut.dtype)))
         
-        z = asarray(layerOut)
+        z = np.asarray(layerOut)
         if (np.issubclass(z.dtype.type, np._nx.complexfloating)):
             zimag = z.imag
             zreal = z.real
