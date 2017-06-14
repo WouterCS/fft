@@ -13,6 +13,6 @@ git pull
 docker cp $PROJECTPATH/RFNN     $NAME:/RFNN
 docker cp $PROJECTPATH/DockerScripts/DockerCreation $NAME:/scripts
 docker start $NAME 
-docker exec -it $NAME /bin/bash /scripts/ondockerSetUp.sh
+docker exec -it $NAME /bin/bash /scripts/ondockerSetUp-stage3.bash
 #mv $LOCALPATH              $DROPBOXPATH
 
