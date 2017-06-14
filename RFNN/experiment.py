@@ -169,14 +169,14 @@ def fftReLu(layerIn, params):
         print('Layer in sqrt-magnitude, shape: %s, dtype: %s' % (str(layerOut.shape), str(layerOut.dtype)))
         
         z = np.asarray(layerOut)
-        if (np.issubclass_(z.dtype.type, np.core.numeric.complexfloating)):
-            zimag = z.imag
-            zreal = z.real
-            print('yes subclass')
-        else:
-            zimag = 0
-            zreal = z
-            print('no subclass')
+        #if (np.issubclass_(z.dtype.type, np.core.numeric.complexfloating)):
+        zimag = z.imag
+        zreal = z.real
+            #print('yes subclass')
+        # else:
+            # zimag = 0
+            # zreal = z
+            # print('no subclass')
         print(dir(zimag))
         print(dir(zreal))
         print(dir(5))
