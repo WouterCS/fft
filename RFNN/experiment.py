@@ -166,7 +166,7 @@ def fftReLu(layerIn, params):
     if params.fftFunction == 'sqt-magnitude':
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
         layerOut = rfft2d(layerIn)
-        print(dir(layerOut))
+        print('Layer in sqrt-magnitude, shape: %s, dtype: %s' % (str(layerOut.shape), str(layerOut.dtype)))
         mag = np.abs(layerOut)
         pha = np.angle(layerOut)
         layerOut = irfft2d( np.sqrt(mag) * np.exp( 1j * (pha) ))
