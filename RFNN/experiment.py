@@ -170,8 +170,8 @@ def fftReLu(layerIn, params):
         
         z = np.asarray(layerOut)
         #if (np.issubclass_(z.dtype.type, np.core.numeric.complexfloating)):
-        zimag = z.imag
-        zreal = z.real
+        zimag = z.imag.data
+        zreal = z.real.data
             #print('yes subclass')
         # else:
             # zimag = 0
