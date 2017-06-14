@@ -180,10 +180,10 @@ def fftReLu(layerIn, params):
         print(dir(zimag))
         print(dir(zreal))
         print(dir(5))
-        layerOut = np.arctan2(zimag, zreal)
+        pha = np.arctan2(zimag, zreal)
         
         mag = np.abs(layerOut)
-        pha = np.angle(layerOut)
+        #pha = np.angle(layerOut)
         layerOut = irfft2d( np.sqrt(mag) * np.exp( 1j * (pha) ))
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         return layerOut
