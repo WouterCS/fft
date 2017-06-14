@@ -184,7 +184,7 @@ def fftReLu(layerIn, params):
         
         mag = np.abs(layerOut)
         #pha = np.angle(layerOut)
-        layerOut = irfft2d( np.sqrt(mag) * np.exp( 1j * (pha) ))
+        layerOut = irfft2d( tf.sqrt(mag) * np.exp( 1j * (pha) ))
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         return layerOut
 def printShape(shape):
