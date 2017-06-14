@@ -12,8 +12,8 @@ def tensorAngle(z):
     z = np.asarray(z)
     zimag = z.imag.data
     zreal = z.real.data
-    print(dir(zimag))
-    print(dir(zreal))
+    print(zimag)
+    print(zreal)
     print('zimag shape: %s, zreal shape: %s' % (str(zimag.shape), str(zreal.shape)))
     return np.arctan2(zimag, zreal)
 
