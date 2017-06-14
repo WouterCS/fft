@@ -10,8 +10,8 @@ from tensorflow.python.ops.spectral_ops import irfft2d, irfft
 
 def tensorAngle(z):
     z = np.asarray(z)
-    zimag = z.imag.data
-    zreal = z.real.data
+    zimag = z.imag
+    zreal = z.real
     print(zimag)
     print(zreal)
     print('zimag shape: %s, zreal shape: %s' % (str(zimag.shape), str(zreal.shape)))
