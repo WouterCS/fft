@@ -167,7 +167,7 @@ def fftReLu(layerIn, params):
         layerOut = fp.rfft2(layerIn)
         mag = np.abs(layerOut)
         pha = np.angle(layerOut)
-        layerOut = fp.irfft2( np.sqrt(mag) * np.exp( 1j * (pha) )) )
+        layerOut = fp.irfft2( np.sqrt(mag) * np.exp( 1j * (pha) ))
         return layerOut
 def printShape(shape):
     print('Dim: ', map(lambda x: x.value, shape))
