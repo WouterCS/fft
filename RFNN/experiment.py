@@ -8,7 +8,11 @@ from RFNN.datasets.utils import show_samples, shuffle_samples, split_dataset
 from tensorflow.python.ops.spectral_ops import rfft2d, rfft
 from tensorflow.python.ops.spectral_ops import irfft2d, irfft
 
-
+def tensorAngle(z):
+    z = np.asarray(layerOut)
+    zimag = z.imag.data
+    zreal = z.real.data
+    return np.arctan2(zimag, zreal)
 
 def error_rate(predictions, labels):
     # Return the error rate based on dense predictions and sparse labels
@@ -168,22 +172,9 @@ def fftReLu(layerIn, params):
         layerOut = rfft2d(layerIn)
         print('Layer in sqrt-magnitude, shape: %s, dtype: %s' % (str(layerOut.shape), str(layerOut.dtype)))
         
-        z = np.asarray(layerOut)
-        #if (np.issubclass_(z.dtype.type, np.core.numeric.complexfloating)):
-        zimag = z.imag.data
-        zreal = z.real.data
-            #print('yes subclass')
-        # else:
-            # zimag = 0
-            # zreal = z
-            # print('no subclass')
-        print(dir(zimag))
-        print(dir(zreal))
-        print(dir(5))
-        pha = np.arctan2(zimag, zreal)
-        
         mag = np.abs(layerOut)
-        #pha = np.angle(layerOut)
+        pha = tensorAngle(layerOut)
+        print('Mag shape: %s, pha shape: %s' % (str(mag.shape), str(pha.shape)))
         layerOut = irfft2d( tf.sqrt(mag) * np.exp( 1j * (pha) ))
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         return layerOut
