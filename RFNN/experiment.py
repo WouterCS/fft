@@ -167,6 +167,16 @@ def fftReLu(layerIn, params):
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
         layerOut = rfft2d(layerIn)
         print('Layer in sqrt-magnitude, shape: %s, dtype: %s' % (str(layerOut.shape), str(layerOut.dtype)))
+        
+        z = asarray(layerOut)
+        if (np.issubclass(z.dtype.type, np._nx.complexfloating)):
+            zimag = z.imag
+            zreal = z.real
+        else:
+            zimag = 0
+            zreal = z
+        layerOut = np.arctan2(zimag, zreal)
+        
         mag = np.abs(layerOut)
         pha = np.angle(layerOut)
         layerOut = irfft2d( np.sqrt(mag) * np.exp( 1j * (pha) ))
