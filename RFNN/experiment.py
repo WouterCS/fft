@@ -9,7 +9,7 @@ from tensorflow.python.ops.spectral_ops import rfft2d, rfft
 from tensorflow.python.ops.spectral_ops import irfft2d, irfft
 
 def tensorAngle(z):
-    z = np.asarray(layerOut)
+    z = np.asarray(z)
     zimag = z.imag.data
     zreal = z.real.data
     return np.arctan2(zimag, zreal)
