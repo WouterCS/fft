@@ -164,10 +164,10 @@ def fftReLu(layerIn, params):
         printShape(shape4)
         return layerOut
     if params.fftFunction == 'sqt-magnitude':
-        layerOut = fp.rfft2(layerIn)
+        layerOut = np.rfft2(layerIn)
         mag = np.abs(layerOut)
         pha = np.angle(layerOut)
-        layerOut = fp.irfft2( np.sqrt(mag) * np.exp( 1j * (pha) ))
+        layerOut = np.irfft2( np.sqrt(mag) * np.exp( 1j * (pha) ))
         return layerOut
 def printShape(shape):
     print('Dim: ', map(lambda x: x.value, shape))
