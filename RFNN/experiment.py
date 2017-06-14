@@ -175,6 +175,7 @@ def fftReLu(layerIn, params):
         else:
             zimag = 0
             zreal = z
+        print(dir(zimag))
         layerOut = np.arctan2(zimag, zreal)
         
         mag = np.abs(layerOut)
