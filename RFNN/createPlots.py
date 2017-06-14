@@ -28,18 +28,18 @@ def createPlot(folders, targetName, labels = map(lambda x: 'label %d' % x, range
 
 i = 5/0
 
-
+ReLuError = [0.42, 0.70, 0.85,  1.19, 1.63, 2.49, 4.16]
+FFTError = [3.34, 3.75, 4.41, 5.01, 6.74, 9.27, 13.8]
+ReLuAcc = map(lambda x: 100-x,  ReLuError)
+FFTAcc = map(lambda x: 100-x,  FFTError)
 plt.clf()
-lpara = para.parameters('/home/wouter/Dropbox/thesis/sortedResults/absFFT/model-40-to-5/results-2000-1/para')
-plt.plot(lpara.acc_test, color = 'blue', label = 'with dropout')
-lpara = para.parameters('/home/wouter/Dropbox/thesis/results/results-2000-1/para')
-lpara.acc_test  = lpara.acc_test + ([lpara.acc_test[-1]] * ( 600 - len(lpara.acc_test) ))
-plt.plot(lpara.acc_test, color = 'red', label = 'without dropout')
-#plt.xticks(range(7), ['60,000', '20,000', '10,000', '5,000', '2,000', '1,000', '300'])
-plt.legend(prop={'size':15}, loc = 'upper right')
-plt.figure(num =1, figsize = (20,20), dpi = 800)
-plt.xlabel('epochs')
-plt.ylabel('test error-rate (%)')
-plt.ylim(0,30)
-plt.title('The difference in using or not using dropout')
-plt.savefig('/home/wouter/Dropbox/thesis/%s.jpg' % 'dropoutComparison')
+plt.plot(ReLuAcc, color = 'blue', marker='o', label = 'ReLu')
+plt.plot(FFTAcc, color = 'red', marker='o', label = 'Absolute value in the Fourier-domain')
+plt.xticks(range(7), ['60,000', '20,000', '10,000', '5,000', '2,000', '1,000', '300'])
+plt.legend(prop={'size':15}, loc = 'lower left')
+plt.figure(num =1, figsize = (20,1), dpi = 800)
+plt.xlabel('number of MNIST training examples')
+plt.ylabel('test accuracy (%)')
+plt.ylim(85, 100)
+plt.title('ReLu vs the absolute value in the Fourier-domain')
+plt.savefig('/home/wouter/Dropbox/thesis/%s.jpg' % 'posterFigReLu', figsize = (20,1))

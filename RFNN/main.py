@@ -23,7 +23,7 @@ def train():
             self.optimizer = 'adadelta' # 'adadelta'   'adam'   'adagrad'
             self.fixed_lr = True
             self.initial_lr = 1
-            self.fftFunction = 'absFFT'  # 'absFFT'    'absoluteValueUntransposed'    'emptyFFT'    'abs'      'relu'     'y-absFFT'     'x-absFFT'
+            self.fftFunction = 'sqt-magnitude'  # 'absFFT'    'absoluteValueUntransposed'    'emptyFFT'    'abs'      'relu'     'y-absFFT'     'x-absFFT'   'sqt-magnitude'
             self.model = 'model40to5'  #  'model40to5'    'model32to1'
             self.useDropout = True
     
@@ -32,7 +32,7 @@ def train():
     #todo: model 32 doorrekenen
     
     hyperParam.numEpochs = 600
-    hyperParam.fftFunction = 'absFFT'
+    hyperParam.fftFunction = 'sqt-magnitude'
     hyperParam.fixed_lr = False
     hyperParam.initial_lr = 3
     
