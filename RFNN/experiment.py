@@ -1,5 +1,5 @@
 import tensorflow as tf
-import numpy
+import numpy as np
 from datetime import datetime
 
 from RFNN.datasets.utils import show_samples, shuffle_samples, split_dataset
@@ -12,7 +12,7 @@ from tensorflow.python.ops.spectral_ops import irfft2d, irfft
 
 def error_rate(predictions, labels):
     # Return the error rate based on dense predictions and sparse labels
-    error = 100.0 - (100.0 * numpy.mean(numpy.argmax(predictions, 1) == labels))
+    error = 100.0 - (100.0 * np.mean(np.argmax(predictions, 1) == labels))
 
     return error
 
@@ -30,7 +30,7 @@ def eval_in_batches(data, sess, data_node, prediction_node, eval_batchsize, numb
         print('Size: %d, eval_batchsize: %d' % (size, eval_batchsize))
         raise ValueError("batch size for evals larger than dataset: %d" % size)
     print('size: %d, eval_batchsize: %d, type: %s' % (size, eval_batchsize, data.dtype), data.shape)
-    predictions = numpy.ndarray(shape=(size, number_of_labels), dtype=numpy.float32)
+    predictions = np.ndarray(shape=(size, number_of_labels), dtype=np.float32)
     for begin in xrange(0, size, eval_batchsize):
         end = begin + eval_batchsize
         if end <= size:
@@ -312,7 +312,7 @@ def do_training(params, dataset):
     w = sess.run(weights)
 
     batch_number = 0
-    for curEpoch in range(int(numpy.ceil(params.max_epochs))):
+    for curEpoch in range(int(np.ceil(params.max_epochs))):
         if hasattr(optimizer, '_lr_t'):
             cur_lr = optimizer._lr_t.eval(session=sess)
         else: # due to inconsistent naming in adagrad optimizer vs other optimizers
@@ -357,7 +357,7 @@ def do_training(params, dataset):
 
     # Create confusion matrix
     params.confusionMatrix = tf.confusion_matrix(labels = test_labels, 
-                                                                                predictions = numpy.argmax(eval_in_batches(test_data,
+                                                                                predictions = np.argmax(eval_in_batches(test_data,
                                                                                                                                                             sess,
                                                                                                                                                             eval_data_node,
                                                                                                                                                             prediction_eval,
