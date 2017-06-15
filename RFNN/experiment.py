@@ -9,14 +9,16 @@ from tensorflow.python.ops.spectral_ops import rfft2d, rfft
 from tensorflow.python.ops.spectral_ops import irfft2d, irfft
 
 def tensorAngle(z):
-    z = np.asarray(z)
-    print(dir(z))
-    zimag = tf.imag(z)
-    zreal = tf.imag(z)
-    print('zimag: %s' % str(zimag))
-    print('zreal: %s' % str(zreal))
-    print('zimag shape: %s, zreal shape: %s' % (str(zimag.shape), str(zreal.shape)))
-    return np.arctan2(zimag, zreal)
+    # z = np.asarray(z)
+    # print(dir(z))
+    # zimag = tf.imag(z)
+    # zreal = tf.imag(z)
+    # print('zimag: %s' % str(zimag))
+    # print('zreal: %s' % str(zreal))
+    # print('zimag shape: %s, zreal shape: %s' % (str(zimag.shape), str(zreal.shape)))
+    # return np.arctan2(zimag, zreal)
+    
+    return np.arctan2(tf.real(z).eval(), tf.imag(z).eval())
 
 def error_rate(predictions, labels):
     # Return the error rate based on dense predictions and sparse labels
