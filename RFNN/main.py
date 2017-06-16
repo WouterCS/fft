@@ -32,7 +32,7 @@ def train():
     #todo: model 32 doorrekenen
     
     hyperParam.numEpochs = 600
-    hyperParam.fftFunction = 'sqt-magnitude'
+    hyperParam.fftFunction = 'absFFT'
     hyperParam.fixed_lr = False
     hyperParam.initial_lr = 3
     
