@@ -36,12 +36,12 @@ def train():
     hyperParam.fixed_lr = False
     hyperParam.initial_lr = 3
     
-    hyperParam.numExamples = 300
-    trainGivenSetSize(dataset, hyperParam, 1)
-    hyperParam.numExamples = 1000
-    trainGivenSetSize(dataset, hyperParam, 1)
-    hyperParam.numExamples = 2000
-    trainGivenSetSize(dataset, hyperParam, 1)
+    # hyperParam.numExamples = 300
+    # trainGivenSetSize(dataset, hyperParam, 1)
+    # hyperParam.numExamples = 1000
+    # trainGivenSetSize(dataset, hyperParam, 1)
+    # hyperParam.numExamples = 2000
+    # trainGivenSetSize(dataset, hyperParam, 1)
     hyperParam.numExamples = 5000
     trainGivenSetSize(dataset, hyperParam, 1)
     hyperParam.numExamples = 10000
