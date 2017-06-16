@@ -3,22 +3,11 @@ import numpy as np
 from datetime import datetime
 
 from RFNN.datasets.utils import show_samples, shuffle_samples, split_dataset
+from tf_angle import tf_angle
 
 #fft relu
 from tensorflow.python.ops.spectral_ops import rfft2d, rfft
 from tensorflow.python.ops.spectral_ops import irfft2d, irfft
-
-def tensorAngle(z):
-    # z = np.asarray(z)
-    # print(dir(z))
-    # zimag = tf.imag(z)
-    # zreal = tf.imag(z)
-    # print('zimag: %s' % str(zimag))
-    # print('zreal: %s' % str(zreal))
-    # print('zimag shape: %s, zreal shape: %s' % (str(zimag.shape), str(zreal.shape)))
-    # return np.arctan2(zimag, zreal)
-    
-    return np.arctan2(tf.real(z).eval(), tf.imag(z).eval())
 
 def error_rate(predictions, labels):
     # Return the error rate based on dense predictions and sparse labels
@@ -179,7 +168,7 @@ def fftReLu(layerIn, params):
         print('Layer in sqrt-magnitude, shape: %s, dtype: %s' % (str(layerOut.shape), str(layerOut.dtype)))
         
         mag = np.abs(layerOut)
-        pha = tensorAngle(layerOut)
+        pha = tf_angle(layerOut)
         print('Mag shape: %s, pha shape: %s' % (str(mag.shape), str(pha.shape)))
         layerOut = irfft2d( tf.sqrt(mag) * np.exp( 1j * (pha) ))
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
