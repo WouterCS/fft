@@ -3,7 +3,7 @@ import numpy as np
 from datetime import datetime
 
 from RFNN.datasets.utils import show_samples, shuffle_samples, split_dataset
-from tf_angle import tf_angle
+from tf_angle import sqrtMagnitude
 
 #fft relu
 from tensorflow.python.ops.spectral_ops import rfft2d, rfft
@@ -164,13 +164,7 @@ def fftReLu(layerIn, params):
         return layerOut
     if params.fftFunction == 'sqt-magnitude':
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
-        layerOut = rfft2d(layerIn)
-        print('Layer in sqrt-magnitude, shape: %s, dtype: %s' % (str(layerOut.shape), str(layerOut.dtype)))
-        
-        mag = np.abs(layerOut)
-        pha = tf_angle(layerOut)
-        print('Mag shape: %s, pha shape: %s' % (str(mag.shape), str(pha.shape)))
-        layerOut = irfft2d( tf.sqrt(mag) * np.exp( 1j * (pha) ))
+        layerOut = irfft2d( sqrtMagnitude(rfft2d(layerIn) )
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         return layerOut
 def printShape(shape):

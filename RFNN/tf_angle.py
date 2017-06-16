@@ -33,7 +33,18 @@ def tf_atan2(x,y, name=None):
                         [tf.float32],
                         name=name,
                         grad=atan2grad)
-        return z[0]
+        z= tf.reshape(tf.concat(z,1), x.shape)
+        return z
     
 def tf_angle(c):
     return tf_atan2(tf.imag(c), tf.real(c))
+
+def sqrtMagnitude(c):
+    mag = tf.cast(tf.abs(c), tf.float32)
+    pha = tf.cast(tf_angle(c), tf.float32)
+    
+    mag = tf.sqrt(mag)
+    
+    magComplex = tf.complex(mag, tf.zeros(mag.shape))
+    phaComplex = tf.complex(tf.zeros(pha.shape), pha)
+    return magComplex * tf.exp( phaComplex )
