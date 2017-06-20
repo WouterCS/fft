@@ -163,13 +163,13 @@ def fftReLu(layerIn, params):
         printShape(shape4)
         return layerOut
     if params.fftFunction == 'sqt-magnitude':
-        printShape(layerIn)
+        printShape(layerIn.shape)
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
-        printShape(layerIn)
+        printShape(layerIn.shape)
         layerOut = irfft2d( sqrtMagnitude(rfft2d(layerIn) ))
-        printShape(layerOut)
+        printShape(layerOut.shape)
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
-        printShape(layerOut)
+        printShape(layerOut.shape)
         return layerOut
 def printShape(shape):
     print('Dim: ', map(lambda x: x.value, shape))
