@@ -32,19 +32,16 @@ def train():
     #todo: model 32 doorrekenen
     
     hyperParam.numEpochs = 50
-    hyperParam.fftFunction = 'sqt-magnitude'
     hyperParam.fixed_lr = True
-    hyperParam.initial_lr = 10
+    hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 5000
+    hyperParam.optimizer = 'adam'
     
-    optimizers = ['adadelta', 'adam', 'adagrad']
-    for j in range(3):
-        hyperParam.optimizer = optimizers[j]
-        hyperParam.initial_lr = 10
-        for i in range(10):
-            hyperParam.initial_lr = hyperParam.initial_lr * 0.3
-            trainGivenSetSize(dataset, hyperParam, i + 10*j)
-        
+    hyperParam.fftFunction = 'absFFT'
+    trainGivenSetSize(dataset, hyperParam, 1)
+    
+    hyperParam.fftFunction = 'sqt-magnitude'
+    trainGivenSetSize(dataset, hyperParam, 1)
 
     print('finished all training')
 
