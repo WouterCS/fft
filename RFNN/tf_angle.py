@@ -14,7 +14,7 @@ def atan2grad(op, grad):
     if x == 0 and y == 0:
         return 0, 0
     
-    return grad * (x / (tf.square(x) + tf.square(y))), grad * (y /  (tf.square(x) + tf.square(y))) #the propagated gradient with respect to the first and second argument respectively
+    return grad * (x / (tf.square(x) + tf.square(y))), grad * (-y /  (tf.square(x) + tf.square(y))) #the propagated gradient with respect to the first and second argument respectively
 
 # Wrapper around tf.py_func which allows gradients to be added.
 def py_func(func, inp, Tout, stateful=True, name=None, grad=None):
