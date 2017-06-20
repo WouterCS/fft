@@ -20,28 +20,25 @@ def train():
         def __init__(self):
             self.numExamples = 2000
             self.numEpochs = 600
-            self.optimizer = 'adadelta' # 'adadelta'   'adam'   'adagrad'
+            self.optimizer = 'adam' # 'adadelta'   'adam'   'adagrad'
             self.fixed_lr = True
-            self.initial_lr = 1
-            self.fftFunction = 'sqt-magnitude'  # 'absFFT'    'absoluteValueUntransposed'    'emptyFFT'    'abs'      'relu'     'y-absFFT'     'x-absFFT'   'sqt-magnitude'
+            self.initial_lr = 1e-2
+            self.fftFunction = 'absFFT'  # 'absFFT'    'absoluteValueUntransposed'    'emptyFFT'    'abs'      'relu'     'y-absFFT'     'x-absFFT'   'sqt-magnitude'
             self.model = 'model40to5'  #  'model40to5'    'model32to1'
             self.useDropout = True
     
     hyperParam = hyperParameters()
-
-    #todo: model 32 doorrekenen
-    
     hyperParam.numEpochs = 50
     hyperParam.fixed_lr = True
     hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 5000
     hyperParam.optimizer = 'adam'
     
-    hyperParam.fftFunction = 'absFFT'
-    trainGivenSetSize(dataset, hyperParam, 1)
-    
     hyperParam.fftFunction = 'sqt-magnitude'
     trainGivenSetSize(dataset, hyperParam, 1)
+    
+    hyperParam.fftFunction = 'absFFT'
+    trainGivenSetSize(dataset, hyperParam, 2)
 
     print('finished all training')
 
