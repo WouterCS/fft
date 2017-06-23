@@ -166,7 +166,8 @@ def fftReLu(layerIn, params):
         printShape(layerIn.shape)
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
         printShape(layerIn.shape)
-        layerOut = irfft2d( sqrtMagnitude(rfft2d(layerIn) ))
+        #layerOut = irfft2d( sqrtMagnitude(rfft2d(layerIn) ))
+        layerOut = irfft2d( tf.cast(tf.abs(rfft2d(layerIn) ), tf.complex64))
         printShape(layerOut.shape)
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         printShape(layerOut.shape)
@@ -359,13 +360,14 @@ def do_training(params, dataset):
 
     # Create confusion matrix
     params.confusionMatrix = tf.confusion_matrix(labels = test_labels, 
-                                                                                predictions = np.argmax(eval_in_batches(test_data,
-                                                                                                                                                            sess,
-                                                                                                                                                            eval_data_node,
-                                                                                                                                                            prediction_eval,
-                                                                                                                                                            params.eval_batchsize)
-                                                                                                                                 , 1),
-                                                                                num_classes = 10).eval(session=sess)
+                                                 predictions = np.argmax(
+                                                        eval_in_batches(test_data,
+                                                                        sess,
+                                                                        eval_data_node,
+                                                                        prediction_eval,
+                                                                        params.eval_batchsize)
+                                                 , 1),
+                                                num_classes = 10).eval(session=sess)
     print(str(params.confusionMatrix))
     params
     # Close the session
