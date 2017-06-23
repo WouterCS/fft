@@ -4,7 +4,7 @@ from datetime import datetime
 
 from RFNN.datasets.utils import show_samples, shuffle_samples, split_dataset
 from tf_angle import sqrtMagnitude, tf_angle
-from tf_customop import tf_abs
+from test_customop import tf_abs
 
 #fft relu
 from tensorflow.python.ops.spectral_ops import rfft2d, rfft
