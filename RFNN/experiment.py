@@ -3,7 +3,7 @@ import numpy as np
 from datetime import datetime
 
 from RFNN.datasets.utils import show_samples, shuffle_samples, split_dataset
-from tf_angle import sqrtMagnitude
+from tf_angle import sqrtMagnitude, tf_angle
 
 #fft relu
 from tensorflow.python.ops.spectral_ops import rfft2d, rfft
@@ -167,7 +167,7 @@ def fftReLu(layerIn, params):
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
         printShape(layerIn.shape)
         #layerOut = irfft2d( sqrtMagnitude(rfft2d(layerIn) ))
-        layerOut = irfft2d( tf.cast(tf.abs(rfft2d(layerIn) ), tf.complex64))
+        layerOut = irfft2d( tf.cast(tf_angle(rfft2d(layerIn) ), tf.complex64))
         printShape(layerOut.shape)
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         printShape(layerOut.shape)
