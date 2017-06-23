@@ -31,7 +31,7 @@ def train():
     hyperParam.numEpochs = 50
     hyperParam.fixed_lr = True
     hyperParam.initial_lr = 1e-2
-    hyperParam.numExamples = 5000
+    hyperParam.numExamples = 2000
     hyperParam.optimizer = 'adam'
     
     hyperParam.fftFunction = 'sqt-magnitude'
