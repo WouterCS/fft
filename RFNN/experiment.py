@@ -168,7 +168,7 @@ def fftReLu(layerIn, params):
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
         printShape(layerIn.shape)
         #layerOut = irfft2d( sqrtMagnitude(rfft2d(layerIn) ))
-        layerOut = tf_sigmoid(layerIn)
+        layerOut = tf_sigmoid(tf.real(layerIn))
         printShape(layerOut.shape)
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         printShape(layerOut.shape)

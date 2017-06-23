@@ -4,7 +4,8 @@ import numpy as np
 
 # wrapper for the numpy arctan2 function, where we make sure the output is of type float32
 def custom_op(x):
-    return (1 / (1 + np.exp(-x))).astype(np.float32)
+    xout = 1 / (1 + np.exp(-x))
+    return (xout).astype(np.float32)
 
 # Function that can propegate the gradient through an arctan2 operation, in the format expected by Tensorflow
 def custom_op_grad(op, grad):
