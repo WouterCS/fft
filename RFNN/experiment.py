@@ -4,7 +4,7 @@ from datetime import datetime
 
 from RFNN.datasets.utils import show_samples, shuffle_samples, split_dataset
 from tf_angle import sqrtMagnitude, tf_angle
-from test_customop import tf_sigmoid
+from test_customop import tf_sigmoid, tf_sqrtMagnitude
 
 #fft relu
 from tensorflow.python.ops.spectral_ops import rfft2d, rfft
@@ -167,13 +167,16 @@ def fftReLu(layerIn, params):
         printShape(layerIn.shape)
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
         printShape(layerIn.shape)
-        #layerOut = irfft2d( sqrtMagnitude(rfft2d(layerIn) ))
-        fourierCoeff = rfft2d(layerIn)
-        layerOut = irfft2d( tf.complex(tf.real(fourierCoeff), tf.imag(fourierCoeff)))
+        layerOut = irfft2d( sqrtMagnitude(rfft2d(layerIn) ))
         printShape(layerOut.shape)
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         printShape(layerOut.shape)
         return layerOut
+    if params.fftFunction == 'custom_op':
+        custom_op = tf_sigmoid()
+        return custom_op(layerIn)
+    if params.fftFunction == 'reference_op':
+        return tf.sigmoid(layerIn)
 def printShape(shape):
     print('Dim: ', map(lambda x: x.value, shape))
     

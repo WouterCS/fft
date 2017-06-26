@@ -23,21 +23,21 @@ def train():
             self.optimizer = 'adam' # 'adadelta'   'adam'   'adagrad'
             self.fixed_lr = True
             self.initial_lr = 1e-2
-            self.fftFunction = 'absFFT'  # 'absFFT'    'absoluteValueUntransposed'    'emptyFFT'    'abs'      'relu'     'y-absFFT'     'x-absFFT'   'sqt-magnitude'
+            self.fftFunction = 'absFFT'  # 'absFFT'    'absoluteValueUntransposed'    'emptyFFT'    'abs'      'relu'     'y-absFFT'     'x-absFFT'   'sqt-magnitude' 'custom_op'  'reference_op'
             self.model = 'model40to5'  #  'model40to5'    'model32to1'
             self.useDropout = True
     
     hyperParam = hyperParameters()
-    hyperParam.numEpochs = 50
+    hyperParam.numEpochs = 10
     hyperParam.fixed_lr = True
     hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 2000
     hyperParam.optimizer = 'adam'
     
-    hyperParam.fftFunction = 'sqt-magnitude'
+    hyperParam.fftFunction = 'custom_op'
     trainGivenSetSize(dataset, hyperParam, 1)
     
-    hyperParam.fftFunction = 'absFFT'
+    hyperParam.fftFunction = 'reference_op'
     trainGivenSetSize(dataset, hyperParam, 2)
 
     print('finished all training')
