@@ -28,7 +28,7 @@ def train():
             self.useDropout = True
     
     hyperParam = hyperParameters()
-    hyperParam.numEpochs = 10
+    hyperParam.numEpochs = 600
     hyperParam.fixed_lr = True
     hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 2000
