@@ -28,16 +28,16 @@ def train():
             self.useDropout = True
     
     hyperParam = hyperParameters()
-    hyperParam.numEpochs = 600
+    hyperParam.numEpochs = 50
     hyperParam.fixed_lr = True
     hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 2000
     hyperParam.optimizer = 'adam'
     
-    hyperParam.fftFunction = 'custom_op'
+    hyperParam.fftFunction = 'sqt-magnitude'
     trainGivenSetSize(dataset, hyperParam, 1)
     
-    hyperParam.fftFunction = 'reference_op'
+    hyperParam.fftFunction = 'custom_op'
     trainGivenSetSize(dataset, hyperParam, 2)
 
     print('finished all training')
