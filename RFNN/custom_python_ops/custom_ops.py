@@ -1,6 +1,6 @@
 import numpy as np
 import tensorflow as tf
-#from op_creator import custom_wih_grad
+from op_creator import custom_wih_grad
 
 # custom reimplementation of tf.sigmoid
 def tf_sigmoid(xin):
