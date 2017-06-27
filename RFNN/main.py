@@ -34,7 +34,7 @@ def train():
     hyperParam.numExamples = 2000
     hyperParam.optimizer = 'adam'
     
-    hyperParam.fftFunction = 'sqt-magnitude'
+    hyperParam.fftFunction = 'reference_op'
     trainGivenSetSize(dataset, hyperParam, 1)
     
     hyperParam.fftFunction = 'custom_op'
