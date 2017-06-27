@@ -73,7 +73,7 @@ def tf_angle(c):
     arctanFun = tf_arctan2()
     return arctanFun(tf.imag(c), tf.real(c))
 
-def idThroughPolar(c):
+def sqrtMagnitude(c):
     mag = tf.abs(c)
     pha = tf_angle(c)
     
