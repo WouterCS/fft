@@ -3,7 +3,7 @@ import numpy as np
 from datetime import datetime
 
 from RFNN.datasets.utils import show_samples, shuffle_samples, split_dataset
-from tf_angle import sqrtMagnitude, tf_angle, tf_abs
+from custom_python_ops.custom_ops import tf_angle, tf_abs, tf_relu
 
 #fft relu
 from tensorflow.python.ops.spectral_ops import rfft2d, rfft
@@ -172,14 +172,16 @@ def fftReLu(layerIn, params):
         printShape(layerOut.shape)
         return layerOut
     if params.fftFunction == 'custom_op':
-        layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
-        layerOut = irfft2d(tf.cast(tf_abs(rfft2d(layerIn)), tf.complex64))
-        layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
+        #layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
+        #layerOut = irfft2d(tf.cast(tf_abs(rfft2d(layerIn)), tf.complex64))
+        #layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
+        layerOut = tf_relu(layerIn)
         return layerOut
     if params.fftFunction == 'reference_op':
-        layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
-        layerOut = irfft2d(tf.cast(tf.abs(rfft2d(layerIn)), tf.complex64))
-        layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
+        #layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
+        #layerOut = irfft2d(tf.cast(tf.abs(rfft2d(layerIn)), tf.complex64))
+        #layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
+        layerOut = tf.nn.relu(layerIn)
         return layerOut
 def printShape(shape):
     print('Dim: ', map(lambda x: x.value, shape))
