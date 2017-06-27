@@ -174,7 +174,7 @@ def fftReLu(layerIn, params):
         return layerOut
     if params.fftFunction == 'custom_op':
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
-        layerOut = irfft2d(tf.cast(tf_abs(rfft2d(layerIn)), tf.complex64))
+        layerOut = irfft2d(tf.cast(tf_angle(rfft2d(layerIn)), tf.complex64))
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         #layerOut = tf_relu(layerIn)
         return layerOut
