@@ -11,8 +11,8 @@ def sqrtMagnitude(c):
     pha = tf_angle(c)
     
     sqrtmag = tf.sqrt(mag)
-    
+    return tf.cast(sqrtmag, tf.complex64)
     magCompl = tf.complex(sqrtmag, tf.zeros(sqrtmag.shape))
     phaCompl = tf.complex(tf.zeros(pha.shape), pha)
     
-    return magCompl #* tf.exp(phaCompl)
+    return magCompl * tf.exp(phaCompl)
