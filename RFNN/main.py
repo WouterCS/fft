@@ -37,8 +37,8 @@ def train():
     hyperParam.fftFunction = 'sqt-magnitude'
     trainGivenSetSize(dataset, hyperParam, 1)
     
-    #hyperParam.fftFunction = 'reference_op'
-    #trainGivenSetSize(dataset, hyperParam, 2)
+    hyperParam.fftFunction = 'reference_op'
+    trainGivenSetSize(dataset, hyperParam, 2)
 
     print('finished all training')
 
