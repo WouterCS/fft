@@ -4,8 +4,7 @@ from custom_ops import tf_arctan2
 
 
 def tf_angle(c):
-    arctanFun = tf_arctan2()
-    return arctanFun(tf.imag(c), tf.real(c))
+    return tf_arctan2(tf.imag(c), tf.real(c))
 
 def sqrtMagnitude(c):
     mag = tf.abs(c)
