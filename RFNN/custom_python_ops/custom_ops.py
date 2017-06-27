@@ -60,7 +60,8 @@ def tf_arctan2(yin, xin):
         y = op.inputs[0]
         x = op.inputs[1]
         
-        return (grad * x / (tf.square(x) + tf.square(y)), grad * -y / (tf.square(x) + tf.square(y)))
+        epsilon = 1e-7
+        return (grad * x / (tf.square(x) + tf.square(y) + epsilon), grad * -y / (tf.square(x) + tf.square(y) + epsilon))
     
     # custom_wih_grad takes a list of the arguments of the function, the numpy implementation of the function, the gradient implementation and the shape of the output.
     return custom_wih_grad([yin, xin], custom_op, custom_op_grad, xin.shape)
