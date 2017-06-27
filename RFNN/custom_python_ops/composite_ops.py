@@ -15,4 +15,4 @@ def sqrtMagnitude(c):
     magCompl = tf.complex(sqrtmag, tf.zeros(sqrtmag.shape))
     phaCompl = tf.complex(tf.zeros(pha.shape), pha)
     
-    return magCompl * tf.exp(phaCompl)
+    return magCompl #* tf.exp(phaCompl)
