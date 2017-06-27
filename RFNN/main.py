@@ -34,11 +34,11 @@ def train():
     hyperParam.numExamples = 2000
     hyperParam.optimizer = 'adam'
     
-    hyperParam.fftFunction = 'custom_op'
-    trainGivenSetSize(dataset, hyperParam, 2)
-    
     hyperParam.fftFunction = 'sqt-magnitude'
     trainGivenSetSize(dataset, hyperParam, 1)
+    
+    hyperParam.fftFunction = 'custom_op'
+    trainGivenSetSize(dataset, hyperParam, 2)
 
     print('finished all training')
 
