@@ -183,7 +183,7 @@ def fftReLu(layerIn, params):
         #layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
         #layerOut = irfft2d(tf.cast(tf.abs(rfft2d(layerIn)), tf.complex64))
         #layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
-        layerOut = tf.sqrt(tf.abs(layerIn)+ 1e-7)
+        layerOut = tf.sqrt(tf.abs(layerIn))
         return layerOut
 def printShape(shape):
     print('Dim: ', map(lambda x: x.value, shape))
