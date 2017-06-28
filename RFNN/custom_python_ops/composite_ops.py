@@ -16,3 +16,14 @@ def sqrtMagnitude(c):
     phaCompl = tf.complex(tf.zeros(pha.shape), pha)
     
     return magCompl * tf.exp(phaCompl)
+    
+def powMagnitude(c, params):
+    mag = tf.abs(c)
+    pha = tf_angle(c)
+    
+    sqrtmag = tf.pow(tf.nn.relu(mag), params.powMagnitude)
+
+    magCompl = tf.complex(sqrtmag, tf.zeros(sqrtmag.shape))
+    phaCompl = tf.complex(tf.zeros(pha.shape), pha)
+    
+    return magCompl * tf.exp(phaCompl)

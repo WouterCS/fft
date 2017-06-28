@@ -22,23 +22,40 @@ def train():
             self.numEpochs = 600
             self.optimizer = 'adam' # 'adadelta'   'adam'   'adagrad'
             self.fixed_lr = True
-            self.initial_lr = 1e-2
-            self.fftFunction = 'absFFT'  # 'absFFT'    'absoluteValueUntransposed'    'emptyFFT'    'abs'      'relu'     'y-absFFT'     'x-absFFT'   'sqt-magnitude' 'custom_op'  'reference_op'
+            self.initial_lr = 1e-1
+            self.fftFunction = 'absFFT'  # 'absFFT'    'absoluteValueUntransposed'    'emptyFFT'    'abs'      'relu'     'y-absFFT'     'x-absFFT'   'sqt-magnitude' 'custom_op'  'reference_op'   'powMagnitude'
             self.model = 'model40to5'  #  'model40to5'    'model32to1'
             self.useDropout = True
+            self.powMagnitude = 0.5
     
     hyperParam = hyperParameters()
-    hyperParam.numEpochs = 200
+    hyperParam.numEpochs = 1
     hyperParam.fixed_lr = False
     hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 2000
     hyperParam.optimizer = 'adam'
+    hyperParam.fftFunction = 'powMagnitude'
     
-    hyperParam.fftFunction = 'sqt-magnitude'
+    hyperParam.powMagnitude = 0.5
     trainGivenSetSize(dataset, hyperParam, 1)
     
-    #hyperParam.fftFunction = 'reference_op'
-    #trainGivenSetSize(dataset, hyperParam, 2)
+    hyperParam.powMagnitude = 0.6
+    trainGivenSetSize(dataset, hyperParam, 1)
+    
+    hyperParam.powMagnitude = 0.7
+    trainGivenSetSize(dataset, hyperParam, 1)
+    
+    hyperParam.powMagnitude = 0.8
+    trainGivenSetSize(dataset, hyperParam, 1)
+    
+    hyperParam.powMagnitude = 0.9
+    trainGivenSetSize(dataset, hyperParam, 1)
+    
+    hyperParam.powMagnitude = 0.4
+    trainGivenSetSize(dataset, hyperParam, 1)
+    
+    hyperParam.powMagnitude = 0.3
+    trainGivenSetSize(dataset, hyperParam, 1)
 
     print('finished all training')
 
@@ -66,6 +83,7 @@ def trainGivenSetSize(dataset, hyperParam, i):
     params.fftFunction = hyperParam.fftFunction
     params.max_epochs = hyperParam.numEpochs
     params.model = hyperParam.model
+    params.powMagnitude = hyperParam.powMagnitude
     if not hyperParam.useDropout:
         params.KEEP_PROB_CONV = 1.0
         params.KEEP_PROB_HIDDEN = 1.0
@@ -73,7 +91,10 @@ def trainGivenSetSize(dataset, hyperParam, i):
     with open(directory + '/README.txt', 'wb') as f:
         print('Training examples: %d' % params.number_of_training_samples, file = f)
         print('Epochs: %d' % params.max_epochs, file = f)
-        print('Model: %s' % params.model, file = f)
+        if params.model == 'powMagnitude':
+            print('Model: %s, with power: %f' % (params.model, params.powMagnitude), file = f)
+        else:
+            print('Model: %s' % params.model, file = f)
         print('Optimizer: %s' % params.optimizer, file = f)
         if params.fixed_lr:
             print('learning rate: %f' % params.initial_lr, file = f)

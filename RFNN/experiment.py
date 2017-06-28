@@ -4,7 +4,7 @@ from datetime import datetime
 
 from RFNN.datasets.utils import show_samples, shuffle_samples, split_dataset
 from custom_python_ops.custom_ops import tf_abs, tf_relu, tf_sqrt
-from custom_python_ops.composite_ops import sqrtMagnitude, tf_angle
+from custom_python_ops.composite_ops import sqrtMagnitude, tf_angle, powMagnitude
 
 #fft relu
 from tensorflow.python.ops.spectral_ops import rfft2d, rfft
@@ -171,6 +171,11 @@ def fftReLu(layerIn, params):
         printShape(layerOut.shape)
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         printShape(layerOut.shape)
+        return layerOut
+    if params.fftFunction == 'powMagnitude'
+        layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
+        layerOut = irfft2d( powMagnitude(rfft2d(layerIn) ))
+        layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         return layerOut
     if params.fftFunction == 'custom_op':
         layerOut = tf.sqrt(tf.nn.relu(tf.abs(layerIn)))
