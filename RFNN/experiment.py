@@ -3,7 +3,7 @@ import numpy as np
 from datetime import datetime
 
 from RFNN.datasets.utils import show_samples, shuffle_samples, split_dataset
-from custom_python_ops.custom_ops import tf_abs, tf_relu
+from custom_python_ops.custom_ops import tf_abs, tf_relu, tf_sqrt
 from custom_python_ops.composite_ops import sqrtMagnitude, tf_angle
 
 #fft relu
@@ -180,10 +180,10 @@ def fftReLu(layerIn, params):
         #layerOut = tf_relu(layerIn)
         return layerOut
     if params.fftFunction == 'reference_op':
-        layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
-        layerOut = irfft2d(tf.cast(tf.abs(rfft2d(layerIn)), tf.complex64))
-        layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
-        #layerOut = tf_relu(layerIn)
+        #layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
+        #layerOut = irfft2d(tf.cast(tf.abs(rfft2d(layerIn)), tf.complex64))
+        #layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
+        layerOut = tf_sqrt(layerIn)
         return layerOut
 def printShape(shape):
     print('Dim: ', map(lambda x: x.value, shape))

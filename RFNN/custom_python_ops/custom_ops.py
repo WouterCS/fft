@@ -48,6 +48,21 @@ def tf_relu(xin):
     # custom_wih_grad takes a list of the arguments of the function, the numpy implementation of the function, the gradient implementation and the shape of the output.
     return custom_wih_grad([xin], custom_op, custom_op_grad, xin.shape)
 
+# custom reimplementation of tf.sqrt
+def tf_sqrt(xin):
+    # numpy implementation of the desired function
+    def custom_op(x):
+        xout = np.sqrt(x)
+        return (xout).astype(np.float32)
+
+    # tensorflow implementation of the new gradient as it is propogated through this op
+    def custom_op_grad(op, grad):
+        x = op.inputs[0]
+        return (1 / (2 * tf.sqrt(x))) * grad
+    
+    # custom_wih_grad takes a list of the arguments of the function, the numpy implementation of the function, the gradient implementation and the shape of the output.
+    return custom_wih_grad([xin], custom_op, custom_op_grad, xin.shape)
+    
 # custom tensorflow implementation of np.arctan2
 def tf_arctan2(yin, xin):
     # numpy implementation of the desired function
