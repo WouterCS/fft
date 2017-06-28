@@ -29,7 +29,7 @@ def train():
             self.powMagnitude = 0.5
     
     hyperParam = hyperParameters()
-    hyperParam.numEpochs = 1
+    hyperParam.numEpochs = 100
     hyperParam.fixed_lr = False
     hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 2000
