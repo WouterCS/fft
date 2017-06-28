@@ -173,7 +173,7 @@ def fftReLu(layerIn, params):
         printShape(layerOut.shape)
         return layerOut
     if params.fftFunction == 'custom_op':
-        layerOut = tf.abs(layerIn) #tf.sqrt(tf.nn.relu(layerIn))
+        layerOut = tf.sqrt(tf.abs(layerIn)+ 1e-8)
         #layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
         #layerOut = irfft2d(tf.cast(tf.sqrt(tf.abs(rfft2d(layerIn))), tf.complex64))
         #layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
@@ -183,7 +183,7 @@ def fftReLu(layerIn, params):
         #layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
         #layerOut = irfft2d(tf.cast(tf.abs(rfft2d(layerIn)), tf.complex64))
         #layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
-        layerOut = tf.sqrt(tf.abs(layerIn)+ 1e-6)
+        layerOut = tf.sqrt(tf.abs(layerIn)+ 1e-7)
         return layerOut
 def printShape(shape):
     print('Dim: ', map(lambda x: x.value, shape))
