@@ -28,8 +28,8 @@ def train():
             self.useDropout = True
     
     hyperParam = hyperParameters()
-    hyperParam.numEpochs = 600
-    hyperParam.fixed_lr = True
+    hyperParam.numEpochs = 200
+    hyperParam.fixed_lr = False
     hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 2000
     hyperParam.optimizer = 'adam'
