@@ -29,7 +29,7 @@ def train():
             self.powMagnitude = 0.5
     
     hyperParam = hyperParameters()
-    hyperParam.numEpochs = 100
+    hyperParam.numEpochs = 200
     hyperParam.fixed_lr = False
     hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 2000
@@ -40,22 +40,31 @@ def train():
     trainGivenSetSize(dataset, hyperParam, 1)
     
     hyperParam.powMagnitude = 0.6
-    trainGivenSetSize(dataset, hyperParam, 1)
+    trainGivenSetSize(dataset, hyperParam, 2)
     
     hyperParam.powMagnitude = 0.7
-    trainGivenSetSize(dataset, hyperParam, 1)
+    trainGivenSetSize(dataset, hyperParam, 3)
     
     hyperParam.powMagnitude = 0.8
-    trainGivenSetSize(dataset, hyperParam, 1)
+    trainGivenSetSize(dataset, hyperParam, 4)
     
     hyperParam.powMagnitude = 0.9
-    trainGivenSetSize(dataset, hyperParam, 1)
+    trainGivenSetSize(dataset, hyperParam, 5)
     
     hyperParam.powMagnitude = 0.4
-    trainGivenSetSize(dataset, hyperParam, 1)
+    trainGivenSetSize(dataset, hyperParam, 6)
     
     hyperParam.powMagnitude = 0.3
-    trainGivenSetSize(dataset, hyperParam, 1)
+    trainGivenSetSize(dataset, hyperParam, 7)
+    
+    hyperParam.powMagnitude = 0.2
+    trainGivenSetSize(dataset, hyperParam, 8)
+    
+    hyperParam.powMagnitude = 0.1
+    trainGivenSetSize(dataset, hyperParam, 9)
+    
+    hyperParam.powMagnitude = 0.95
+    trainGivenSetSize(dataset, hyperParam, 10)
 
     print('finished all training')
 
