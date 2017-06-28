@@ -172,7 +172,7 @@ def fftReLu(layerIn, params):
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         printShape(layerOut.shape)
         return layerOut
-    if params.fftFunction == 'powMagnitude'
+    if params.fftFunction == 'powMagnitude':
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
         layerOut = irfft2d( powMagnitude(rfft2d(layerIn) ))
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
