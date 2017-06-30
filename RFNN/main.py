@@ -37,10 +37,10 @@ def train():
     hyperParam.fftFunction = 'relu'
     
     trainGivenSetSize(dataset, hyperParam, 1)
-    # powersToTes = [1, 0.85, 0.98, 1.1, 1.2]
-    # for i in range(len(powersToTes)):
-        # hyperParam.powMagnitude = powersToTes[i]
-        # trainGivenSetSize(dataset, hyperParam, i)
+    powersToTes = [0.85, 0.98, 1.1, 1.2]
+    for i in range(len(powersToTes)):
+        hyperParam.powMagnitude = powersToTes[i]
+        trainGivenSetSize(dataset, hyperParam, i)
 
     print('finished all training')
 
