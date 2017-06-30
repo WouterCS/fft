@@ -76,7 +76,7 @@ def trainGivenSetSize(dataset, hyperParam, i):
     directory = '/results/results-%d-%d' % (hyperParam.numExamples, i)
     if not os.path.exists(directory):
         os.makedirs(directory)
-    if params.fftFunction == 'powMagnitude':
+    if hyperParam.fftFunction == 'powMagnitude':
         print('Start of training with %d examples and %s non-linearity with power: %f.' % (hyperParam.numExamples, hyperParam.fftFunction, hyperParam.powMagnitude))
     else:
         print('Start of training with %d examples and %s non-linearity.' % (hyperParam.numExamples, hyperParam.fftFunction))
