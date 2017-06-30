@@ -76,16 +76,17 @@ def trainGivenSetSize(dataset, hyperParam, i):
     with open(directory + '/README.txt', 'wb') as f:
         print('Training examples: %d' % params.number_of_training_samples, file = f)
         print('Epochs: %d' % params.max_epochs, file = f)
-        if params.fftFunction == 'powMagnitude':
-            print('Model: %s, with power: %f' % (params.model, params.powMagnitude), file = f)
-        else:
-            print('Model: %s' % params.model, file = f)
+        print('Model: %s' % params.model, file = f)
         print('Optimizer: %s' % params.optimizer, file = f)
         if params.fixed_lr:
             print('learning rate: %f' % params.initial_lr, file = f)
         else:
             print('learning rate: from %f to %f (exponential decay)' % (params.initial_lr, params.initial_lr * params.min_lr), file = f)
-        print('non-linearity: %s' % params.fftFunction, file = f)
+        if params.fftFunction == 'powMagnitude':
+            print('non-linearity: %s, with power: %f' % (params.fftFunction, params.powMagnitude), file = f)
+        else:
+            print('non-linearity: %s' % params.fftFunction, file = f)
+        
         print('Dropout conv layer: %f, dropout hidden layer: %f' % (params.KEEP_PROB_CONV, params.KEEP_PROB_HIDDEN), file = f)
     
     print('Initialized the parameters: %s' % str(datetime.now()))
