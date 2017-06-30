@@ -177,6 +177,8 @@ def fftReLu(layerIn, params):
         layerOut = irfft2d( powMagnitude(rfft2d(layerIn), params))
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
         return layerOut
+    if params.fftFunction == 'identity':
+        return layerIn
     if params.fftFunction == 'custom_op':
         layerOut = tf.sqrt(tf.nn.relu(tf.abs(layerIn)))
         #layerIn = tf.transpose(layerIn, [0, 3, 2, 1])

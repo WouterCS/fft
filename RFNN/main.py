@@ -23,7 +23,7 @@ def train():
             self.optimizer = 'adam' # 'adadelta'   'adam'   'adagrad'
             self.fixed_lr = True
             self.initial_lr = 1e-1
-            self.fftFunction = 'absFFT'  # 'absFFT'    'absoluteValueUntransposed'    'emptyFFT'    'abs'      'relu'     'y-absFFT'     'x-absFFT'   'sqt-magnitude' 'custom_op'  'reference_op'   'powMagnitude'
+            self.fftFunction = 'absFFT'  # 'absFFT' 'absoluteValueUntransposed' 'emptyFFT'  'abs'   'relu'     'y-absFFT'     'x-absFFT'   'sqt-magnitude' 'custom_op'  'reference_op'   'powMagnitude' 'identity'
             self.model = 'model40to5'  #  'model40to5'    'model32to1'
             self.useDropout = True
             self.powMagnitude = 0.5
@@ -34,13 +34,13 @@ def train():
     hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 2000
     hyperParam.optimizer = 'adam'
-    hyperParam.fftFunction = 'powMagnitude'
+    hyperParam.fftFunction = 'identity'
     
-    
-    powersToTes = [1, 0.85, 0.98, 1.1, 1.2]
-    for i in range(len(powersToTes)):
-        hyperParam.powMagnitude = powersToTes[i]
-        trainGivenSetSize(dataset, hyperParam, i)
+    trainGivenSetSize(dataset, hyperParam, 1)
+    # powersToTes = [1, 0.85, 0.98, 1.1, 1.2]
+    # for i in range(len(powersToTes)):
+        # hyperParam.powMagnitude = powersToTes[i]
+        # trainGivenSetSize(dataset, hyperParam, i)
 
     print('finished all training')
 
