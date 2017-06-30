@@ -36,35 +36,11 @@ def train():
     hyperParam.optimizer = 'adam'
     hyperParam.fftFunction = 'powMagnitude'
     
-    hyperParam.powMagnitude = 0.5
-    trainGivenSetSize(dataset, hyperParam, 1)
     
-    hyperParam.powMagnitude = 0.6
-    trainGivenSetSize(dataset, hyperParam, 2)
-    
-    hyperParam.powMagnitude = 0.7
-    trainGivenSetSize(dataset, hyperParam, 3)
-    
-    hyperParam.powMagnitude = 0.8
-    trainGivenSetSize(dataset, hyperParam, 4)
-    
-    hyperParam.powMagnitude = 0.9
-    trainGivenSetSize(dataset, hyperParam, 5)
-    
-    hyperParam.powMagnitude = 0.4
-    trainGivenSetSize(dataset, hyperParam, 6)
-    
-    hyperParam.powMagnitude = 0.3
-    trainGivenSetSize(dataset, hyperParam, 7)
-    
-    hyperParam.powMagnitude = 0.2
-    trainGivenSetSize(dataset, hyperParam, 8)
-    
-    hyperParam.powMagnitude = 0.1
-    trainGivenSetSize(dataset, hyperParam, 9)
-    
-    hyperParam.powMagnitude = 0.95
-    trainGivenSetSize(dataset, hyperParam, 10)
+    powersToTes = [1, 0.85, 0.98, 1.1, 1.2]
+    for i in range(len(powersToTes))
+        hyperParam.powMagnitude = powersToTes[i]
+        trainGivenSetSize(dataset, hyperParam, i)
 
     print('finished all training')
 
@@ -100,7 +76,7 @@ def trainGivenSetSize(dataset, hyperParam, i):
     with open(directory + '/README.txt', 'wb') as f:
         print('Training examples: %d' % params.number_of_training_samples, file = f)
         print('Epochs: %d' % params.max_epochs, file = f)
-        if params.model == 'powMagnitude':
+        if params.fftFunction == 'powMagnitude':
             print('Model: %s, with power: %f' % (params.model, params.powMagnitude), file = f)
         else:
             print('Model: %s' % params.model, file = f)
