@@ -34,9 +34,9 @@ def train():
     hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 2000
     hyperParam.optimizer = 'adam'
-    hyperParam.fftFunction = 'relu'
+    hyperParam.fftFunction = 'powMagnitude'
     
-    trainGivenSetSize(dataset, hyperParam, 1)
+    
     powersToTes = [0.85, 0.98, 1.1, 1.2]
     for i in range(len(powersToTes)):
         hyperParam.powMagnitude = powersToTes[i]
