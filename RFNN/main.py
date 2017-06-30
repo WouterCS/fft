@@ -38,7 +38,7 @@ def train():
     
     
     powersToTes = [1, 0.85, 0.98, 1.1, 1.2]
-    for i in range(len(powersToTes))
+    for i in range(len(powersToTes)):
         hyperParam.powMagnitude = powersToTes[i]
         trainGivenSetSize(dataset, hyperParam, i)
 
