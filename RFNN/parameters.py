@@ -76,11 +76,11 @@ class parameters:
 
         # Results
         self.epochs = []
-        self.loss_normal = []
-        self.loss_resize = []
-        self.loss = []
-        self.alphas_normal = []
-        self.alphas_resize = []
+        self.meanLoss = []
+        self.medianLoss = []
+        self.varianceLoss = []
+        self.minLoss = []
+        self.maxLoss = []
         self.confusionMatrix = []
 
         #self.basis_normal = []

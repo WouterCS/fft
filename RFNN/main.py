@@ -4,7 +4,7 @@ from datetime import datetime
 import RFNN.parameters as para
 from RFNN.experiment import do_training
 from RFNN.dataset import load_and_preprocess_dataset
-
+import numpy as np
 import matplotlib
 # Force matplotlib to not use any Xwindows backend.
 matplotlib.use('Agg')
@@ -37,7 +37,7 @@ def train():
     hyperParam.fftFunction = 'powMagnitude'
     
     index = 0
-    hyperParam.numExamples = 60000
+    hyperParam.numExamples = 2000
     hyperParam.fftFunction = 'identity'
     index = index + 1
     trainGivenSetSize(dataset, hyperParam, index)
@@ -103,6 +103,31 @@ def trainGivenSetSize(dataset, hyperParam, i):
         print('Confusion matrix:', file = f)
         print(str(params.confusionMatrix), file = f)
     
+    plot_test_acc(params, directory)
+    plot_loss(params, directory)
+    
+    print('Current run done.')
+    
+    params.save()
+  
+
+def plot_loss(params, directory):
+    plt.clf()
+    plt.plot(params.minLoss)
+    plt.plot(params.medianLoss)
+    plt.plot(params.maxLoss)
+    plt.legend(['min loss in epoch', 'median loss in epoch', 'max loss in epoch'], loc='upper right')
+    plt.figure(num =1, figsize = (20,20), dpi = 800)
+    plt.xlabel('epochs')
+    plt.ylabel('loss (%)')
+    plt.grid(b=True, which='major', color='black', linestyle='-')
+    plt.minorticks_on()
+    plt.grid(b=True, which='minor', color='black', linestyle='--')
+    plt.yscale('log')
+    #plt.ylim(0,100)
+    plt.savefig(directory + '/loss.png')
+    
+def plot_test_acc(params, directory):
     plt.clf()
     plt.plot(params.acc_test, color = 'blue')
     plt.figure(num =1, figsize = (20,20), dpi = 800)
@@ -113,12 +138,9 @@ def trainGivenSetSize(dataset, hyperParam, i):
     plt.grid(b=True, which='minor', color='black', linestyle='--')
     plt.ylim(0,100)
     plt.savefig(directory + '/conversionPlot.png')
+    maxVal = 0
     if len(params.acc_test) > 50:
         plt.xlim(len(params.acc_test) - 50, len(params.acc_test))
-    plt.ylim(0,15)
+    maxVal = np.max(params.acc_test[-50:])
+    plt.ylim(0,min(15, maxVal * 1.2))
     plt.savefig(directory + '/conversionPlot-detailed.png')
-    
-    print('Current run done.')
-    
-    params.save()
-    
