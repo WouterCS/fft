@@ -37,25 +37,8 @@ def train():
     hyperParam.fftFunction = 'powMagnitude'
     
     index = 0
-    
-    powersToTes = [1.05, 1.1, 1.2, 1.3, 2.0]
-    for i in range(len(powersToTes)):
-        index = index + 1
-        hyperParam.powMagnitude = powersToTes[i]
-        trainGivenSetSize(dataset, hyperParam, index)
-
     hyperParam.numExamples = 60000
-    
-    hyperParam.fftFunction = 'powMagnitude'
-    hyperParam.powMagnitude = 0.9
-    index = index + 1
-    trainGivenSetSize(dataset, hyperParam, index)
-    
     hyperParam.fftFunction = 'identity'
-    index = index + 1
-    trainGivenSetSize(dataset, hyperParam, index)
-    
-    hyperParam.fftFunction = 'relu'
     index = index + 1
     trainGivenSetSize(dataset, hyperParam, index)
     
