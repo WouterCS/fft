@@ -27,7 +27,8 @@ def train():
             self.model = 'model40to5'  #  'model40to5'    'model32to1'
             self.useDropout = True
             self.powMagnitude = 0.5
-            self.path_to_store_weights = '/results/model/weights'
+            self.dir_to_store_weights = '/results/model/'
+            self.file_to_store_weights = 'weights'
     
     hyperParam = hyperParameters()
     hyperParam.numEpochs = 10
@@ -59,6 +60,8 @@ def trainGivenSetSize(dataset, hyperParam, i):
     directory = '/results/results-%d-%d' % (hyperParam.numExamples, i)
     if not os.path.exists(directory):
         os.makedirs(directory)
+    if not os.path.exists(hyperParam.dir_to_store_weights):
+        os.makedirs(hyperParam.dir_to_store_weights)
     if hyperParam.fftFunction == 'powMagnitude':
         print('Start of training with %d examples and %s non-linearity with power: %f.' % (hyperParam.numExamples, hyperParam.fftFunction, hyperParam.powMagnitude))
     else:
@@ -72,7 +75,7 @@ def trainGivenSetSize(dataset, hyperParam, i):
     params.max_epochs = hyperParam.numEpochs
     params.model = hyperParam.model
     params.powMagnitude = hyperParam.powMagnitude
-    params.path_to_store_weights = hyperParam.path_to_store_weights
+    params.path_to_store_weights = hyperParam.dir_to_store_weights + hyperParam.file_to_store_weights
     if not hyperParam.useDropout:
         params.KEEP_PROB_CONV = 1.0
         params.KEEP_PROB_HIDDEN = 1.0
