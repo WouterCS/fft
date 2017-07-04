@@ -27,7 +27,7 @@ def train():
             self.model = 'model40to5'  #  'model40to5'    'model32to1'
             self.useDropout = True
             self.powMagnitude = 0.5
-            self.path_to_store_weights = '/results/weights'
+            self.path_to_store_weights = '/results/model/weights'
     
     hyperParam = hyperParameters()
     hyperParam.numEpochs = 10
