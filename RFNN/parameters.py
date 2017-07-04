@@ -75,7 +75,7 @@ class parameters:
         self.lambda_s1_resize = 0.0
 
         # Results
-        self.path_to_store_weights
+        self.path_to_store_weights = ''
         
         self.epochs = []
         self.meanLoss = []
