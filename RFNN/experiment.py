@@ -328,6 +328,8 @@ def do_training(params, dataset):
     # Create session
     sess = tf.Session()
 
+    saver = tf.train.Saver()
+
     # Initialize variables
     sess.run(tf.global_variables_initializer())
     print('Run session: %s'  % str(datetime.now()))
@@ -386,6 +388,9 @@ def do_training(params, dataset):
     evaluate(train_data, train_labels, validation_data, validation_labels, test_data, test_labels, sess, eval_data_node, prediction_eval, params, params.max_epochs)
     params.learning_rate.append(cur_lr)
 
+    save_path = saver.save(sess, params.path_to_store_weights)
+
+    
     # Create confusion matrix
     params.confusionMatrix = tf.confusion_matrix(labels = test_labels, 
                                                  predictions = np.argmax(

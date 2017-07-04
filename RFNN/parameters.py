@@ -75,6 +75,8 @@ class parameters:
         self.lambda_s1_resize = 0.0
 
         # Results
+        self.path_to_store_weights
+        
         self.epochs = []
         self.meanLoss = []
         self.medianLoss = []
@@ -83,20 +85,8 @@ class parameters:
         self.maxLoss = []
         self.confusionMatrix = []
 
-        #self.basis_normal = []
-        #self.basis_resize = []
-        #self.weights_normal = []
-        #self.weights_resize = []
-
         self.acc_epochs = []
-        self.acc_train_normal = []
-        self.acc_train_resize = []
         self.acc_train = []
-        self.acc_val_normal = []
-        self.acc_val_resize = []
-        self.acc_val = []
-        self.acc_test_normal = []
-        self.acc_test_resize = []
         self.acc_test = []
 
         print("Parameters reset to default values!")

@@ -27,40 +27,18 @@ def train():
             self.model = 'model40to5'  #  'model40to5'    'model32to1'
             self.useDropout = True
             self.powMagnitude = 0.5
+            self.path_to_store_weights = '/results/weights'
     
     hyperParam = hyperParameters()
-    hyperParam.numEpochs = 200
+    hyperParam.numEpochs = 10
     hyperParam.fixed_lr = False
     hyperParam.initial_lr = 1e-2
-    hyperParam.numExamples = 5000
+    hyperParam.numExamples = 2000
     hyperParam.optimizer = 'adam'
     hyperParam.fftFunction = 'powMagnitude'
     
     index = 0
     hyperParam.fftFunction = 'identity'
-    index = index + 1
-    trainGivenSetSize(dataset, hyperParam, index)
-    
-    hyperParam.fftFunction = 'relu'
-    index = index + 1
-    trainGivenSetSize(dataset, hyperParam, index)
-    
-    hyperParam.fftFunction = 'powMagnitude'
-    hyperParam.powMagnitude = 0.9
-    index = index + 1
-    trainGivenSetSize(dataset, hyperParam, index)
-    
-    hyperParam.numExamples = 10000
-    hyperParam.fftFunction = 'identity'
-    index = index + 1
-    trainGivenSetSize(dataset, hyperParam, index)
-    
-    hyperParam.fftFunction = 'relu'
-    index = index + 1
-    trainGivenSetSize(dataset, hyperParam, index)
-    
-    hyperParam.fftFunction = 'powMagnitude'
-    hyperParam.powMagnitude = 0.9
     index = index + 1
     trainGivenSetSize(dataset, hyperParam, index)
     
@@ -94,6 +72,7 @@ def trainGivenSetSize(dataset, hyperParam, i):
     params.max_epochs = hyperParam.numEpochs
     params.model = hyperParam.model
     params.powMagnitude = hyperParam.powMagnitude
+    params.path_to_store_weights = hyperParam.path_to_store_weights
     if not hyperParam.useDropout:
         params.KEEP_PROB_CONV = 1.0
         params.KEEP_PROB_HIDDEN = 1.0
