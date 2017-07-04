@@ -87,6 +87,7 @@ class parameters:
 
         self.acc_epochs = []
         self.acc_train = []
+        self.acc_val = []
         self.acc_test = []
 
         print("Parameters reset to default values!")
