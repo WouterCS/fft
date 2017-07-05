@@ -240,7 +240,7 @@ def do_training(params, dataset):
         sizeFinalImage = 1*1
     elif params.model == 'model40to5':
         model = model40to5
-        sizeFinalImage = 5*5
+        sizeFinalImage = 6*6
     
     # Create all the trainable variables
     print('Create weights: %s'  % str(datetime.now()))
