@@ -488,7 +488,7 @@ def model40to5(params, data, weights, inputDepth, train=False):
 
     # Block 0
     print(dir(data.shape[1]))
-    padSize = (40 - data.shape[1]) / 2
+    padSize = (40 - data.shape[1].value) / 2
     l0 = tf.pad(data, [[0, 0], [padSize, padSize], [padSize, padSize], [0, 0]], mode='CONSTANT')# Pad       40x40
 
     # Block 1
