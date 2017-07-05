@@ -34,6 +34,7 @@ def load_and_preprocess_dataset():
 
         # Splitted sets
         'training_set': {'data': trainData, 'labels': trainLabels},
+        'validation_set': {'data': [], 'labels': []},
         'test_set': {'data': testData, 'labels': testLabels},
 
         # General info
