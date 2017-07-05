@@ -36,10 +36,7 @@ def eval_in_batches(data, sess, data_node, prediction_node, eval_batchsize, numb
         print('begin: %d, end: %d, eval_batchsize: %d' % (begin, end, eval_batchsize))
         if end <= size:
             sessOutput = sess.run(prediction_node, feed_dict={data_node: data[begin:end, ...]})
-            print(sessOutput)
-            print(dir(sessOutput))
             print(sessOutput.shape)
-            
             predictions[begin:end, :] = sessOutput
         else:
             batch_predictions = sess.run(prediction_node, feed_dict={data_node: data[-eval_batchsize:, ...]})
