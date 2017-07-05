@@ -82,6 +82,7 @@ def trainGivenSetSize(dataset, hyperParam, i):
         params.KEEP_PROB_HIDDEN = 1.0
     
     with open(directory + '/README.txt', 'wb') as f:
+        print('Dataset: %s' % hyperParam.datasetname, file = f)
         print('Training examples: %d' % params.number_of_training_samples, file = f)
         print('Epochs: %d' % params.max_epochs, file = f)
         print('Model: %s' % params.model, file = f)
