@@ -35,12 +35,23 @@ def train():
     hyperParam.numEpochs = 5
     hyperParam.fixed_lr = False
     hyperParam.initial_lr = 1e-2
-    hyperParam.numExamples = 2000
+    hyperParam.numExamples = 5000
     hyperParam.optimizer = 'adam'
     hyperParam.fftFunction = 'powMagnitude'
     
     index = 0
     hyperParam.fftFunction = 'relu'
+    index = index + 1
+    trainGivenSetSize(dataset, hyperParam, index)
+    
+    index = 0
+    hyperParam.fftFunction = 'identity'
+    index = index + 1
+    trainGivenSetSize(dataset, hyperParam, index)
+    
+    index = 0
+    hyperParam.fftFunction = 'powMagnitude'
+    hyperParam.powMagnitude = 0.9
     index = index + 1
     trainGivenSetSize(dataset, hyperParam, index)
     
