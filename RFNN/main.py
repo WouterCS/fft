@@ -35,7 +35,7 @@ def train():
     hyperParam.numEpochs = 5
     hyperParam.fixed_lr = False
     hyperParam.initial_lr = 1e-2
-    hyperParam.numExamples = 5000
+    hyperParam.numExamples = 10000
     hyperParam.optimizer = 'adam'
     hyperParam.fftFunction = 'powMagnitude'
     
@@ -44,12 +44,10 @@ def train():
     index = index + 1
     trainGivenSetSize(dataset, hyperParam, index)
     
-    index = 0
     hyperParam.fftFunction = 'identity'
     index = index + 1
     trainGivenSetSize(dataset, hyperParam, index)
     
-    index = 0
     hyperParam.fftFunction = 'powMagnitude'
     hyperParam.powMagnitude = 0.9
     index = index + 1
@@ -123,7 +121,7 @@ def trainGivenSetSize(dataset, hyperParam, i):
     plot_test_acc(params, directory)
     plot_loss(params, directory)
     
-    print('Current run done.')
+    print('Current run done at time: %s.' % str(datetime.now()))
     
     params.save()
   
