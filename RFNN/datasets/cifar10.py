@@ -3,7 +3,7 @@ import numpy as np
 import sys 
 import os
 
-relativePathToData = './data/cifar-10'
+WORK_DIRECTORY = '/usr/local/lib/python2.7/dist-packages/RFNN/datasets/data/cifar-10'
 
 def unpickle(file):
     import cPickle
@@ -16,19 +16,19 @@ def load_and_preprocess_dataset():
     trainData = np.zeros((0,32,32,3), dtype = np.uint8)
     trainLabels = np.zeros((0), dtype = int)
     for i in range(1,6):
-        rawDict = unpickle(relativePathToData + '/data_batch_%d' % i)
+        rawDict = unpickle(WORK_DIRECTORY + '/data_batch_%d' % i)
         reshapeData = rawDict['data'].reshape((len(rawDict['labels']), 3, 32, 32))
         transposedData = reshapeData.transpose([0,2,3,1])
         trainData = np.concatenate((trainData,transposedData), axis = 0)
         trainLabels = np.concatenate((trainLabels, rawDict['labels']))
         
         
-    rawTestData = unpickle(relativePathToData + '/test_batch')
+    rawTestData = unpickle(WORK_DIRECTORY + '/test_batch')
     reshapeData = rawTestData['data'].reshape((len(rawTestData['labels']), 3, 32, 32))
     testData = reshapeData.transpose([0,2,3,1])
     testLabels = rawTestData['labels']
 
-    metaInfo = unpickle(relativePathToData + '/batches.meta')
+    metaInfo = unpickle(WORK_DIRECTORY + '/batches.meta')
 
     dataset = {
 
