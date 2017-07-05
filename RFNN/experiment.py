@@ -522,5 +522,4 @@ def model40to5(params, data, weights, inputDepth, train=False):
     l4 = tf.matmul(l4, weights['fc_w1'])                                                        # FC
     l4 = l4 + weights['fc_b1']                                                                  # Bias
     
-    print(l4.shape)
     return l4

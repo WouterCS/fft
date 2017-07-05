@@ -41,7 +41,7 @@ def load_and_preprocess_dataset():
         'width': trainData.shape[1],
         'height': trainData.shape[2],
         'depth': trainData.shape[3],
-        'number_of_labels': trainData.shape[0],
+        'number_of_labels': len(metaInfo['label_names']),
         'label_names': metaInfo['label_names'],
     }
     
