@@ -243,7 +243,7 @@ def do_training(params, dataset):
         sizeFinalImage = 1*1
     elif params.model == 'model40to5':
         model = model40to5
-        sizeFinalImage = 6*6
+        sizeFinalImage = 5*5
     
     # Create all the trainable variables
     print('Create weights: %s'  % str(datetime.now()))
@@ -424,8 +424,9 @@ def model32to1(params, data, weights, inputDepth, train=False):
     basis5 = create_basis_filters(params.grid, params.order5, weights['s4'], params.normalize, params.N4)
 
     # Block 0
-    l0 = tf.pad(data, [[0, 0], [2, 2], [2, 2], [0, 0]], mode='CONSTANT')                        # Pad       32x32
-
+    padSize = (32 - data.shape[1].value) / 2
+    l0 = tf.pad(data, [[0, 0], [padSize, padSize], [padSize, padSize], [0, 0]], mode='CONSTANT')# Pad       32x32
+    
     # Block 1
     l1 = structured_conv_layer(l0, basis1, weights['a1'])                                       # Conv
     #l1 = tf.nn.relu(l1)                                                                         # Relu
@@ -487,7 +488,6 @@ def model40to5(params, data, weights, inputDepth, train=False):
     basis3 = create_basis_filters(params.grid, params.order3, weights['s3'], params.normalize, params.N2)
 
     # Block 0
-    print(dir(data.shape[1]))
     padSize = (40 - data.shape[1].value) / 2
     l0 = tf.pad(data, [[0, 0], [padSize, padSize], [padSize, padSize], [0, 0]], mode='CONSTANT')# Pad       40x40
 
