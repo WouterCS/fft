@@ -1,8 +1,16 @@
 # Import dataset functions
 import RFNN.datasets.mnist as mnist
+import RFNN.datasets.cifar10 as cifar10
 from RFNN.datasets.utils import show_samples, split_dataset
 
-def load_and_preprocess_dataset():
+def load_and_preprocess_dataset(nameDataset):
+    if nameDataset == 'MNIST':
+        return load_and_preprocess_MNIST()
+    if nameDataset == 'cifar-10':
+        return load_and_preprocess_CIFAR10()
+    raise Exception('Unsupported dataset name')
+
+def load_and_preprocess_MNIST():
     # Load dataset
     samples_data, samples_labels, test_data, test_labels = mnist.load_dataset()
 
@@ -35,3 +43,6 @@ def load_and_preprocess_dataset():
     }
 
     return dataset
+    
+def load_and_preprocess_CIFAR10():
+    return cifar10.load_and_preprocess_dataset()

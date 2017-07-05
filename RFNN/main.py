@@ -11,13 +11,9 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 def train():
-    print('Start main: %s'  % str(datetime.now()))
-    dataset = load_and_preprocess_dataset()
-    print('Loaded the dataset: %s'  % str(datetime.now()))
-    
-    
     class hyperParameters:
         def __init__(self):
+            self.datasetname = 'CIFAR-10'  # 'MNIST'   'CIFAR-10'
             self.numExamples = 2000
             self.numEpochs = 600
             self.optimizer = 'adam' # 'adadelta'   'adam'   'adagrad'
@@ -31,6 +27,11 @@ def train():
             self.file_to_store_weights = '/weights'
     
     hyperParam = hyperParameters()
+    print('Start main: %s'  % str(datetime.now()))
+    dataset = load_and_preprocess_dataset(hyperParam.datasetname())
+    print('Loaded the dataset %s: %s'  % (hyperParam.datasetname(), str(datetime.now())))
+    
+
     hyperParam.numEpochs = 10
     hyperParam.fixed_lr = False
     hyperParam.initial_lr = 1e-2
