@@ -32,7 +32,7 @@ def train():
     print('Loaded the dataset %s: %s'  % (hyperParam.datasetname, str(datetime.now())))
     
 
-    hyperParam.numEpochs = 5
+    hyperParam.numEpochs = 100
     hyperParam.fixed_lr = False
     hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 2000
