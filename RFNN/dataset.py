@@ -6,7 +6,7 @@ from RFNN.datasets.utils import show_samples, split_dataset
 def load_and_preprocess_dataset(nameDataset):
     if nameDataset == 'MNIST':
         return load_and_preprocess_MNIST()
-    if nameDataset == 'cifar-10':
+    if nameDataset == 'CIFAR-10':
         return load_and_preprocess_CIFAR10()
     raise Exception('Unsupported dataset name')
 
