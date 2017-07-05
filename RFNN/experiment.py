@@ -33,6 +33,7 @@ def eval_in_batches(data, sess, data_node, prediction_node, eval_batchsize, numb
     predictions = np.ndarray(shape=(size, number_of_labels), dtype=np.float32)
     for begin in xrange(0, size, eval_batchsize):
         end = begin + eval_batchsize
+        print('begin: %d, end: %d, eval_batchsize: %d' % (begin, end, eval_batchsize)
         if end <= size:
             predictions[begin:end, :] = sess.run(prediction_node, feed_dict={data_node: data[begin:end, ...]})
         else:
