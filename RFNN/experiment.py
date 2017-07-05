@@ -487,11 +487,12 @@ def model40to5(params, data, weights, inputDepth, train=False):
     basis3 = create_basis_filters(params.grid, params.order3, weights['s3'], params.normalize, params.N2)
 
     # Block 0
-    l0 = tf.pad(data, [[0, 0], [6, 6], [6, 6], [0, 0]], mode='CONSTANT')                        # Pad       40x40
+    padSize = (40 - data.shape[1]) / 2
+    l0 = tf.pad(data, [[0, 0], [padSize, padSize], [padSize, padSize], [0, 0]], mode='CONSTANT')# Pad       40x40
 
     # Block 1
     l1 = structured_conv_layer(l0, basis1, weights['a1'])                                       # Conv
-    #l1 = tf.nn.relu(l1)                                                                         # Relu
+    #l1 = tf.nn.relu(l1)                                                                        # Relu
     l1 = fftReLu(l1, params)
     l1 = tf.nn.max_pool(l1, ksize=[1, 3, 3, 1], strides=[1, 2, 2, 1], padding="SAME")           # Pool      20x20
     l1 = tf.nn.local_response_normalization(l1, depth_radius=4, bias=2, alpha=1e-4, beta=0.75)  # Norm
@@ -499,7 +500,7 @@ def model40to5(params, data, weights, inputDepth, train=False):
 
     # Block 2
     l2 = structured_conv_layer(l1, basis2, weights['a2'])                                       # Conv
-    #l2 = tf.nn.relu(l2)                                                                         # Relu
+    #l2 = tf.nn.relu(l2)                                                                        # Relu
     l2 = fftReLu(l2, params)
     l2 = tf.nn.max_pool(l2, ksize=[1, 3, 3, 1], strides=[1, 2, 2, 1], padding="SAME")           # Pool      10x10
     l2 = tf.nn.local_response_normalization(l2, depth_radius=4, bias=2, alpha=1e-4, beta=0.75)  # Norm
@@ -507,7 +508,7 @@ def model40to5(params, data, weights, inputDepth, train=False):
 
     # Block 3
     l3 = structured_conv_layer(l2, basis3, weights['a3'])                                       # Conv
-    #l3 = tf.nn.relu(l3)                                                                         # Relu
+    #l3 = tf.nn.relu(l3)                                                                        # Relu
     l3 = fftReLu(l3, params)
     l3 = tf.nn.max_pool(l3, ksize=[1, 3, 3, 1], strides=[1, 2, 2, 1], padding="SAME")           # Pool      5x5
     l3 = tf.nn.local_response_normalization(l3, depth_radius=4, bias=2, alpha=1e-4, beta=0.75)  # Norm

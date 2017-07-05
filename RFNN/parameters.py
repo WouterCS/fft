@@ -58,7 +58,7 @@ class parameters:
         self.batchsize = 25
         self.eval_epochs = range(2, 600) #[95,96,97,98,99,100]
         self.save_freq = 1
-        self.eval_batchsize = 200
+        self.eval_batchsize = 100
         self.number_of_training_samples = 100
         self.optimizer = 'adam'
         self.fixed_lr = False
