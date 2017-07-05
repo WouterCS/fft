@@ -32,7 +32,7 @@ def train():
     print('Loaded the dataset %s: %s'  % (hyperParam.datasetname, str(datetime.now())))
     
 
-    hyperParam.numEpochs = 100
+    hyperParam.numEpochs = 5
     hyperParam.fixed_lr = False
     hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 2000
@@ -148,5 +148,8 @@ def plot_test_acc(params, directory):
     if len(params.acc_test) > 50:
         plt.xlim(len(params.acc_test) - 50, len(params.acc_test))
     maxVal = np.max(params.acc_test[-50:])
-    plt.ylim(0,min(15, maxVal * 1.2))
+    minVal = np.min(params.acc_test[-50:])
+    meanVal = np.mean(params.acc_test[-50:])
+    rangeVal = maxVal - minVal
+    plt.ylim(np.max(0, meanVal - 0.6 * rangeVal), meanVal + 0.6 * rangeVal)
     plt.savefig(directory + '/conversionPlot-detailed.png')
