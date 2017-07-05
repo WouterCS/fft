@@ -487,6 +487,7 @@ def model40to5(params, data, weights, inputDepth, train=False):
     basis3 = create_basis_filters(params.grid, params.order3, weights['s3'], params.normalize, params.N2)
 
     # Block 0
+    print(dir(data.shape[1]))
     padSize = (40 - data.shape[1]) / 2
     l0 = tf.pad(data, [[0, 0], [padSize, padSize], [padSize, padSize], [0, 0]], mode='CONSTANT')# Pad       40x40
 
