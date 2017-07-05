@@ -40,7 +40,7 @@ def train():
     hyperParam.fftFunction = 'powMagnitude'
     
     index = 0
-    hyperParam.fftFunction = 'identity'
+    hyperParam.fftFunction = 'relu'
     index = index + 1
     trainGivenSetSize(dataset, hyperParam, index)
     
