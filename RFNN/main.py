@@ -151,5 +151,5 @@ def plot_test_acc(params, directory):
     minVal = np.min(params.acc_test[-50:])
     meanVal = np.mean(params.acc_test[-50:])
     rangeVal = maxVal - minVal
-    plt.ylim(np.max(0, meanVal - 0.6 * rangeVal).astype(int), (meanVal + 0.6 * rangeVal).astype(int))
+    plt.ylim(max(0, meanVal - 0.6 * rangeVal), meanVal + 0.6 * rangeVal)
     plt.savefig(directory + '/conversionPlot-detailed.png')
