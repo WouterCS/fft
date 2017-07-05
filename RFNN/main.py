@@ -28,8 +28,8 @@ def train():
     
     hyperParam = hyperParameters()
     print('Start main: %s'  % str(datetime.now()))
-    dataset = load_and_preprocess_dataset(hyperParam.datasetname())
-    print('Loaded the dataset %s: %s'  % (hyperParam.datasetname(), str(datetime.now())))
+    dataset = load_and_preprocess_dataset(hyperParam.datasetname)
+    print('Loaded the dataset %s: %s'  % (hyperParam.datasetname, str(datetime.now())))
     
 
     hyperParam.numEpochs = 10
