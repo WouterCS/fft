@@ -34,7 +34,7 @@ def load_and_preprocess_dataset():
 
         # Splitted sets
         'training_set': {'data': trainData, 'labels': trainLabels},
-        'validation_set': {'data': np.empty((0, trainData.shape[1], trainData.shape[2], trainData.shape[3]), 'labels': np.empty((0))},
+        'validation_set': {'data': np.empty((0, trainData.shape[1], trainData.shape[2], trainData.shape[3])), 'labels': np.empty((0))},
         'test_set': {'data': testData, 'labels': testLabels},
 
         # General info
