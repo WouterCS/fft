@@ -49,7 +49,8 @@ class parameters:
         self.fixed_sigmas = True
         self.fftFunction = 'absFFT'
         self.powMagnitude = 0.5
-        self.model = 'model32to1'
+        self.model = 'model40to5'
+        self.poolingLayer = 'max_pooling'
         self.KEEP_PROB_CONV = 0.8
         self.KEEP_PROB_HIDDEN = 0.3
 

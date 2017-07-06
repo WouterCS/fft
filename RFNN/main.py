@@ -21,6 +21,7 @@ def train():
             self.initial_lr = 1e-1
             self.fftFunction = 'absFFT'  # 'absFFT' 'absoluteValueUntransposed' 'emptyFFT'  'abs'   'relu'     'y-absFFT'     'x-absFFT'   'sqt-magnitude' 'custom_op'  'reference_op'   'powMagnitude' 'identity'
             self.model = 'model40to5'  #  'model40to5'    'model32to1'
+            self.poolingLayer = 'max_pooling' # 'avg_pooling' 'max_pooling'
             self.useDropout = True
             self.powMagnitude = 0.5
             self.dir_to_store_weights = '/model'
@@ -38,6 +39,7 @@ def train():
     hyperParam.numExamples = 10000
     hyperParam.optimizer = 'adam'
     hyperParam.fftFunction = 'powMagnitude'
+    hyperParam.poolingLayer = 'avg_pooling'
     
     index = 0
     hyperParam.fftFunction = 'relu'
@@ -86,6 +88,7 @@ def trainGivenSetSize(dataset, hyperParam, i):
     params.model = hyperParam.model
     params.powMagnitude = hyperParam.powMagnitude
     params.path_to_store_weights = directory + hyperParam.dir_to_store_weights + hyperParam.file_to_store_weights
+    params.poolingLayer = hyperParam.poolingLayer
     if not hyperParam.useDropout:
         params.KEEP_PROB_CONV = 1.0
         params.KEEP_PROB_HIDDEN = 1.0
@@ -95,6 +98,7 @@ def trainGivenSetSize(dataset, hyperParam, i):
         print('Training examples: %d' % params.number_of_training_samples, file = f)
         print('Epochs: %d' % params.max_epochs, file = f)
         print('Model: %s' % params.model, file = f)
+        print('Pooling layer is: %s' % (params.poolingLayer), file = f)
         print('Optimizer: %s' % params.optimizer, file = f)
         if params.fixed_lr:
             print('learning rate: %f' % params.initial_lr, file = f)
