@@ -56,7 +56,19 @@ def train():
     index = index + 1
     trainGivenSetSize(dataset, hyperParam, index)
     
-
+    hyperParam.poolingLayer = 'avg_pooling'
+    hyperParam.fftFunction = 'identity'
+    index = index + 1
+    trainGivenSetSize(dataset, hyperParam, index)
+    
+    hyperParam.fftFunction = 'powMagnitude'
+    hyperParam.powMagnitude = 0.9
+    index = index + 1
+    trainGivenSetSize(dataset, hyperParam, index)
+    
+    hyperParam.fftFunction = 'relu'
+    index = index + 1
+    trainGivenSetSize(dataset, hyperParam, index)
     
     print('finished all training')
 
