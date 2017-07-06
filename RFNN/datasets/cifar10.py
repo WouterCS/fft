@@ -33,9 +33,9 @@ def load_and_preprocess_dataset():
     dataset = {
 
         # Splitted sets
-        'training_set': {'data': trainData, 'labels': trainLabels},
+        'training_set': {'data': normalize(trainData), 'labels': trainLabels},
         'validation_set': {'data': np.empty((0, trainData.shape[1], trainData.shape[2], trainData.shape[3])), 'labels': np.empty((0))},
-        'test_set': {'data': testData, 'labels': testLabels},
+        'test_set': {'data': normalize(testData), 'labels': testLabels},
 
         # General info
         'width': trainData.shape[1],
@@ -46,3 +46,7 @@ def load_and_preprocess_dataset():
     }
     
     return dataset
+    
+def normalize(data):
+    data = data.astype(np.float64)
+    return (data - np.mean(data, axis = 0)) / np.std(data, axis = 0)

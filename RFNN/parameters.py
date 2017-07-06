@@ -36,11 +36,11 @@ class parameters:
         self.order3 = 2
         self.order4 = 2
         self.order5 = 2
-        self.N1 = 64
-        self.N2 = 64
-        self.N3 = 64
-        self.N4 = 64
-        self.N5 = 64
+        self.N1 = 128 #64
+        self.N2 = 128 #64
+        self.N3 = 128 #64
+        self.N4 = 128 #64
+        self.N5 = 128 #64
         self.initial_sigma1 = 1.5
         self.initial_sigma2 = 1.0
         self.initial_sigma3 = 1.0
