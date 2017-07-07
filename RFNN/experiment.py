@@ -248,53 +248,8 @@ def do_training(params, dataset):
     
     # Create all the trainable variables
     print('Create weights: %s'  % str(datetime.now()))
-    weights = {
 
-        # Fully connected weights
-        'fc_w1': tf.Variable(tf.random_normal([sizeFinalImage * params.N1, dataset['number_of_labels']],
-                                              stddev=0.01,
-                                              dtype=tf.float32)),
-        'fc_b1': tf.Variable(tf.random_normal([dataset['number_of_labels']])),
-
-        # Alphas
-        'a1': tf.Variable(tf.random_uniform([1, 1, dataset['depth'] * F1, params.N1],
-                                            minval=-1.0,
-                                            maxval=1.0,
-                                            dtype=tf.float32
-                                            )),
-        'a2': tf.Variable(tf.random_uniform([1, 1, params.N1 * F2, params.N2],
-                                            minval=-1.0,
-                                            maxval=1.0,
-                                            dtype=tf.float32
-                                            )),
-        'a3': tf.Variable(tf.random_uniform([1, 1, params.N2 * F3, params.N3],
-                                            minval=-1.0,
-                                            maxval=1.0,
-                                            dtype=tf.float32
-                                            )),
-        'a4': tf.Variable(tf.random_uniform([1, 1, params.N3 * F4, params.N4],
-                                            minval=-1.0,
-                                            maxval=1.0,
-                                            dtype=tf.float32
-                                            )),
-        'a5': tf.Variable(tf.random_uniform([1, 1, params.N4 * F5, params.N5],
-                                            minval=-1.0,
-                                            maxval=1.0,
-                                            dtype=tf.float32
-                                            ))
-    }
-
-    if params.fixed_sigmas:
-        weights['s1'] = tf.constant(params.initial_sigma1)
-        weights['s2'] = tf.constant(params.initial_sigma2)
-        weights['s3'] = tf.constant(params.initial_sigma3)
-        weights['s4'] = tf.constant(params.initial_sigma4)
-        weights['s5'] = tf.constant(params.initial_sigma5)
-    else:
-        weights['s1'] = tf.Variable(params.initial_sigma1)
-        weights['s2'] = tf.Variable(params.initial_sigma2)
-        weights['s3'] = tf.Variable(params.initial_sigma3)
-
+    weights = traditionalWeights(params, sizeFinalImage, dataset)
     # Define the loss function
     logits = model(params, train_data_node, weights, dataset['depth'], train=True)
     predition = tf.nn.softmax(logits)
@@ -543,3 +498,52 @@ def model40to5(params, data, weights, inputDepth, train=False):
     
 def cifar10_example_model(params, data, weights, inputDepth, train=False):
     return cifar10_example_inference(data, params)
+    
+def traditionalWeights(params, sizeFinalImage, dataset):
+    weights = {
+
+        # Fully connected weights
+        'fc_w1': tf.Variable(tf.random_normal([sizeFinalImage * params.N1, dataset['number_of_labels']],
+                                              stddev=0.01,
+                                              dtype=tf.float32)),
+        'fc_b1': tf.Variable(tf.random_normal([dataset['number_of_labels']])),
+
+        # Alphas
+        'a1': tf.Variable(tf.random_uniform([1, 1, dataset['depth'] * F1, params.N1],
+                                            minval=-1.0,
+                                            maxval=1.0,
+                                            dtype=tf.float32
+                                            )),
+        'a2': tf.Variable(tf.random_uniform([1, 1, params.N1 * F2, params.N2],
+                                            minval=-1.0,
+                                            maxval=1.0,
+                                            dtype=tf.float32
+                                            )),
+        'a3': tf.Variable(tf.random_uniform([1, 1, params.N2 * F3, params.N3],
+                                            minval=-1.0,
+                                            maxval=1.0,
+                                            dtype=tf.float32
+                                            )),
+        'a4': tf.Variable(tf.random_uniform([1, 1, params.N3 * F4, params.N4],
+                                            minval=-1.0,
+                                            maxval=1.0,
+                                            dtype=tf.float32
+                                            )),
+        'a5': tf.Variable(tf.random_uniform([1, 1, params.N4 * F5, params.N5],
+                                            minval=-1.0,
+                                            maxval=1.0,
+                                            dtype=tf.float32
+                                            ))
+    }
+
+    if params.fixed_sigmas:
+        weights['s1'] = tf.constant(params.initial_sigma1)
+        weights['s2'] = tf.constant(params.initial_sigma2)
+        weights['s3'] = tf.constant(params.initial_sigma3)
+        weights['s4'] = tf.constant(params.initial_sigma4)
+        weights['s5'] = tf.constant(params.initial_sigma5)
+    else:
+        weights['s1'] = tf.Variable(params.initial_sigma1)
+        weights['s2'] = tf.Variable(params.initial_sigma2)
+        weights['s3'] = tf.Variable(params.initial_sigma3)
+    return weights

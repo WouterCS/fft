@@ -40,7 +40,7 @@ def train():
     hyperParam.optimizer = 'adam'
     hyperParam.fftFunction = 'relu'
     hyperParam.poolingLayer = 'max_pooling'
-    hyperParam.model = 'cifar10_example_model'#'model40to5' #
+    hyperParam.model = 'model40to5' #'cifar10_example_model'#
     
     index = 0
 
