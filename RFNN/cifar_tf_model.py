@@ -97,6 +97,7 @@ def cifar10_example_inference(images, weights, params):
   # Move everything into depth so we can perform a single matrix multiply.
   reshape = tf.reshape(pool2, [batchsize, -1])
   dim = reshape.get_shape()[1].value
+  print(weights['layer3'])
   weights = weights['layer3']['weights']
   biases3 = weights['layer3']['biases']
   local3 = tf.nn.relu(tf.matmul(reshape, weights) + biases3)#, name=scope.name)
