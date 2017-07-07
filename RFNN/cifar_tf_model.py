@@ -151,8 +151,10 @@ def train(total_loss, global_step):
                                   staircase=True)
 
 
-  # Generate moving averages of all losses and associated summaries.
-  loss_averages_op = _add_loss_summaries(total_loss)
+  # Generate moving averages of all losses.
+  loss_averages = tf.train.ExponentialMovingAverage(0.9, name='avg')
+  losses = tf.get_collection('losses')
+  loss_averages_op = loss_averages.apply(losses + [total_loss])
 
   # Compute gradients.
   with tf.control_dependencies([loss_averages_op]):
@@ -162,18 +164,8 @@ def train(total_loss, global_step):
   # Apply gradients.
   apply_gradient_op = opt.apply_gradients(grads, global_step=global_step)
 
-  # Add histograms for trainable variables.
-  for var in tf.trainable_variables():
-    tf.summary.histogram(var.op.name, var)
-
-  # Add histograms for gradients.
-  for grad, var in grads:
-    if grad is not None:
-      tf.summary.histogram(var.op.name + '/gradients', grad)
-
   # Track the moving averages of all trainable variables.
-  variable_averages = tf.train.ExponentialMovingAverage(
-      MOVING_AVERAGE_DECAY, global_step)
+  variable_averages = tf.train.ExponentialMovingAverage(0.9999, global_step)
   variables_averages_op = variable_averages.apply(tf.trainable_variables())
 
   with tf.control_dependencies([apply_gradient_op, variables_averages_op]):

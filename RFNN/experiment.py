@@ -9,7 +9,7 @@ from custom_python_ops.composite_ops import sqrtMagnitude, tf_angle, powMagnitud
 from tensorflow.python.ops.spectral_ops import rfft2d, rfft
 from tensorflow.python.ops.spectral_ops import irfft2d, irfft
 
-from cifar_tf_model import cifar10_example_inference
+from cifar_tf_model import cifar10_example_inference, train
 
 def error_rate(predictions, labels):
     # Return the error rate based on dense predictions and sparse labels
@@ -303,7 +303,7 @@ def do_training(params, dataset):
     tf.add_to_collection('losses', prediction_loss)
     loss = tf.add_n(tf.get_collection('losses'))
     
-    temp_train_op = train(total_loss, global_step)
+    
     
     global_step = tf.Variable(0, trainable=False)
     if params.fixed_lr:
@@ -312,6 +312,7 @@ def do_training(params, dataset):
         learning_rate = tf.train.exponential_decay(float(params.initial_lr), global_step, params.max_epochs *( params.number_of_training_samples // params.batchsize ), params.min_lr, staircase=False)
     print('Learning rate; starting value: %f, max epochs: %d, rate: %f' % (params.initial_lr, params.max_epochs, params.min_lr))
 
+    temp_train_op = train(loss, global_step)
     
     # Create the optimizer
     if params.optimizer == 'adadelta':
