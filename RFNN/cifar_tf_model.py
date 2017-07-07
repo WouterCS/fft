@@ -119,29 +119,29 @@ def cifar10_example_inference(images, params):
   return softmax_linear
   
 def tfCifarWeightsWeights(params, sizeFinalImage, dataset):
-    layer1Weights = {'kernel': _variable_with_weight_decay('weights',
+    layer1Weights = {'kernel': _variable_with_weight_decay('weights1',
                                        shape=[5, 5, 3, 64],
                                        stddev=5e-2,
                                        wd=0.0),
-                    'biases': _variable_on_cpu('biases', [64], tf.constant_initializer(0.0))}
+                    'biases': _variable_on_cpu('biases1', [64], tf.constant_initializer(0.0))}
                     
-    layer2Weights = {'kernel': _variable_with_weight_decay('weights',
+    layer2Weights = {'kernel': _variable_with_weight_decay('weights2',
                                        shape=[5, 5, 64, 64],
                                        stddev=5e-2,
                                        wd=0.0),
-                    'biases': _variable_on_cpu('biases', [64], tf.constant_initializer(0.1))}
+                    'biases': _variable_on_cpu('biases2', [64], tf.constant_initializer(0.1))}
                     
-    layer3Weights = {'weights': _variable_with_weight_decay('weights', shape=[dim, 384],
+    layer3Weights = {'weights': _variable_with_weight_decay('weights3', shape=[dim, 384],
                                         stddev=0.04, wd=0.004),
-                    'biases': _variable_on_cpu('biases', [384], tf.constant_initializer(0.1))}
+                    'biases': _variable_on_cpu('biases3', [384], tf.constant_initializer(0.1))}
                     
-    layer4Weights = {'weights': _variable_with_weight_decay('weights', shape=[384, 192],
+    layer4Weights = {'weights': _variable_with_weight_decay('weights4', shape=[384, 192],
                                         stddev=0.04, wd=0.004),
-                    'biases': _variable_on_cpu('biases', [192], tf.constant_initializer(0.1))}
+                    'biases': _variable_on_cpu('biases4', [192], tf.constant_initializer(0.1))}
     
-    layer5Weights = {'weights': _variable_with_weight_decay('weights', [192, params.num_classes],
+    layer5Weights = {'weights': _variable_with_weight_decay('weights5', [192, params.num_classes],
                                         stddev=1/192.0, wd=0.0),
-                    'biases': _variable_on_cpu('biases', [params.num_classes], tf.constant_initializer(0.0))}
+                    'biases': _variable_on_cpu('biases5', [params.num_classes], tf.constant_initializer(0.0))}
                     
     weights = {'layer1': layer1Weights, 'layer2': layer2Weights, 'layer3': layer3Weights, 'layer4': layer4Weights, 'layer5': layer5Weights, }
     return weights
