@@ -379,7 +379,7 @@ def do_training(params, dataset):
             feed_dict = {train_data_node: batch_data, train_labels_node: batch_labels}
             #_, l = sess.run([train_op, loss], feed_dict=feed_dict)
             
-            sess.run(temp_train_op)
+            sess.run(temp_train_op, feed_dict=feed_dict)
             
             # Increment batch number
             batch_number += 1
