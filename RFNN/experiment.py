@@ -495,7 +495,7 @@ def model40to5(params, data, weights, inputDepth, train=False):
     return l4
     
 def cifar10_example_model(params, data, weights, inputDepth, train=False):
-    return cifar10_example_inference(data, params)
+    return cifar10_example_inference(data, weights, params)
     
 def traditionalWeights(params, sizeFinalImage, dataset):
     # Compute the number of basis filters

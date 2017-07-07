@@ -45,7 +45,7 @@ def _variable_with_weight_decay(name, shape, stddev, wd):
   return var
   
 
-def cifar10_example_inference(images, params):
+def cifar10_example_inference(images, weights, params):
   """Build the CIFAR-10 model.
 
   Args:
