@@ -131,7 +131,7 @@ def cifar10_example_inference(images, params):
 
   return softmax_linear
   
-def train(total_loss, global_step):
+def train(total_loss, global_step, params):
   """Train CIFAR-10 model.
   Create an optimizer and apply to all trainable variables. Add moving
   average for all trainable variables.
