@@ -53,6 +53,7 @@ class parameters:
         self.poolingLayer = 'max_pooling'
         self.KEEP_PROB_CONV = 0.8
         self.KEEP_PROB_HIDDEN = 0.3
+        self.num_classes = 10
 
         # Training parameters
         self.max_epochs = 100
