@@ -6,9 +6,10 @@ from RFNN.datasets.utils import show_samples, shuffle_samples, split_dataset
 from custom_python_ops.custom_ops import tf_abs, tf_relu, tf_sqrt
 from custom_python_ops.composite_ops import sqrtMagnitude, tf_angle, powMagnitude
 
-#fft relu
 from tensorflow.python.ops.spectral_ops import rfft2d, rfft
 from tensorflow.python.ops.spectral_ops import irfft2d, irfft
+
+from cifar-10-tf-model import cifar10_example_inference
 
 def error_rate(predictions, labels):
     # Return the error rate based on dense predictions and sparse labels
@@ -294,8 +295,11 @@ def do_training(params, dataset):
     # Define the loss function
     logits = model(params, train_data_node, weights, dataset['depth'], train=True)
     predition = tf.nn.softmax(logits)
-    loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=train_labels_node, logits=logits), name="loss")
-
+    prediction_loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=train_labels_node, logits=logits), name="loss")
+    
+    tf.add_to_collection('losses', prediction_loss)
+    loss = tf.add_n(tf.get_collection('losses'))
+    
     global_step = tf.Variable(0, trainable=False)
     if params.fixed_lr:
         learning_rate = params.initial_lr
@@ -530,3 +534,6 @@ def model40to5(params, data, weights, inputDepth, train=False):
     l4 = l4 + weights['fc_b1']                                                                  # Bias
     
     return l4
+    
+def cifar10_example_model(params, data, weights, inputDepth, train=False):
+    return cifar10_example_inference(data, params)
