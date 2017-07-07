@@ -227,12 +227,7 @@ def do_training(params, dataset):
                                        shape=(params.batchsize,),
                                        name="train_labels_node")
 
-    # Compute the number of basis filters
-    F1 = (params.order1 + 1) * ((params.order1 + 1) - 1) / 2 + (params.order1 + 1)
-    F2 = (params.order2 + 1) * ((params.order2 + 1) - 1) / 2 + (params.order2 + 1)
-    F3 = (params.order3 + 1) * ((params.order3 + 1) - 1) / 2 + (params.order3 + 1)
-    F4 = (params.order4 + 1) * ((params.order4 + 1) - 1) / 2 + (params.order4 + 1)
-    F5 = (params.order5 + 1) * ((params.order5 + 1) - 1) / 2 + (params.order5 + 1)
+
 
 
     
@@ -500,6 +495,13 @@ def cifar10_example_model(params, data, weights, inputDepth, train=False):
     return cifar10_example_inference(data, params)
     
 def traditionalWeights(params, sizeFinalImage, dataset):
+    # Compute the number of basis filters
+    F1 = (params.order1 + 1) * ((params.order1 + 1) - 1) / 2 + (params.order1 + 1)
+    F2 = (params.order2 + 1) * ((params.order2 + 1) - 1) / 2 + (params.order2 + 1)
+    F3 = (params.order3 + 1) * ((params.order3 + 1) - 1) / 2 + (params.order3 + 1)
+    F4 = (params.order4 + 1) * ((params.order4 + 1) - 1) / 2 + (params.order4 + 1)
+    F5 = (params.order5 + 1) * ((params.order5 + 1) - 1) / 2 + (params.order5 + 1)
+    
     weights = {
 
         # Fully connected weights
