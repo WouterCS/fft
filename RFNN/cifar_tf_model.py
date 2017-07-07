@@ -64,8 +64,8 @@ def cifar10_example_inference(images, weights, params):
   
   #with tf.variable_scope('conv1') as scope:
   print('model active')
-  kernel = weights['layer1']['kernel']
-  conv = tf.nn.conv2d(images, kernel, [1, 1, 1, 1], padding='SAME')
+  kernel1 = weights['layer1']['kernel']
+  conv = tf.nn.conv2d(images, kernel1, [1, 1, 1, 1], padding='SAME')
   biases1 = weights['layer1']['biases']
   pre_activation = tf.nn.bias_add(conv, biases1)
   conv1 = tf.nn.relu(pre_activation)#, name=scope.name)
@@ -79,8 +79,8 @@ def cifar10_example_inference(images, weights, params):
 
   # conv2
   #with tf.variable_scope('conv2') as scope:
-  kernel = weights['layer2']['kernel']
-  conv = tf.nn.conv2d(norm1, kernel, [1, 1, 1, 1], padding='SAME')
+  kernel2 = weights['layer2']['kernel']
+  conv = tf.nn.conv2d(norm1, kernel2, [1, 1, 1, 1], padding='SAME')
   biases2 = weights['layer2']['biases']
   pre_activation = tf.nn.bias_add(conv, biases2)
   conv2 = tf.nn.relu(pre_activation)#, name=scope.name)
@@ -97,27 +97,24 @@ def cifar10_example_inference(images, weights, params):
   # Move everything into depth so we can perform a single matrix multiply.
   reshape = tf.reshape(pool2, [batchsize, -1])
   dim = reshape.get_shape()[1].value
-  
-  t = weights['layer3']['biases']
-  
-  weights = weights['layer3']['weights']
-  t = weights['layer3']['biases']
-  local3 = tf.nn.relu(tf.matmul(reshape, weights) + t)#, name=scope.name)
+  weights3 = weights['layer3']['weights']
+  biases3 = weights['layer3']['biases']
+  local3 = tf.nn.relu(tf.matmul(reshape, weights3) + biases2)#, name=scope.name)
 
   # local4
   #with tf.variable_scope('local4') as scope:
-  weights = weights['layer4']['weights']
+  weights4 = weights['layer4']['weights']
   biases4 = weights['layer4']['biases']
-  local4 = tf.nn.relu(tf.matmul(local3, weights) + biases4)#, name=scope.name)
+  local4 = tf.nn.relu(tf.matmul(local3, weights4) + biases4)#, name=scope.name)
 
   # linear layer(WX + b),
   # We don't apply softmax here because
   # tf.nn.sparse_softmax_cross_entropy_with_logits accepts the unscaled logits
   # and performs the softmax internally for efficiency.
   #with tf.variable_scope('softmax_linear') as scope:
-  weights = weights['layer5']['weights']
+  weights5 = weights['layer5']['weights']
   biases5 = weights['layer5']['biases']
-  softmax_linear = tf.add(tf.matmul(local4, weights), biases5)#, name=scope.name)
+  softmax_linear = tf.add(tf.matmul(local4, weights5), biases5)#, name=scope.name)
 
   return softmax_linear
   
