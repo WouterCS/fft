@@ -63,7 +63,7 @@ def cifar10_example_inference(images, params):
   # by replacing all instances of tf.get_variable() with tf.Variable().
   #
   # conv1
-  batchsize = images.shape[0]
+  batchsize = images.shape[0].value
   
   with tf.variable_scope('conv1') as scope:
     print('model active')
