@@ -99,6 +99,7 @@ def cifar10_example_inference(images, weights, params):
   dim = reshape.get_shape()[1].value
   print(weights['layer3'])
   print(weights['layer3']['biases'])
+  print(biases3)
   weights = weights['layer3']['weights']
   biases3 = weights['layer3']['biases']
   local3 = tf.nn.relu(tf.matmul(reshape, weights) + biases3)#, name=scope.name)
