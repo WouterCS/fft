@@ -234,17 +234,20 @@ def do_training(params, dataset):
     if params.model == 'model32to1':
         model = model32to1
         sizeFinalImage = 1*1
+        weights = traditionalWeights(params, sizeFinalImage, dataset)
     elif params.model == 'model40to5':
         model = model40to5
         sizeFinalImage = 5*5
+        weights = traditionalWeights(params, sizeFinalImage, dataset)
     elif params.model == 'cifar10_example_model':
         model = cifar10_example_model
         sizeFinalImage = 5*5
+        weights = tfCifarWeightsWeights(params, sizeFinalImage, dataset)
     
     # Create all the trainable variables
     print('Create weights: %s'  % str(datetime.now()))
 
-    weights = traditionalWeights(params, sizeFinalImage, dataset)
+    
     # Define the loss function
     logits = model(params, train_data_node, weights, dataset['depth'], train=True)
     predition = tf.nn.softmax(logits)

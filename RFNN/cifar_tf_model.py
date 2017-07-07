@@ -64,12 +64,9 @@ def cifar10_example_inference(images, params):
   
   #with tf.variable_scope('conv1') as scope:
   print('model active')
-  kernel = _variable_with_weight_decay('weights',
-                                       shape=[5, 5, 3, 64],
-                                       stddev=5e-2,
-                                       wd=0.0)
+  kernel = weights['layer1']['kernel']
   conv = tf.nn.conv2d(images, kernel, [1, 1, 1, 1], padding='SAME')
-  biases = _variable_on_cpu('biases', [64], tf.constant_initializer(0.0))
+  biases = weights['layer1']['biases']
   pre_activation = tf.nn.bias_add(conv, biases)
   conv1 = tf.nn.relu(pre_activation)#, name=scope.name)
 
@@ -82,12 +79,9 @@ def cifar10_example_inference(images, params):
 
   # conv2
   #with tf.variable_scope('conv2') as scope:
-  kernel = _variable_with_weight_decay('weights',
-                                       shape=[5, 5, 64, 64],
-                                       stddev=5e-2,
-                                       wd=0.0)
+  kernel = weights['layer2']['kernel']
   conv = tf.nn.conv2d(norm1, kernel, [1, 1, 1, 1], padding='SAME')
-  biases = _variable_on_cpu('biases', [64], tf.constant_initializer(0.1))
+  biases = weights['layer2']['biases']
   pre_activation = tf.nn.bias_add(conv, biases)
   conv2 = tf.nn.relu(pre_activation)#, name=scope.name)
 
@@ -103,16 +97,14 @@ def cifar10_example_inference(images, params):
   # Move everything into depth so we can perform a single matrix multiply.
   reshape = tf.reshape(pool2, [batchsize, -1])
   dim = reshape.get_shape()[1].value
-  weights = _variable_with_weight_decay('weights', shape=[dim, 384],
-                                        stddev=0.04, wd=0.004)
-  biases = _variable_on_cpu('biases', [384], tf.constant_initializer(0.1))
+  weights = weights['layer3']['weights']
+  biases = weights['layer3']['biases']
   local3 = tf.nn.relu(tf.matmul(reshape, weights) + biases)#, name=scope.name)
 
   # local4
   #with tf.variable_scope('local4') as scope:
-  weights = _variable_with_weight_decay('weights', shape=[384, 192],
-                                        stddev=0.04, wd=0.004)
-  biases = _variable_on_cpu('biases', [192], tf.constant_initializer(0.1))
+  weights = weights['layer4']['weights']
+  biases = weights['layer4']['biases']
   local4 = tf.nn.relu(tf.matmul(local3, weights) + biases)#, name=scope.name)
 
   # linear layer(WX + b),
@@ -120,13 +112,39 @@ def cifar10_example_inference(images, params):
   # tf.nn.sparse_softmax_cross_entropy_with_logits accepts the unscaled logits
   # and performs the softmax internally for efficiency.
   #with tf.variable_scope('softmax_linear') as scope:
-  weights = _variable_with_weight_decay('weights', [192, params.num_classes],
-                                        stddev=1/192.0, wd=0.0)
-  biases = _variable_on_cpu('biases', [params.num_classes],
-                            tf.constant_initializer(0.0))
+  weights = weights['layer5']['weights']
+  biases = weights['layer5']['biases']
   softmax_linear = tf.add(tf.matmul(local4, weights), biases)#, name=scope.name)
 
   return softmax_linear
+  
+def tfCifarWeightsWeights(params, sizeFinalImage, dataset):
+    layer1Weights = {'kernel': = _variable_with_weight_decay('weights',
+                                       shape=[5, 5, 3, 64],
+                                       stddev=5e-2,
+                                       wd=0.0),
+                    'biases': _variable_on_cpu('biases', [64], tf.constant_initializer(0.0))}
+                    
+    layer2Weights = {'kernel': = _variable_with_weight_decay('weights',
+                                       shape=[5, 5, 64, 64],
+                                       stddev=5e-2,
+                                       wd=0.0),
+                    'biases': _variable_on_cpu('biases', [64], tf.constant_initializer(0.1))}
+                    
+    layer3Weights = {'weights': = _variable_with_weight_decay('weights', shape=[dim, 384],
+                                        stddev=0.04, wd=0.004),
+                    'biases': _variable_on_cpu('biases', [384], tf.constant_initializer(0.1))}
+                    
+    layer4Weights = {'weights': = _variable_with_weight_decay('weights', shape=[384, 192],
+                                        stddev=0.04, wd=0.004),
+                    'biases': _variable_on_cpu('biases', [192], tf.constant_initializer(0.1))}
+    
+    layer5Weights = {'weights': = _variable_with_weight_decay('weights', [192, params.num_classes],
+                                        stddev=1/192.0, wd=0.0),
+                    'biases': _variable_on_cpu('biases', [params.num_classes], tf.constant_initializer(0.0))}
+                    
+    weights = {'layer1': layer1Weights, 'layer2': layer2Weights, 'layer3': layer3Weights, 'layer4': layer4Weights, 'layer5': layer5Weights, }
+    return weights
   
 def train(total_loss, global_step, params):
   """Train CIFAR-10 model.
@@ -169,3 +187,4 @@ def train(total_loss, global_step, params):
     train_op = tf.no_op(name='train')
 
   return train_op
+  
