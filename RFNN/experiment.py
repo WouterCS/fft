@@ -262,7 +262,7 @@ def do_training(params, dataset):
         learning_rate = tf.train.exponential_decay(float(params.initial_lr), global_step, params.max_epochs *( params.number_of_training_samples // params.batchsize ), params.min_lr, staircase=False)
     print('Learning rate; starting value: %f, max epochs: %d, rate: %f' % (params.initial_lr, params.max_epochs, params.min_lr))
 
-    temp_train_op = train(loss, global_step, params)
+    #temp_train_op = train(loss, global_step, params)
     
     # Create the optimizer
     if params.optimizer == 'adadelta':
