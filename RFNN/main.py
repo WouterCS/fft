@@ -38,9 +38,9 @@ def train():
     hyperParam.initial_lr = 1e-2
     hyperParam.numExamples = 10000
     hyperParam.optimizer = 'adam'
-    hyperParam.fftFunction = 'powMagnitude'
+    hyperParam.fftFunction = 'relu'
     hyperParam.poolingLayer = 'max_pooling'
-    hyperParam.model = 'model40to5' #'cifar10_example_model'
+    hyperParam.model = 'cifar10_example_model'#'model40to5' #
     
     index = 0
 
