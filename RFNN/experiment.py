@@ -379,20 +379,20 @@ def do_training(params, dataset):
             feed_dict = {train_data_node: batch_data, train_labels_node: batch_labels}
             #_, l = sess.run([train_op, loss], feed_dict=feed_dict)
             
-            sess.run(temp_train_op, feed_dict=feed_dict)
+            _, l = sess.run([temp_train_op, loss], feed_dict=feed_dict)
             
             # Increment batch number
             batch_number += 1
 
             # Update the results
-            #lossInEpoch.append(l)
-        # lossInEpoch = np.asarray(lossInEpoch)
-        # params.meanLoss.append(np.mean(lossInEpoch))
-        # params.medianLoss.append(np.median(lossInEpoch))
-        # params.varianceLoss.append(np.var(lossInEpoch))
-        # params.minLoss.append(np.min(lossInEpoch))
-        # params.maxLoss.append(np.max(lossInEpoch))
-        # print('Num batches: %d, min loss: %f, median loss: %f, mean loss: %f, variance loss: %f, max loss: %f' % (len(lossInEpoch), params.minLoss[-1], params.medianLoss[-1], params.meanLoss[-1], params.varianceLoss[-1], params.maxLoss[-1]))
+            lossInEpoch.append(l)
+        lossInEpoch = np.asarray(lossInEpoch)
+        params.meanLoss.append(np.mean(lossInEpoch))
+        params.medianLoss.append(np.median(lossInEpoch))
+        params.varianceLoss.append(np.var(lossInEpoch))
+        params.minLoss.append(np.min(lossInEpoch))
+        params.maxLoss.append(np.max(lossInEpoch))
+        print('Num batches: %d, min loss: %f, median loss: %f, mean loss: %f, variance loss: %f, max loss: %f' % (len(lossInEpoch), params.minLoss[-1], params.medianLoss[-1], params.meanLoss[-1], params.varianceLoss[-1], params.maxLoss[-1]))
     
     # Final evaluation on different sets
     evaluate(train_data, train_labels, validation_data, validation_labels, test_data, test_labels, sess, eval_data_node, prediction_eval, params, params.max_epochs)
