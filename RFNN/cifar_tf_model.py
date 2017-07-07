@@ -120,17 +120,18 @@ def cifar10_example_inference(images, params):
   
 def tfCifarWeightsWeights(params, sizeFinalImage, dataset):
     layer1Weights = {'kernel': _variable_with_weight_decay('weights1',
-                                       shape=[5, 5, 3, 64],
+                                       shape=[5, 5, 3, params.N1],
                                        stddev=5e-2,
                                        wd=0.0),
-                    'biases': _variable_on_cpu('biases1', [64], tf.constant_initializer(0.0))}
+                    'biases': _variable_on_cpu('biases1', [params.N1], tf.constant_initializer(0.0))}
                     
     layer2Weights = {'kernel': _variable_with_weight_decay('weights2',
-                                       shape=[5, 5, 64, 64],
+                                       shape=[5, 5, params.N1, params.N2],
                                        stddev=5e-2,
                                        wd=0.0),
-                    'biases': _variable_on_cpu('biases2', [64], tf.constant_initializer(0.1))}
-                    
+                    'biases': _variable_on_cpu('biases2', [params.N2], tf.constant_initializer(0.1))}
+    
+    dim = (dataset['width'] / 4) * (dataset['height'] / 4) * params.N2
     layer3Weights = {'weights': _variable_with_weight_decay('weights3', shape=[dim, 384],
                                         stddev=0.04, wd=0.004),
                     'biases': _variable_on_cpu('biases3', [384], tf.constant_initializer(0.1))}
