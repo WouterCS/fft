@@ -9,7 +9,7 @@ from custom_python_ops.composite_ops import sqrtMagnitude, tf_angle, powMagnitud
 from tensorflow.python.ops.spectral_ops import rfft2d, rfft
 from tensorflow.python.ops.spectral_ops import irfft2d, irfft
 
-from cifar_tf_model.py import cifar10_example_inference
+from cifar_tf_model import cifar10_example_inference
 
 def error_rate(predictions, labels):
     # Return the error rate based on dense predictions and sparse labels
