@@ -376,7 +376,8 @@ def do_training(params, dataset):
 
             # Run 1 step of the gradient descent algorithm
             feed_dict = {train_data_node: batch_data, train_labels_node: batch_labels}
-            _, l, w = sess.run([train_op, loss, weights], feed_dict=feed_dict)
+            #_, l, w = sess.run([train_op, loss, weights], feed_dict=feed_dict)
+            _, l = sess.run([train_op, loss], feed_dict=feed_dict)
 
             # Increment batch number
             batch_number += 1
