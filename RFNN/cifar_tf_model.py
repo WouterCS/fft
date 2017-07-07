@@ -1,4 +1,8 @@
 import tensorflow as tf
+import numpy as np
+
+def uniquefyName(name):
+    return '%s-%d' % (name, np.random.randint(1e6))
 
 def _variable_on_cpu(name, shape, initializer):
   """Helper to create a Variable stored on CPU memory.
@@ -13,7 +17,7 @@ def _variable_on_cpu(name, shape, initializer):
   """
   with tf.device('/cpu:0'):
     dtype = tf.float32
-    var = tf.get_variable(name, shape, initializer=initializer, dtype=dtype)
+    var = tf.get_variable(uniquefyName(name), shape, initializer=initializer, dtype=dtype)
   return var
   
 
@@ -59,9 +63,11 @@ def cifar10_example_inference(images, params):
   # by replacing all instances of tf.get_variable() with tf.Variable().
   #
   # conv1
+  batchsize = images.shape[0]
+  
   with tf.variable_scope('conv1') as scope:
     print('model active')
-    kernel = _variable_with_weight_decay('weightsxyz',
+    kernel = _variable_with_weight_decay('weights',
                                          shape=[5, 5, 3, 64],
                                          stddev=5e-2,
                                          wd=0.0)
@@ -98,7 +104,7 @@ def cifar10_example_inference(images, params):
   # local3
   with tf.variable_scope('local3') as scope:
     # Move everything into depth so we can perform a single matrix multiply.
-    reshape = tf.reshape(pool2, [params.batchsize, -1])
+    reshape = tf.reshape(pool2, [batchsize, -1])
     dim = reshape.get_shape()[1].value
     weights = _variable_with_weight_decay('weights', shape=[dim, 384],
                                           stddev=0.04, wd=0.004)
