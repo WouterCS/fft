@@ -242,6 +242,9 @@ def do_training(params, dataset):
     elif params.model == 'model40to5':
         model = model40to5
         sizeFinalImage = 5*5
+    elif params.model == 'cifar10_example_model':
+        model = cifar10_example_model
+        sizeFinalImage = 5*5
     
     # Create all the trainable variables
     print('Create weights: %s'  % str(datetime.now()))

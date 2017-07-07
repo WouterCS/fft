@@ -20,7 +20,7 @@ def train():
             self.fixed_lr = True
             self.initial_lr = 1e-1
             self.fftFunction = 'absFFT'  # 'absFFT' 'absoluteValueUntransposed' 'emptyFFT'  'abs'   'relu'     'y-absFFT'     'x-absFFT'   'sqt-magnitude' 'custom_op'  'reference_op'   'powMagnitude' 'identity'
-            self.model = 'model40to5'  #  'model40to5'    'model32to1'
+            self.model = 'model40to5'  #  'model40to5'    'model32to1'  'cifar10_example_model'
             self.poolingLayer = 'max_pooling' # 'avg_pooling' 'max_pooling'
             self.useDropout = True
             self.powMagnitude = 0.5
@@ -40,35 +40,13 @@ def train():
     hyperParam.optimizer = 'adam'
     hyperParam.fftFunction = 'powMagnitude'
     hyperParam.poolingLayer = 'max_pooling'
+    hyperParam.model = 'cifar10_example_model'
     
     index = 0
-    
-    hyperParam.fftFunction = 'identity'
+
     index = index + 1
     trainGivenSetSize(dataset, hyperParam, index)
     
-    hyperParam.fftFunction = 'powMagnitude'
-    hyperParam.powMagnitude = 0.9
-    index = index + 1
-    trainGivenSetSize(dataset, hyperParam, index)
-    
-    hyperParam.fftFunction = 'relu'
-    index = index + 1
-    trainGivenSetSize(dataset, hyperParam, index)
-    
-    hyperParam.poolingLayer = 'avg_pooling'
-    hyperParam.fftFunction = 'identity'
-    index = index + 1
-    trainGivenSetSize(dataset, hyperParam, index)
-    
-    hyperParam.fftFunction = 'powMagnitude'
-    hyperParam.powMagnitude = 0.9
-    index = index + 1
-    trainGivenSetSize(dataset, hyperParam, index)
-    
-    hyperParam.fftFunction = 'relu'
-    index = index + 1
-    trainGivenSetSize(dataset, hyperParam, index)
     
     print('finished all training')
 
