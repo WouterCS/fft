@@ -1,9 +1,6 @@
 import tensorflow as tf
 import numpy as np
 
-def uniquefyName(name):
-    return '%s-%d' % (name, np.random.randint(1e6))
-
 def _variable_on_cpu(name, shape, initializer):
   """Helper to create a Variable stored on CPU memory.
 
@@ -17,7 +14,7 @@ def _variable_on_cpu(name, shape, initializer):
   """
   with tf.device('/cpu:0'):
     dtype = tf.float32
-    var = tf.get_variable(uniquefyName(name), shape, initializer=initializer, dtype=dtype)
+    var = tf.get_variable(name, shape, initializer=initializer, dtype=dtype)
   return var
   
 
