@@ -385,7 +385,7 @@ def do_training(params, dataset):
             batch_number += 1
 
             # Update the results
-            lossInEpoch.append(l)
+            #lossInEpoch.append(l)
         # lossInEpoch = np.asarray(lossInEpoch)
         # params.meanLoss.append(np.mean(lossInEpoch))
         # params.medianLoss.append(np.median(lossInEpoch))
