@@ -35,7 +35,7 @@ def train():
 
     hyperParam.numEpochs = 200
     hyperParam.fixed_lr = False
-    hyperParam.initial_lr = 1e-2
+    hyperParam.initial_lr = 1e-1
     hyperParam.numExamples = 10000
     hyperParam.optimizer = 'adam'
     hyperParam.fftFunction = 'relu'
@@ -45,7 +45,7 @@ def train():
     index = 0
 
     index = index + 1
-    trainGivenSetSize(dataset, hyperParam, index)
+    trainGivenSetSize(dataset, hyperParam, 2)
     
     
     print('finished all training')
@@ -155,7 +155,7 @@ def plot_test_acc(params, directory):
         plt.xlim(len(params.acc_test) - 50, len(params.acc_test))
     maxVal = np.max(params.acc_test[-50:])
     minVal = np.min(params.acc_test[-50:])
-    meanVal = np.mean(params.acc_test[-50:])
+    meanVal = (maxVal + minVal) / 2
     rangeVal = maxVal - minVal
     plt.ylim(max(0, meanVal - 0.6 * rangeVal), meanVal + 0.6 * rangeVal)
     plt.savefig(directory + '/conversionPlot-detailed.png')
