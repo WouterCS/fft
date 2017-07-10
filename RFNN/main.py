@@ -45,7 +45,7 @@ def train():
     index = 0
 
     index = index + 1
-    trainGivenSetSize(dataset, hyperParam, 2)
+    trainGivenSetSize(dataset, hyperParam, 1)
     
     
     print('finished all training')

@@ -68,7 +68,7 @@ def cifar10_example_inference(images, weights, params):
   conv = tf.nn.conv2d(images, kernel1, [1, 1, 1, 1], padding='SAME')
   biases1 = weights['layer1']['biases']
   pre_activation = tf.nn.bias_add(conv, biases1)
-  conv1 = tf.nn.elu(pre_activation)#, name=scope.name)
+  conv1 = tf.nn.relu(pre_activation)#, name=scope.name)
 
   # pool1
   pool1 = tf.nn.max_pool(conv1, ksize=[1, 3, 3, 1], strides=[1, 2, 2, 1],
@@ -83,7 +83,7 @@ def cifar10_example_inference(images, weights, params):
   conv = tf.nn.conv2d(norm1, kernel2, [1, 1, 1, 1], padding='SAME')
   biases2 = weights['layer2']['biases']
   pre_activation = tf.nn.bias_add(conv, biases2)
-  conv2 = tf.nn.elu(pre_activation)#, name=scope.name)
+  conv2 = tf.nn.relu(pre_activation)#, name=scope.name)
 
   # norm2
   norm2 = tf.nn.lrn(conv2, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75,
@@ -99,13 +99,13 @@ def cifar10_example_inference(images, weights, params):
   dim = reshape.get_shape()[1].value
   weights3 = weights['layer3']['weights']
   biases3 = weights['layer3']['biases']
-  local3 = tf.nn.elu(tf.matmul(reshape, weights3) + biases3)#, name=scope.name)
+  local3 = tf.nn.relu(tf.matmul(reshape, weights3) + biases3)#, name=scope.name)
 
   # local4
   #with tf.variable_scope('local4') as scope:
   weights4 = weights['layer4']['weights']
   biases4 = weights['layer4']['biases']
-  local4 = tf.nn.elu(tf.matmul(local3, weights4) + biases4)#, name=scope.name)
+  local4 = tf.nn.relu(tf.matmul(local3, weights4) + biases4)#, name=scope.name)
 
   # linear layer(WX + b),
   # We don't apply softmax here because
