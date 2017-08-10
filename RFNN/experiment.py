@@ -4,7 +4,7 @@ from datetime import datetime
 
 from RFNN.datasets.utils import show_samples, shuffle_samples, split_dataset
 from custom_python_ops.custom_ops import tf_abs, tf_relu, tf_sqrt
-from custom_python_ops.composite_ops import sqrtMagnitude, tf_angle, powMagnitude
+from custom_python_ops.composite_ops import powMagnitude, sqrtMagnitude, tf_angle
 
 from tensorflow.python.ops.spectral_ops import rfft2d, rfft
 from tensorflow.python.ops.spectral_ops import irfft2d, irfft
@@ -117,17 +117,9 @@ def evaluate(train_data, train_labels, validation_data, validation_labels, test_
     
 def fftReLu(layerIn, params):
     if params.fftFunction == 'absFFT':
-        shape1 = layerIn.shape
         layerIn = tf.transpose(layerIn, [0, 3, 1, 2])
-        shape2 = layerIn.shape
         layerOut = irfft2d(tf.cast(tf.abs(rfft2d(layerIn)), tf.complex64))
-        shape3 = layerOut.shape
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
-        shape4 = layerOut.shape
-        printShape(shape1)
-        printShape(shape2)
-        printShape(shape3)
-        printShape(shape4)
         return layerOut
     if params.fftFunction == 'absoluteValueUntransposed':
         return irfft2d(tf.cast(tf.abs(rfft2d(layerIn)), tf.complex64))
@@ -138,40 +130,20 @@ def fftReLu(layerIn, params):
     if params.fftFunction == 'relu':
         return tf.nn.relu(layerIn)  
     if params.fftFunction == 'y-absFFT':
-        shape1 = layerIn.shape
         layerIn = tf.transpose(layerIn, [0, 3, 1, 2])
-        shape2 = layerIn.shape
         layerOut = irfft(tf.cast(tf.abs(rfft(layerIn)), tf.complex64))
-        shape3 = layerOut.shape
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
-        shape4 = layerOut.shape
-        printShape(shape1)
-        printShape(shape2)
-        printShape(shape3)
-        printShape(shape4)
         return layerOut
     if params.fftFunction == 'x-absFFT':
-        shape1 = layerIn.shape
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
-        shape2 = layerIn.shape
         layerOut = irfft(tf.cast(tf.abs(rfft(layerIn)), tf.complex64))
         layerOut = irfft(tf.cast(tf.abs(rfft(layerIn)), tf.complex64))
-        shape3 = layerOut.shape
         layerOut = tf.transpose(layerOut, [0, 3, 2, 1])
-        shape4 = layerOut.shape
-        printShape(shape1)
-        printShape(shape2)
-        printShape(shape3)
-        printShape(shape4)
         return layerOut
     if params.fftFunction == 'sqt-magnitude':
-        printShape(layerIn.shape)
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
-        printShape(layerIn.shape)
         layerOut = irfft2d( sqrtMagnitude(rfft2d(layerIn) ))
-        printShape(layerOut.shape)
         layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
-        printShape(layerOut.shape)
         return layerOut
     if params.fftFunction == 'powMagnitude':
         layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
@@ -180,19 +152,7 @@ def fftReLu(layerIn, params):
         return layerOut
     if params.fftFunction == 'identity':
         return layerIn
-    if params.fftFunction == 'custom_op':
-        layerOut = tf.sqrt(tf.nn.relu(tf.abs(layerIn)))
-        #layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
-        #layerOut = irfft2d(tf.cast(tf.sqrt(tf.abs(rfft2d(layerIn))), tf.complex64))
-        #layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
-        #layerOut = tf_relu(layerIn)
-        return layerOut
-    if params.fftFunction == 'reference_op':
-        #layerIn = tf.transpose(layerIn, [0, 3, 2, 1])
-        #layerOut = irfft2d(tf.cast(tf.abs(rfft2d(layerIn)), tf.complex64))
-        #layerOut = tf.transpose(layerOut, [0, 2, 3, 1])
-        layerOut = tf.sqrt(tf.abs(layerIn))
-        return layerOut
+
 def printShape(shape):
     print('Dim: ', map(lambda x: x.value, shape))
     
